@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26113327-6A5C-4FB4-A12A-9C8298D9779D}"
+	ProjectSection(SolutionItems) = preProject
+		..\game.js = ..\game.js
+		..\index.html = ..\index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{04462832-C146-404F-A7C4-9ED64AC14C4E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Description = 491 prototype
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{04462832-C146-404F-A7C4-9ED64AC14C4E} = {26113327-6A5C-4FB4-A12A-9C8298D9779D}
+	EndGlobalSection
+EndGlobal
