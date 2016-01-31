@@ -1,0 +1,39 @@
+PROJECT SPRITE INSTRUCTIONS
+
+? indicates the number of frames for that row. Each number listed after the type of animation. Speed can be adjusted depending on how fast we want the pieces to go. Digits to the left equal the index of the animation sprite.
+
+
+//(spriteSheet, frameWidth, frameHeight, frameDuration, frames, loop, reverse)
+
+MARIO - this.animation = new Animation(spritesheet, 128.01, 97, 0.15, ?, true, false);
+
+0.  standing = 12	
+1.  jumping = 6
+2.  turning = 1
+3.  running = 8
+4.  attack = 7
+5.  free fall = 8
+6.  fireball = 4
+7.  block = 4
+8.  win = 8
+9.  lose = 4
+
+BOWSER 
+0.  standing = 4
+1.  running = 6
+2.  attack 1 = 9
+3.  attack 2 = 7
+4.  shell attack = 11
+5.  jump = 8
+6.  blue fire = 4
+7.  red fire = 4
+8.  running away = 6
+9.  scared jump or getting hit = 7
+
+KOOPA - .2 seems to be a good walking speed.
+
+0.  walking = 7
+1.  shell attack = 4
+2.  hopping out of shell = 2
+3.  walking naked = 8
+4.  flying = 9
