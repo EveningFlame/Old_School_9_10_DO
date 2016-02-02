@@ -48,16 +48,16 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var locY = y;
     var offset = vindex === 0 ? this.startX : 0;
     ctx.drawImage(this.skybg,
-                  0, 0,  // source from sheet
+                  sb2, 0,  // source from sheet
                   800, 800,
-                  -sb2 + 1000, 0,
+                  0, 0,
                   800, 800
                   );
 
     ctx.drawImage(this.skybg,
-                  0, 0,  // source from sheet
+                  sb1, 0,  // source from sheet
                   800, 800,
-                  -sb1 ,0,
+                  0 ,0,
                   //-sb, 0,
                   800, 800
                   );
@@ -204,10 +204,11 @@ Unicorn.prototype.update = function () {
 }
 
 Unicorn.prototype.draw = function (ctx) {
-    if (sb1 > 3200) {
+	var yPlace = 630;
+    if (sb1 > 2400) {
         sb1 = 0;
     }
-    if (sb2 > 3200) {
+    if (sb2 > 2400) {
         sb2 = 0;
     }
     if (this.x >= 500) {
@@ -241,17 +242,17 @@ Unicorn.prototype.draw = function (ctx) {
     }    
     else if (this.game.walkRight) {
         standLeft = false;
-        this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, 700, 1.6);
+        this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 1.6);
 
     } else if (this.game.walkLeft) {
         standLeft = true;
-        this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, 700, 1.6);
+        this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 1.6);
     }
     else {
         if (standLeft) {
-            this.animationStandLeft.drawFrame(this.game.clockTick, ctx, this.x, 700, 1.6);
+            this.animationStandLeft.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 1.6);
         } else {
-            this.animation.drawFrame(this.game.clockTick, ctx, this.x, 700, 1.6);
+            this.animation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 1.6);
         }
     }
 
