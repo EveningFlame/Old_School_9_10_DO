@@ -1,13 +1,5 @@
 var sb1 = 0;
 var sb2 = 0;
-var defaultGround = 630;
-var startX = 0;
-var startY = 48;
-var offsetY = .192;
-var width = 48;
-var height = 48
-var defaultSpeed = 0.1;
-var defaultScroll = 250;
 
 var unlocked;
 var bgmove;
@@ -56,19 +48,16 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var locY = y;
     var offset = vindex === 0 ? this.startX : 0;
     ctx.drawImage(this.skybg,
-                  sb2, 0,  // source from sheet
-                  800, 800,
-                  0, 0,
-                  800, 800
-                  );
+                  0 , 0,  // source from sheet
+                  1200, 800,
+                  -sb2 + 1200 , 0,
+                  1200, 800);
 
     ctx.drawImage(this.skybg,
-                  sb1, 0,  // source from sheet
-                  800, 800,
-                  0 ,0,
-                  //-sb, 0,
-                  800, 800
-                  );
+                  0 , 0,  // source from sheet
+                  1200, 800,
+                  -sb1 ,0,
+                  1200, 800);
 
     // ctx.drawImage(this.groundbg,
     //               0, -500,  // source from sheet
@@ -88,13 +77,13 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var randplatx = -400;
     var randplaty = -450;
 
-    //ctx.drawImage(this.platforms,
-    //              randplatx, randplaty,  // source from sheet
-    //              191 - randplatx, 31 - randplaty,
-    //              -sb1 ,0,
-    //              //-sb, 0,
-    //              191 - randplatx,
-    //              31 - randplaty);
+    // ctx.drawImage(this.platforms,
+    //               randplatx, randplaty,  // source from sheet
+    //               191 - randplatx, 31 - randplaty,
+    //               -sb1 ,0,
+    //               //-sb, 0,
+    //               191 - randplatx,
+    //               31 - randplaty);
 
 
     ctx.drawImage(this.spriteSheet,
@@ -143,21 +132,15 @@ Background.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
-function Hero(game, heroSprite, worldSprite, standAnimation, walkAnimation, jumpAnimation) {
-    this.animation = new Animation(heroSprite, worldSprite, ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"),
-        startX, (startY * 0) + offsetY, width, height - offsetY, defaultSpeed, standAnimation, true, false);
-    this.jumpAnimation = new Animation(heroSprite, worldSprite, ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"),
-        startX, (startY * 2) + offsetY, width, height - offsetY, defaultSpeed, jumpAnimation, false, false);
-    this.rightWalkAnimation = new Animation(heroSprite, worldSprite, ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"),
-        startX, (startY * 6) + offsetY, width, height - offsetY, defaultSpeed, walkAnimation, true, false);
-    this.animationStandLeft = new Animation(heroSprite, worldSprite, ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"),
-        startX, startY + offsetY, width, height - offsetY, defaultSpeed, standAnimation, true, true);
-    this.jumpAnimationLeft = new Animation(heroSprite, worldSprite, ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"),
-        startX, (startY * 3) + offsetY, width, height - offsetY, defaultSpeed, jumpAnimation, false, true);
-    this.leftWalkAnimation = new Animation(heroSprite, worldSprite, ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"),
-        startX, (startY * 7) + offsetY, width, height - offsetY, defaultSpeed, walkAnimation, true, true);
+function Hero(game, heroSprite, backImage, groundImage) {
+    this.animation = new Animation(heroSprite, backImage, groundImage, ASSET_MANAGER.getAsset("./img/platform.png"), 0, 0.096, 48, 47.004, 0.15 , 12, true, false);
+    this.jumpAnimation = new Animation(heroSprite, ASSET_MANAGER.getAsset("./img/skybg.png"), ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"), 0, 96.096, 48, 47.004, 0.1, 6, false, false);
+    this.rightWalkAnimation = new Animation(heroSprite, ASSET_MANAGER.getAsset("./img/skybg.png"), ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"), 0, 288.096, 48, 47.004, 0.1, 8, true, false);
+    this.animationStandLeft = new Animation(heroSprite, ASSET_MANAGER.getAsset("./img/skybg.png"), ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"), 0, 48.096, 48, 47.004, 0.15, 12, true, true);
+    this.jumpAnimationLeft = new Animation(heroSprite, ASSET_MANAGER.getAsset("./img/skybg.png"), ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"), 0, 144.096, 48, 47.004, 0.1, 6, false, true);
+    this.leftWalkAnimation = new Animation(heroSprite, ASSET_MANAGER.getAsset("./img/skybg.png"), ASSET_MANAGER.getAsset("./img/groundbg.png"), ASSET_MANAGER.getAsset("./img/platform.png"), 0, 336.096, 48, 47.004, 0.1, 8, true, true);   
     this.radius = 100; 
-    this.ground = defaultGround;
+    this.ground = 630;
     Entity.call(this, game, 0, 400);
 }
 
@@ -177,6 +160,7 @@ Hero.prototype.update = function () {
         if (jumpDistance > 0.5)
             jumpDistance = 1 - jumpDistance;
 
+        //var height = jumpDistance * 2 * totalHeight;
         var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
         this.y = this.ground - height;
     }
@@ -192,10 +176,12 @@ Hero.prototype.update = function () {
         if (jumpDistance > 0.5)
             jumpDistance = 1 - jumpDistance;
 
+        //var height = jumpDistance * 2 * totalHeight;
         var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
         this.y = this.ground - height;
     }
     
+
     if (bgmove && this.game.walkRight) { 
         sb1 += 2;           // background movement lock
         sb2 += 2;
@@ -215,18 +201,17 @@ Hero.prototype.update = function () {
 }
 
 Hero.prototype.draw = function (ctx) {
-	var yPlace = this.ground;
-    if (sb1 > 2400) {
+    if (sb1 > 1200) {
         sb1 = 0;
     }
-    if (sb2 > 2400) {
+    if (sb2 > 1200) {
         sb2 = 0;
     }
-    if (this.x >= defaultScroll) {
+    if (this.x >= 500) {
         unlocked = false;
         bgmove = true;
     }
-    if (this.x < defaultScroll) {
+    if (this.x < 500) {
         unlocked = true;
         bgmove = false;
     }
@@ -253,17 +238,17 @@ Hero.prototype.draw = function (ctx) {
     }    
     else if (this.game.walkRight) {
         standLeft = false;
-        this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 1.6);
+        this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, 630, 1.6);
 
     } else if (this.game.walkLeft) {
         standLeft = true;
-        this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 1.6);
+        this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, 630, 1.6);
     }
     else {
         if (standLeft) {
-            this.animationStandLeft.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 1.6);
+            this.animationStandLeft.drawFrame(this.game.clockTick, ctx, this.x, 630, 1.6);
         } else {
-            this.animation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 1.6);
+            this.animation.drawFrame(this.game.clockTick, ctx, this.x, 630, 1.6);
         }
     }
 
@@ -274,7 +259,10 @@ Hero.prototype.draw = function (ctx) {
 
 var ASSET_MANAGER = new AssetManager();
 
+ASSET_MANAGER.queueDownload("./img/RobotUnicorn.png");
+ASSET_MANAGER.queueDownload("./img/mariosprite.png");
 ASSET_MANAGER.queueDownload("./img/mariosprite2.png");
+ASSET_MANAGER.queueDownload("./img/mariospriteleft.png");
 ASSET_MANAGER.queueDownload("./img/skybg.png");
 ASSET_MANAGER.queueDownload("./img/groundbg.png");
 ASSET_MANAGER.queueDownload("./img/platform.png");
@@ -284,15 +272,17 @@ ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
     var canvas = document.getElementById('gameWorld');
     var ctx = canvas.getContext('2d');
-    var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
-    var world1Sprite = ASSET_MANAGER.getAsset("./img/skybg.png");
+
+    var mario = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
+    var world1 = ASSET_MANAGER.getAsset("./img/skybg.png");
+    var ground1 = ASSET_MANAGER.getAsset("./img/groundbg.png");
 
     var gameEngine = new GameEngine();
     var bg = new Background(gameEngine);
-    var hero = new Hero(gameEngine, marioSprite, world1Sprite, 12, 8, 6);
+    var unicorn = new Hero(gameEngine, mario, world1, ground1);
 
     gameEngine.addEntity(bg);
-    gameEngine.addEntity(hero);
+    gameEngine.addEntity(unicorn);
  
     gameEngine.init(ctx);
     gameEngine.start();
