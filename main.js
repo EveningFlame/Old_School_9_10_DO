@@ -373,6 +373,8 @@ ASSET_MANAGER.queueDownload("./img/groundbg2.png");
 ASSET_MANAGER.queueDownload("./img/platform.png");
 ASSET_MANAGER.queueDownload("./img/koopa2.png");
 
+ASSET_MANAGER.queueDownload("./music/mario_overworld_theme.mp3");
+
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
     var canvas = document.getElementById('gameWorld');
@@ -382,6 +384,8 @@ ASSET_MANAGER.downloadAll(function () {
     var ground1 = ASSET_MANAGER.getAsset("./img/groundbg2.png");
     var platform1Sprite = ASSET_MANAGER.getAsset("./img/platform.png");
     var Koopa = ASSET_MANAGER.getAsset("./img/koopa2.png");
+	
+	var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
 
     var gameEngine = new GameEngine();
     var bg = new Platform(gameEngine, world1Sprite, 800, defaultGround, 0, 0, true);
@@ -394,6 +398,17 @@ ASSET_MANAGER.downloadAll(function () {
     var b2 = new Platform(gameEngine, platform1Sprite, 31, 31, 2250, 674, false);
 
     var m1 = new Minion(gameEngine, Koopa, 66.048, 40.032, 0, 66.048, 6, 1300, 595, true);
+	
+	console.log(marioMusic);
+	console.log(marioMusic);
+	
+	var sound = true;
+	
+	if(sound){
+		var sound = new Howl({
+			urls: ["./music/mario_overworld_theme.mp3"]
+		}).play();
+	}
 
     gameEngine.addEntity(gr);
     gameEngine.addEntity(bg);
