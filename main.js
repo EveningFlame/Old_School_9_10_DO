@@ -190,7 +190,16 @@ Hero.prototype.constructor = Hero;
 
 Hero.prototype.update = function () {
     console.log("total distance = " + totalDistance);
-    this.jumpHeight = underPlatform(this.x, this.game);
+
+    var that = this;
+
+    //this.jumpHeight = function () {
+    //    var newHeight = -1;
+    //    if (that.x >= that.game.p1.beginingX() && that.x <= that.game.p1.endingX()) {
+    //        newHeight = defaultGround - that.game.p1.bottom();
+    //    }
+    //    return newHeight;
+    //};
     if (this.jumpHeight < 0) {
         this.jumpHeight = defaultJumpHeight;
     }
@@ -298,13 +307,9 @@ Hero.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
-function underPlatform(currentX, game) {
-    var newHeight = -1;
-    //if (currentX >= game.p1.beginingX() && currentX <= game.p1.endingX()) {
-    //    newHeight = defaultGround - game.p1.bottom();
-    //}
-    return newHeight;
-}
+//function underPlatform(currentX, game) {
+    
+//}
 /*
  * Minions
  */
@@ -312,9 +317,9 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     walking1, placeX, placeY, loop) {
 
     this.animationWalkingLeft1 = new AnimationSprite(minionSprite, startX, (startY * 0),
-        frameWidth, frameHeight, defaultSpeed, walking1, loop, false);
+        frameWidth, frameHeight, defaultSpeed + .1, walking1, loop, false);
     this.animationWalkingRight1 = new AnimationSprite(minionSprite, startX, (startY * 1),
-        frameWidth, frameHeight, defaultSpeed, walking1, loop, false);
+        frameWidth, frameHeight, defaultSpeed + .1, walking1, loop, false);
 
     //if (walking2 > 0) {
     //    this.animationWalkingLeft2 = new AnimationSprite(minionSprite, startX, (startY * 5),
@@ -337,19 +342,23 @@ Minion.prototype.constructor = Minion;
 Minion.prototype.update = function () {
 
     if (this.moveRight) {
-        this.x += defaultScrollSpeed;
+        this.x += 1;
+        if (this.x >= 2190) this.moveRight = false;
     } else {
-        this.x -= defaultScrollSpeed;
+        this.x -= 1;
+        if (this.x <= 1265) this.moveRight = true;
     }
+
+    console.log(this.x + "m x");
     Entity.prototype.update.call(this);
 }
 
 Minion.prototype.draw = function (ctx) {
 
     if (this.moveRight) {
-        this.animationWalkingRight1.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
+        this.animationWalkingRight1.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
     } else {
-        this.animationWalkingLeft1.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
+        this.animationWalkingLeft1.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
     }
     Entity.prototype.draw.call(this);
 }
@@ -384,7 +393,7 @@ ASSET_MANAGER.downloadAll(function () {
     var b1 = new Platform(gameEngine, platform1Sprite, 31, 31, 1250, 674, false);
     var b2 = new Platform(gameEngine, platform1Sprite, 31, 31, 2250, 674, false);
 
-    var m1 = new Minion(gameEngine, Koopa, 688, 417, 0, 688, 6, defaultGround, 600, true);
+    var m1 = new Minion(gameEngine, Koopa, 66.048, 40.032, 0, 66.048, 6, 1300, 595, true);
 
     gameEngine.addEntity(gr);
     gameEngine.addEntity(bg);
@@ -394,7 +403,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(b1); // put koopa between here and p4
     gameEngine.addEntity(b2);
 
-    //gameEngine.addEntity(m1);
+    gameEngine.addEntity(m1);
 
     gameEngine.init(ctx);
     gameEngine.start();
