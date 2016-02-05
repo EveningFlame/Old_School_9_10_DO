@@ -164,23 +164,25 @@ Platform.prototype.draw = function (ctx) {
 * walkAnimation: the amount of animations in the hero's walking movement
 * jumpAnimation: the amount of animations in the hero's jumping movement
 */
-function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset, heroHeight, standAnimation, walkAnimation, jumpAnimation) {
+function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
+    heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) {
     this.animation = new AnimationSprite(heroSprite, startX, (startY * 0) + charYOffset,
-        frameWidth, frameHeight - charYOffset, defaultSpeed, standAnimation, true, false);
+        frameWidth, frameHeight - charYOffset, movementSpeed, standAnimation, true, false);
     this.jumpAnimation = new AnimationSprite(heroSprite, startX, (startY * 2) + charYOffset,
-        frameWidth, frameHeight - charYOffset, defaultSpeed, jumpAnimation, false, false);
+        frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation, false, false);
     this.rightWalkAnimation = new AnimationSprite(heroSprite, startX, (startY * 6) + charYOffset,
-        frameWidth, frameHeight - charYOffset, defaultSpeed, walkAnimation, true, false);
+        frameWidth, frameHeight - charYOffset, movementSpeed, walkAnimation, true, false);
     this.animationStandLeft = new AnimationSprite(heroSprite, startX, startY + charYOffset,
-        frameWidth, frameHeight - charYOffset, defaultSpeed, standAnimation, true, true);
+        frameWidth, frameHeight - charYOffset, movementSpeed, standAnimation, true, true);
     this.jumpAnimationLeft = new AnimationSprite(heroSprite, startX, (startY * 3) + charYOffset,
-        frameWidth, frameHeight - charYOffset, defaultSpeed, jumpAnimation, false, true);
+        frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation, false, true);
     this.leftWalkAnimation = new AnimationSprite(heroSprite, startX, (startY * 7) + charYOffset,
-        frameWidth, frameHeight - charYOffset, defaultSpeed, walkAnimation, true, true);
+        frameWidth, frameHeight - charYOffset, movementSpeed, walkAnimation, true, true);
     this.radius = 100;
     this.heroHeight = heroHeight;
     this.ground = defaultGround - heroHeight;
-    this.scrollSpeed = defaultScrollSpeed;
+    this.scrollSpeed = scrollSpeed;
+    this.speed = movementSpeed;
     this.jumpHeight = defaultJumpHeight;
     Entity.call(this, game, 0, 400);
 }
@@ -216,7 +218,7 @@ Hero.prototype.update = function () {
         if (jumpDistance > 0.5)
             jumpDistance = 1 - jumpDistance;
 
-        var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
+        var height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
         this.y = this.ground - height;
     }
 
@@ -231,11 +233,11 @@ Hero.prototype.update = function () {
         if (jumpDistance > 0.5)
             jumpDistance = 1 - jumpDistance;
 
-        var height = totalHeight*(-4 * (jumpDistance * jumpDistance - jumpDistance));
+        var height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
         this.y = this.ground - height;
     }
-    
-    if (bgmove && this.game.walkRight) { 
+
+    if (bgmove && this.game.walkRight) {
         sb1 += this.scrollSpeed;           // background movement lock
         sb2 += this.scrollSpeed;
     }
@@ -254,7 +256,7 @@ Hero.prototype.update = function () {
 }
 
 Hero.prototype.draw = function (ctx) {
-	var yPlace = this.ground;
+    var yPlace = this.ground;
     if (sb1 > 2400) {
         sb1 = 0;
     }
@@ -307,31 +309,51 @@ Hero.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
+// Boss
+function Boss(game, minionSprite, frameHeight, frameWidth, startX, startY,
+    walking1, placeX, placeY, loop, speed) { }
+
+Boss.prototype = new Entity();
+Boss.prototype.constructor = Boss;
+
+Boss.prototype.update = function () {
+    Entity.prototype.update.call(this);
+}
+
+Boss.prototype.draw = function (ctx) {
+    Entity.prototype.draw.call(this);
+}
 //function underPlatform(currentX, game) {
-    
+
 //}
 /*
  * Minions
  */
 function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
-    walking1, placeX, placeY, loop) {
+    walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) {
 
-    this.animationWalkingLeft1 = new AnimationSprite(minionSprite, startX, (startY * 0),
-        frameWidth, frameHeight, defaultSpeed + .1, walking1, loop, false);
-    this.animationWalkingRight1 = new AnimationSprite(minionSprite, startX, (startY * 1),
-        frameWidth, frameHeight, defaultSpeed + .1, walking1, loop, false);
+    if (walking1 > 0) {
+        this.animationWalkingLeft1 = new AnimationSprite(minionSprite, startX, (startY * 0),
+            frameWidth, frameHeight, speed, walking1, loop, false);
+        this.animationWalkingRight1 = new AnimationSprite(minionSprite, startX, (startY * 1),
+            frameWidth, frameHeight, speed, walking1, loop, false);
+    }
 
-    //if (walking2 > 0) {
-    //    this.animationWalkingLeft2 = new AnimationSprite(minionSprite, startX, (startY * 5),
-    //    frameWidth, frameHeight, defaultSpeed, walking2, loop, false);
-    //    this.animationWalkingRight2 = new AnimationSprite(minionSprite, startX, (startY * 6),
-    //        frameWidth, frameHeight, defaultSpeed, walking2, loop, false);
-    //}
-    
+    if (walking2 > 0) {
+        this.animationWalkingLeft2 = new AnimationSprite(minionSprite, startX, (startY * 5),
+            frameWidth, frameHeight, speed, walking2, loop, false);
+        this.animationWalkingRight2 = new AnimationSprite(minionSprite, startX, (startY * 6),
+            frameWidth, frameHeight, speed, walking2, loop, false);
+    }
+
     this.radius = frameHeight / 2;
     this.y = placeY;
     this.x = placeX;
+    this.speed = speed;
     this.moveRight = false;
+    this.farLeft = leftX;
+    this.farRight = rightX;
+    this.use1 = (walking1 > 0);
     Entity.call(this, game, placeX, placeY);
 }
 
@@ -343,10 +365,10 @@ Minion.prototype.update = function () {
 
     if (this.moveRight) {
         this.x += 1;
-        if (this.x >= 2190) this.moveRight = false;
+        if (this.x >= this.farRight) this.moveRight = false;
     } else {
         this.x -= 1;
-        if (this.x <= 1265) this.moveRight = true;
+        if (this.x <= this.farLeft) this.moveRight = true;
     }
 
     console.log(this.x + "m x");
@@ -356,9 +378,17 @@ Minion.prototype.update = function () {
 Minion.prototype.draw = function (ctx) {
 
     if (this.moveRight) {
-        this.animationWalkingRight1.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
+        if (this.use1) {
+            this.animationWalkingRight1.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
+        } else {
+            this.animationWalkingRight2.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
+        }
     } else {
-        this.animationWalkingLeft1.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
+        if (this.use1) {
+            this.animationWalkingLeft1.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
+        } else {
+            this.animationWalkingLeft2.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
+        }
     }
     Entity.prototype.draw.call(this);
 }
@@ -372,32 +402,41 @@ ASSET_MANAGER.queueDownload("./img/skybg2.png");
 ASSET_MANAGER.queueDownload("./img/groundbg2.png");
 ASSET_MANAGER.queueDownload("./img/platform.png");
 ASSET_MANAGER.queueDownload("./img/koopa2.png");
-
+ASSET_MANAGER.queueDownload("./img/Pipe.png");
 ASSET_MANAGER.queueDownload("./music/mario_overworld_theme.mp3");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
     var canvas = document.getElementById('gameWorld');
     var ctx = canvas.getContext('2d');
+
     var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
-    var world1Sprite = ASSET_MANAGER.getAsset("./img/skybg2.png");
+    var world1 = ASSET_MANAGER.getAsset("./img/skybg2.png");
     var ground1 = ASSET_MANAGER.getAsset("./img/groundbg2.png");
-    var platform1Sprite = ASSET_MANAGER.getAsset("./img/platform.png");
+    var platform = ASSET_MANAGER.getAsset("./img/platform.png");
     var Koopa = ASSET_MANAGER.getAsset("./img/koopa2.png");
-	
+    var pipe = ASSET_MANAGER.getAsset("./img/Pipe.png");
+
 	var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
 
     var gameEngine = new GameEngine();
-    var bg = new Platform(gameEngine, world1Sprite, 800, defaultGround, 0, 0, true);
+    var bg = new Platform(gameEngine, world1, 800, defaultGround, 0, 0, true);
     var gr = new Platform(gameEngine, ground1, 800, 95, 0, defaultGround, true);
-    var hero = new Hero(gameEngine, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6);
+    var hero = new Hero(gameEngine, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 2.5);
 
-    var p1 = new Platform(gameEngine, platform1Sprite, 191, 31, 1500, 600, false);
-    var p2 = new Platform(gameEngine, platform1Sprite, 191, 31, 1600, 500, false);
-    var b1 = new Platform(gameEngine, platform1Sprite, 31, 31, 1250, 674, false);
-    var b2 = new Platform(gameEngine, platform1Sprite, 31, 31, 2250, 674, false);
+    var p1 = new Platform(gameEngine, platform, 190, 31, 1500, 600, false);
+    var p2 = new Platform(gameEngine, platform, 190, 31, 1600, 500, false);
+    var b1 = new Platform(gameEngine, platform, 31, 31, 1250, 674, false);
+    var b2 = new Platform(gameEngine, platform, 160, 31, 2250, 674, false);
+    var t1 = new Platform(gameEngine, pipe, 98, 150, 2281, 556, false);
+    var b3 = new Platform(gameEngine, platform, 94, 31, 3025, 474, false);
+    var t2 = new Platform(gameEngine, pipe, 98, 150, 3022, 325, false);
+    var p3 = new Platform(gameEngine, platform, 190, 31, 3200, 400, false);
 
-    var m1 = new Minion(gameEngine, Koopa, 66.048, 40.032, 0, 66.048, 6, 1300, 595, true);
+    var m1 = new Minion(gameEngine, Koopa, 55.968, 40.032, 0, 55.968,
+        6, 8, 1300, 595, true, .2, 1265, 2190);
+    var m2 = new Minion(gameEngine, Koopa, 55.968, 40.032, 0, 55.968,
+        0, 8, 3250, 290, true, .2, 3180, 3331);
 	
 	console.log(marioMusic);
 	console.log(marioMusic);
@@ -413,12 +452,18 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(gr);
     gameEngine.addEntity(bg);
     gameEngine.addEntity(hero);
+
     gameEngine.addEntity(p1);
     gameEngine.addEntity(p2);
-    gameEngine.addEntity(b1); // put koopa between here and p4
+    gameEngine.addEntity(b1);
     gameEngine.addEntity(b2);
+    gameEngine.addEntity(t1);
+    gameEngine.addEntity(b3);
+    gameEngine.addEntity(t2);
+    gameEngine.addEntity(p3);
 
     gameEngine.addEntity(m1);
+    gameEngine.addEntity(m2);
 
     gameEngine.init(ctx);
     gameEngine.start();

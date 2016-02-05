@@ -62,39 +62,28 @@ GameEngine.prototype.startInput = function () {
     var that = this;
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
-        if (e.which === 32) {
-            that.space = true;
+        switch (e.which) {
+            case 32:
+                that.space = true;
+                break;
+            case 37:
+                that.walkLeft = true;
+                break;
+            case 39:
+                that.walkRight = true;
+                break;
         }
-//        console.log(e);
         e.preventDefault();
     }, false);
-
-    this.ctx.canvas.addEventListener("keydown", function (e) {
-        if (e.which === 39) {
-            that.walkRight = true;
-        }
-        e.preventDefault();
-    }, false);
-
 
     this.ctx.canvas.addEventListener("keyup", function (e) {
-        if (e.which === 39) {
-            that.walkRight = false;
-        }
-        e.preventDefault();
-    }, false);
-
-    this.ctx.canvas.addEventListener("keydown", function (e) {
-        if (e.which === 37) {
-            that.walkLeft = true;
-        }
-        e.preventDefault();
-    }, false);
-
-
-    this.ctx.canvas.addEventListener("keyup", function (e) {
-        if (e.which === 37) {
-            that.walkLeft = false;
+        switch (e.which) {
+            case 37:
+                that.walkLeft = false;
+                break;
+            case 39:
+                that.walkRight = false;
+                break;
         }
         e.preventDefault();
     }, false);
