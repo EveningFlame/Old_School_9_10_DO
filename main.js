@@ -4,10 +4,8 @@ var totalDistance = 0;
 var maxX = 0;
 
 var defaultGround = 705;
-var defaultSpeed = 0.1;
 var defaultScroll = 250;
 var defaultJumpHeight = 200;
-var defaultScrollSpeed = 2.5;
 
 var unlocked;
 var bgmove;
