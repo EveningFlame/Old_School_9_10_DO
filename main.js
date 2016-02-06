@@ -189,17 +189,6 @@ Hero.prototype = new Entity();
 Hero.prototype.constructor = Hero;
 
 Hero.prototype.update = function () {
-    //console.log("total distance = " + totalDistance);
-
-    var that = this;
-
-    //this.jumpHeight = function () {
-    //    var newHeight = -1;
-    //    if (that.x >= that.game.p1.beginingX() && that.x <= that.game.p1.endingX()) {
-    //        newHeight = defaultGround - that.game.p1.bottom();
-    //    }
-    //    return newHeight;
-    //};
     if (this.jumpHeight < 0) {
         this.jumpHeight = defaultJumpHeight;
     }
@@ -320,7 +309,7 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
 	this.animation = new AnimationSprite(bossSprite, startX, (startY * 0),
         frameWidth, frameHeight, speed, standingFrames, true, false);
 	
-	this.walkAnimation = new AnimationSprite(bossSprite, startX, (startY * 1),
+	this.walkAnimation = new AnimationSprite(bossSprite, startX, (startY * 2),
         frameWidth, frameHeight, speed, walkingFrames, true, false);
 		
 		
@@ -481,14 +470,12 @@ ASSET_MANAGER.downloadAll(function () {
     
 /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
-	
 	var hero = new Hero(gameEngine, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 2.5);
-	
-	
-	
-	// 128.01, 97, 
-/* 	function Boss(game, prite, frameHeight, frameWidth, startX, startY, stand, walking1, placeX, placeY, loop, speed, farLeft)  */
-	var boss = new Boss(gameEngine, bowserSprite, 97, 128.01, 0, 97, 4, 6, 1100, 515, true, 0.16, 500);
+	 
+    /* 	function Boss(game, sprite, frameHeight, frameWidth, startX, startY, 
+        stand, walking1, placeX, placeY, loop, speed, farLeft)  */
+	var boss = new Boss(gameEngine, bowserSprite, 55.968, 55.968, 0, 55.968,
+        4, 6, 1100, 595, true, 0.16, 500);
 
     var p1 = new Platform(gameEngine, platform, 190, 31, 1500, 600, false);
     var p2 = new Platform(gameEngine, platform, 190, 31, 1600, 500, false);
@@ -510,7 +497,7 @@ ASSET_MANAGER.downloadAll(function () {
 	/* console.log(marioMusic);
 	console.log(marioMusic); */
 	
-	var sound = false;
+	var sound = true;
 	
 	if(sound){
 		var sound = new Howl({
