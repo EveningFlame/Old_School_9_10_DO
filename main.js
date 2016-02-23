@@ -438,34 +438,48 @@ Minion.prototype.draw = function (ctx) {
 };
 
 
-function Coin(game, sprite, frameHeight, frameWidth, startX, startY, frames, placeX, placeY, loop, speed) {
+// Animation for both the coin and the powerup 
 
-/* function AnimationSprite(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) { */
-
-    this.spin = new AnimationSprite(sprite, startX, (startY * 0), frameWidth, frameHeight, speed, frames, loop, false);
-    
-    this.radius = frameHeight / 2;
-    this.y = placeY;
-    this.x = placeX;
-    this.speed = speed;
-
-    Entity.call(this, game, placeX, placeY);
-};
+function Coin(game, pos_on_mapx, pos_on_mapy, coinSheet, frameWidth, frameHeight, frames, ispowerup) {
+    this.ispowerup = ispowerup;
+    this.width = frameWidth;
+    this.height = frameHeight;
+    this.animation = new AnimationSprite(coinSheet, 0, 0, frameWidth, frameHeight, 0.1, frames, true, false);
+    Entity.call(this, game, pos_on_mapx, pos_on_mapy);
+}
 
 Coin.prototype = new Entity();
-
 Coin.prototype.constructor = Coin;
-
-Coin.prototype.update = function () {
-    Entity.prototype.update.call(this);
-};
 
 Coin.prototype.draw = function (ctx) {
 
-    this.spin.drawFrame(this.game.clockTick, ctx, this.x, this.y, 3);
-
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x-sb1, this.y);
     Entity.prototype.draw.call(this);
-};
+}
+
+Coin.prototype.collide = function (other) {
+
+    //JASON SAYS HE WILL DO IT 
+
+}
+
+Coin.prototype.update = function () {
+    var ent = this.game.entities[0];
+    for (var i = 0; i < this.game.entities.length; i++) {
+        if (this.game.entities[i] instanceof Hero) {
+            var ent = this.game.entities[i];
+        }
+    }
+    
+    if(this.collide(ent)) { //ent !== this &&
+        if (this.ispowerup) {
+            //do someting to mario // may need to use a global variable
+        }
+        this.removeFromWorld = true;      
+    }
+    Entity.prototype.update.call(this);
+}
+
 
 // the "main" code begins here
 
@@ -479,6 +493,7 @@ ASSET_MANAGER.queueDownload("./img/koopa2.png");
 ASSET_MANAGER.queueDownload("./img/Pipe.png");
 ASSET_MANAGER.queueDownload("./img/bowser2.png");
 ASSET_MANAGER.queueDownload("./img/pickup_coin.png");
+ASSET_MANAGER.queueDownload("./img/star.png");
 ASSET_MANAGER.queueDownload("./music/mario_overworld_theme.mp3");
 
 
@@ -494,7 +509,8 @@ ASSET_MANAGER.downloadAll(function () {
     var Koopa = ASSET_MANAGER.getAsset("./img/koopa2.png");
     var pipe = ASSET_MANAGER.getAsset("./img/Pipe.png");
     var bowserSprite = ASSET_MANAGER.getAsset("./img/bowser2.png");
-    var coinSprite = ASSET_MANAGER.getAsset("./img/pickup_coin.png");
+    var gamecoin = ASSET_MANAGER.getAsset("./img/pickup_coin.png");
+    var gamePowerUp = ASSET_MANAGER.getAsset("./img/star.png");
     
     var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
 
@@ -530,7 +546,9 @@ ASSET_MANAGER.downloadAll(function () {
 //    function Coin(game, minionSprite, frameHeight, frameWidth, startX, startY,
 //    frames, placeX, placeY, loop, speed) {
 
-    var coin = new Coin(gameEngine, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09);
+    var coin1 = new Coin(gameEngine, 200, 650, gamecoin, 32, 32, 20, false);
+
+    var powerup1 = new Coin(gameEngine, 250, 650, gamePowerUp, 64, 40, 7, true);
     
 
     
@@ -546,7 +564,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(bg);
     gameEngine.addEntity(hero);
 	//Boss of the level
-	gameEngine.addEntity(boss);
+    gameEngine.addEntity(boss);
 
     gameEngine.addEntity(p1);
     gameEngine.addEntity(p2);
@@ -559,7 +577,8 @@ ASSET_MANAGER.downloadAll(function () {
 
     gameEngine.addEntity(m1);
     gameEngine.addEntity(m2);
-    gameEngine.addEntity(coin);
+    gameEngine.addEntity(coin1);
+    gameEngine.addEntity(powerup1);
     
     gameEngine.init(ctx);
     gameEngine.start();
