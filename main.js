@@ -2,6 +2,7 @@ var sb1 = 0;
 var sb2 = 0;
 var totalDistance = 0;
 var maxX = 0;
+var coinMove = 0;
 
 var defaultGround = 705;
 var defaultScroll = 250;
@@ -28,7 +29,7 @@ Coin.prototype.constructor = Coin;
 
 Coin.prototype.draw = function (ctx) {
 
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x-sb1, this.y);
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x - coinMove, this.y);
     Entity.prototype.draw.call(this);
 }
 
@@ -283,6 +284,7 @@ Hero.prototype.update = function () {
     if (bgmove && this.game.walkRight) {
         sb1 += this.scrollSpeed;           // background movement lock
         sb2 += this.scrollSpeed;
+        coinMove += this.scrollSpeed;
     }
 
     if (unlocked && this.game.walkRight) {
