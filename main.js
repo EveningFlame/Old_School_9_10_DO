@@ -11,6 +11,53 @@ var unlocked;
 var bgmove;
 
 var standLeft;
+
+
+// Animation for both the coin and the powerup 
+
+function Coin(game, pos_on_mapx, pos_on_mapy, coinSheet, frameWidth, frameHeight, frames, ispowerup) {
+    this.ispowerup = ispowerup;
+    this.width = frameWidth;
+    this.height = frameHeight;
+    this.animation = new AnimationSprite(coinSheet, 0, 0, frameWidth, frameHeight, 0.1, frames, true, false);
+    Entity.call(this, game, pos_on_mapx, pos_on_mapy);
+}
+
+Coin.prototype = new Entity();
+Coin.prototype.constructor = Coin;
+
+Coin.prototype.draw = function (ctx) {
+
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x-sb1, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+Coin.prototype.collide = function (other) {
+
+    //JASON SAYS HE WILL DO IT 
+
+}
+
+Coin.prototype.update = function () {
+    var ent = this.game.entities[0];
+    for (var i = 0; i < this.game.entities.length; i++) {
+        if (this.game.entities[i] instanceof Hero) {
+            var ent = this.game.entities[i];
+        }
+    }
+    
+    if(this.collide(ent)) { //ent !== this &&
+        if (this.ispowerup) {
+            //do someting to mario // may need to use a global variable
+        }
+        this.removeFromWorld = true;      
+    }
+    Entity.prototype.update.call(this);
+}
+
+
+
+
 // platforms animation
 function AnimationPlatform(image, frameWidth, frameHeight, imageX, imageY, imageScrolling) {
     this.image = image;
@@ -20,7 +67,10 @@ function AnimationPlatform(image, frameWidth, frameHeight, imageX, imageY, image
     this.imageY = imageY;
     this.scroll = imageScrolling;
     this.elapsedTime = 0;
-};
+}
+
+
+
 
 AnimationPlatform.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var scaleBy = scaleBy || 1;
@@ -51,14 +101,16 @@ AnimationPlatform.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
             this.imageX, this.imageY,
             this.width, this.height);
     }
-};
+}
 AnimationPlatform.prototype.currentFrame = function () {
     return Math.floor(this.elapsedTime / this.frameDuration);
-};
+}
 
 AnimationPlatform.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
-};
+}
+
+
 
 // sprites animation
 function AnimationSprite(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
@@ -73,7 +125,7 @@ function AnimationSprite(spriteSheet, startX, startY, frameWidth, frameHeight, f
     this.elapsedTime = 0;
     this.loop = loop;
     this.reverse = reverse;
-};
+}
 
 AnimationSprite.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var scaleBy = scaleBy || 1;
@@ -99,25 +151,22 @@ AnimationSprite.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var locX = x;
     var locY = y;
     var offset = vindex === 0 ? this.startX : 0;
-    if(scaleBy === 3){
-        console.log("HERE");
-        scaleBy = 1;
-    }
+
     ctx.drawImage(this.spriteSheet,
             index * this.frameWidth + offset, vindex * this.frameHeight + this.startY,  // source from sheet
             this.frameWidth, this.frameHeight,
             locX, locY,
             this.frameWidth * scaleBy,
             this.frameHeight * scaleBy);
-};
+}
 
 AnimationSprite.prototype.currentFrame = function () {
     return Math.floor(this.elapsedTime / this.frameDuration);
-};
+}
 
 AnimationSprite.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
-};
+ }
 
 function Platform(game, platformSprite, width, height, startX, startY, scroll) {
     this.animation = new AnimationPlatform(platformSprite, width, height, startX, startY, scroll);
@@ -127,7 +176,7 @@ function Platform(game, platformSprite, width, height, startX, startY, scroll) {
     this.height = height;
     Entity.call(this, game, startX, startY);
     this.radius = height / 2;
-};
+}
 
 Platform.prototype = new Entity();
 
@@ -135,28 +184,28 @@ Platform.prototype.constructor = Platform;
 
 Platform.prototype.beginingX = function () {
     return this.startX - maxX;
-};
+}
 
 Platform.prototype.endingX = function () {
     return this.startY + this.width - maxX;
-};
+}
 
 Platform.prototype.top = function () {
     return this.startY;
-};
+}
 
 Platform.prototype.bottom = function () {
     return this.startY + this.height;
-};
+}
 
 Platform.prototype.update = function () {
     Entity.prototype.update.call(this);
-};
+}
 
 Platform.prototype.draw = function (ctx) {
     this.animation.drawFrame(this.game.clockTick, ctx, 0, 0, 0);
     Entity.prototype.draw.call(this);
-};
+}
 /*
 * Hero
 * Game: the gameEngine that it will use
@@ -186,7 +235,7 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.speed = movementSpeed;
     this.jumpHeight = defaultJumpHeight;
     Entity.call(this, game, 0, 400);
-};
+}
 
 Hero.prototype = new Entity();
 Hero.prototype.constructor = Hero;
@@ -243,7 +292,7 @@ Hero.prototype.update = function () {
     //console.log("sb1: " + sb1 + " sb2: " + sb2 + " x: " + this.x);
 
     Entity.prototype.update.call(this);
-};
+}
 
 Hero.prototype.draw = function (ctx) {
 
@@ -298,7 +347,7 @@ Hero.prototype.draw = function (ctx) {
     }
 
     Entity.prototype.draw.call(this);
-};
+}
 
 // Boss
 /* function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
@@ -335,7 +384,7 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
     Entity.call(this, game, placeX, placeY);
 	
 
-};
+}
 
 Boss.prototype = new Entity();
 Boss.prototype.constructor = Boss;
@@ -354,7 +403,7 @@ Boss.prototype.update = function () {
 	}
 	
     Entity.prototype.update.call(this);
-};
+}
 
 Boss.prototype.draw = function (ctx) {
 	//(tick, ctx, x, y, scaleBy)	
@@ -366,7 +415,7 @@ Boss.prototype.draw = function (ctx) {
 	}
 
     Entity.prototype.draw.call(this);
-};
+}
 //function underPlatform(currentX, game) {
 
 //}
@@ -399,7 +448,7 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     this.farRight = rightX;
     this.use1 = (walking1 > 0);
     Entity.call(this, game, placeX, placeY);
-};
+}
 
 Minion.prototype = new Entity();
 
@@ -417,7 +466,7 @@ Minion.prototype.update = function () {
 
     //.log(this.x + "m x");
     Entity.prototype.update.call(this);
-};
+}
 
 Minion.prototype.draw = function (ctx) {
 
@@ -435,51 +484,7 @@ Minion.prototype.draw = function (ctx) {
         }
     }
     Entity.prototype.draw.call(this);
-};
-
-
-// Animation for both the coin and the powerup 
-
-function Coin(game, pos_on_mapx, pos_on_mapy, coinSheet, frameWidth, frameHeight, frames, ispowerup) {
-    this.ispowerup = ispowerup;
-    this.width = frameWidth;
-    this.height = frameHeight;
-    this.animation = new AnimationSprite(coinSheet, 0, 0, frameWidth, frameHeight, 0.1, frames, true, false);
-    Entity.call(this, game, pos_on_mapx, pos_on_mapy);
 }
-
-Coin.prototype = new Entity();
-Coin.prototype.constructor = Coin;
-
-Coin.prototype.draw = function (ctx) {
-
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x-sb1, this.y);
-    Entity.prototype.draw.call(this);
-}
-
-Coin.prototype.collide = function (other) {
-
-    //JASON SAYS HE WILL DO IT 
-
-}
-
-Coin.prototype.update = function () {
-    var ent = this.game.entities[0];
-    for (var i = 0; i < this.game.entities.length; i++) {
-        if (this.game.entities[i] instanceof Hero) {
-            var ent = this.game.entities[i];
-        }
-    }
-    
-    if(this.collide(ent)) { //ent !== this &&
-        if (this.ispowerup) {
-            //do someting to mario // may need to use a global variable
-        }
-        this.removeFromWorld = true;      
-    }
-    Entity.prototype.update.call(this);
-}
-
 
 // the "main" code begins here
 
@@ -494,6 +499,7 @@ ASSET_MANAGER.queueDownload("./img/Pipe.png");
 ASSET_MANAGER.queueDownload("./img/bowser2.png");
 ASSET_MANAGER.queueDownload("./img/pickup_coin.png");
 ASSET_MANAGER.queueDownload("./img/star.png");
+
 ASSET_MANAGER.queueDownload("./music/mario_overworld_theme.mp3");
 
 
@@ -508,11 +514,11 @@ ASSET_MANAGER.downloadAll(function () {
     var platform = ASSET_MANAGER.getAsset("./img/platform.png");
     var Koopa = ASSET_MANAGER.getAsset("./img/koopa2.png");
     var pipe = ASSET_MANAGER.getAsset("./img/Pipe.png");
-    var bowserSprite = ASSET_MANAGER.getAsset("./img/bowser2.png");
+	var bowserSprite = ASSET_MANAGER.getAsset("./img/bowser2.png");
     var gamecoin = ASSET_MANAGER.getAsset("./img/pickup_coin.png");
     var gamePowerUp = ASSET_MANAGER.getAsset("./img/star.png");
-    
-    var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
+
+	var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
 
     var gameEngine = new GameEngine();
     var bg = new Platform(gameEngine, world1, 800, defaultGround, 0, 0, true);
@@ -520,12 +526,12 @@ ASSET_MANAGER.downloadAll(function () {
     
 /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
-    var hero = new Hero(gameEngine, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 2.5);
+	var hero = new Hero(gameEngine, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 2.5);
 	 
     /* 	function Boss(game, sprite, frameHeight, frameWidth, startX, startY, 
         stand, walking1, placeX, placeY, loop, speed, farLeft)  */
-    var boss = new Boss(gameEngine, bowserSprite, 55.968, 55.968, 0, 55.968,
-    4, 6, 1100, 595, true, 0.16, 500);
+	var boss = new Boss(gameEngine, bowserSprite, 55.968, 55.968, 0, 55.968,
+        4, 6, 1100, 595, true, 0.16, 500);
 
     var p1 = new Platform(gameEngine, platform, 190, 31, 1500, 600, false);
     var p2 = new Platform(gameEngine, platform, 190, 31, 1600, 500, false);
@@ -539,20 +545,23 @@ ASSET_MANAGER.downloadAll(function () {
 /* 	function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) { */
 	
-    var m1 = new Minion(gameEngine, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 1300, 595, true, .2, 1265, 2190);
-    var m2 = new Minion(gameEngine, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 3250, 290, true, .2, 3180, 3331);
-	
+    var m1 = new Minion(gameEngine, Koopa, 55.968, 40.032, 0, 55.968,
+        6, 8, 1300, 595, true, .2, 1265, 2190);
+    
+    var m2 = new Minion(gameEngine, Koopa, 55.968, 40.032, 0, 55.968,
+        0, 8, 3250, 290, true, .2, 3180, 3331);
 
-//    function Coin(game, minionSprite, frameHeight, frameWidth, startX, startY,
-//    frames, placeX, placeY, loop, speed) {
 
     var coin1 = new Coin(gameEngine, 200, 650, gamecoin, 32, 32, 20, false);
 
     var powerup1 = new Coin(gameEngine, 250, 650, gamePowerUp, 64, 40, 7, true);
-    
 
-    
-	var sound = false;
+    gameEngine.addEntity(coin1);
+	
+	/* console.log(marioMusic);
+	console.log(marioMusic); */
+	
+	var sound = true;
 	
 	if(sound){
 		var sound = new Howl({
@@ -564,7 +573,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.addEntity(bg);
     gameEngine.addEntity(hero);
 	//Boss of the level
-    gameEngine.addEntity(boss);
+	gameEngine.addEntity(boss);
 
     gameEngine.addEntity(p1);
     gameEngine.addEntity(p2);
@@ -577,9 +586,10 @@ ASSET_MANAGER.downloadAll(function () {
 
     gameEngine.addEntity(m1);
     gameEngine.addEntity(m2);
-    gameEngine.addEntity(coin1);
-    gameEngine.addEntity(powerup1);
-    
+
+    gameEngine.addEntity(coin1); 
+     gameEngine.addEntity(powerup1);
+
     gameEngine.init(ctx);
     gameEngine.start();
 });
