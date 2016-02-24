@@ -37,6 +37,19 @@ function GameEngine() {
     this.wheel = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
+    this.defaultScroll = 250;
+    this.totalDistance = 0;
+    this.defaultGround = 705;
+    this.defaultJumpHeight = 200;
+    this.unlocked;
+    this.bgmove;
+    this.maxX = 0;
+    this.sb1 = 0;
+    this.sb2 = 0;
+    this.hero = null;
+    this.coins = [];
+    this.baddies = [];
+    this.platforms = [];
 }
 
 GameEngine.prototype.init = function (ctx) {
