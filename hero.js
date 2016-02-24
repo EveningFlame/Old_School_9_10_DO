@@ -95,6 +95,7 @@ Hero.prototype.update = function () {
     if (this.game.bgmove && this.game.walkRight) {
         this.game.sb1 += this.scrollSpeed;           // background movement lock
         this.game.sb2 += this.scrollSpeed;
+        this.game.coinMove += this.scrollSpeed;
     }
 
     if (this.game.unlocked && this.game.walkRight) {

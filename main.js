@@ -57,6 +57,7 @@ ASSET_MANAGER.queueDownload("./img/koopa2.png");
 ASSET_MANAGER.queueDownload("./img/Pipe.png");
 ASSET_MANAGER.queueDownload("./img/bowser2.png");
 ASSET_MANAGER.queueDownload("./img/pickup_coin.png");
+ASSET_MANAGER.queueDownload("./img/star.png");
 ASSET_MANAGER.queueDownload("./music/mario_overworld_theme.mp3");
 
 
@@ -73,6 +74,7 @@ ASSET_MANAGER.downloadAll(function () {
     var pipe = ASSET_MANAGER.getAsset("./img/Pipe.png");
     var bowserSprite = ASSET_MANAGER.getAsset("./img/bowser2.png");
     var coinSprite = ASSET_MANAGER.getAsset("./img/pickup_coin.png");
+    var starSprite = ASSET_MANAGER.getAsset("./img/star.png");
     
     var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
 
@@ -108,7 +110,7 @@ ASSET_MANAGER.downloadAll(function () {
 //    function Coin(game, minionSprite, frameHeight, frameWidth, startX, startY,
 //    frames, placeX, placeY, loop, speed) {
 
-    var coin = new Coin(gameEngine, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09);
+   
     
 
     
@@ -149,8 +151,29 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.baddies.push(m1);
     gameEngine.baddies.push(m2);
 
-    gameEngine.addEntity(coin);
-    gameEngine.coins.push(coin);
+    var star = new Coin(gameEngine, starSprite, 64, 40, 0, 0, 7, 1420, 460, true, 0.1, true);
+
+    for (var i = 0; i < 5; i++) {
+        var coin = new Coin(gameEngine, coinSprite, 32, 32, 0, 0, 20, 200 + (i * 50), 650, true, 0.09, false);   
+        gameEngine.addEntity(coin);
+        gameEngine.coins.push(coin);
+    }
+
+    for (var i = 0; i < 8; i++) {
+        var coin = new Coin(gameEngine, coinSprite, 32, 32, 0, 0, 20, 1600 + (i * 50), 650, true, 0.09, false);   
+        gameEngine.addEntity(coin);
+        gameEngine.coins.push(coin);
+    }
+
+
+
+   gameEngine.addEntity(star);
+   gameEngine.coins.push(star);
+
+    
+    //var coin1 = new Coin(gameEngine, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09);
+
+   
     
     gameEngine.init(ctx);
     gameEngine.start();
