@@ -141,12 +141,12 @@ Hero.prototype.draw = function (ctx) {
     if (this.jumping) {
         if (this.standLeft) {
             this.jumpAnimationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
-            if (this.game.walkLeft) if (this.game.unlocked) totalDistance -= this.scrollSpeed;
+            if (this.game.walkLeft) if (this.game.unlocked) this.game.totalDistance -= this.scrollSpeed;
         } else {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
             if (this.game.walkRight) {
-                totalDistance += this.scrollSpeed;
-                if (totalDistance > this.game.maxX) this.game.maxX += this.scrollSpeed;
+                this.game.totalDistance += this.scrollSpeed;
+                if (this.game.totalDistance > this.game.maxX) this.game.maxX += this.scrollSpeed;
             }
         }
     } else if (this.game.walkRight) {
