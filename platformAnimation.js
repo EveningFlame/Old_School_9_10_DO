@@ -18,6 +18,17 @@ AnimationPlatform.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     ctx.font = "36px serif";
     ctx.strokeText("Score: ", 10, 40);
     ctx.strokeText(this.game.score, 110, 40);
+    
+        if (this.game.poweredUp) {
+      //console.log(this.game.starTime);
+        this.game.starTime -= this.game.clockTick;
+
+        ctx.strokeText("IM SUPER", 300, 200);
+        if (this.game.starTime < 0) {
+          this.game.poweredUp = false;
+          this.game.starTime = 50;
+        }
+    }
 
     if (this.scroll) {
         ctx.drawImage(this.image,
