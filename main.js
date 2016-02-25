@@ -139,16 +139,16 @@ startGame = function(game){
     game.baddies.push(m1);
     game.baddies.push(m2);
 
-    var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 1420, 460, true, 0.1, true);
+    var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 1420, 460, true, 0.1, true, 3);
 
     for (var i = 0; i < 5; i++) {
-        var coin = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 200 + (i * 50), 650, true, 0.09, false);   
+        var coin = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 200 + (i * 50), 650, true, 0.09, false, 3);   
         game.addEntity(coin);
         game.coins.push(coin);
     }
 
     for (var i = 0; i < 8; i++) {
-        var coin = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 1600 + (i * 50), 650, true, 0.09, false);   
+        var coin = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 1600 + (i * 50), 650, true, 0.09, false, 3);   
         game.addEntity(coin);
         game.coins.push(coin);
     }
@@ -157,6 +157,11 @@ startGame = function(game){
 
    game.addEntity(star);
    game.coins.push(star);
+   
+   var heart = new Coin(game, hearts, 32, 32, 0, 32, 1, 740, 0, true, 0.09, false, 2);  
+
+   game.addEntity(heart);
+   game.coins.push(heart);
 
     
     //var coin1 = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09);
@@ -176,6 +181,7 @@ ASSET_MANAGER.queueDownload("./img/Pipe.png");
 ASSET_MANAGER.queueDownload("./img/bowser2.png");
 ASSET_MANAGER.queueDownload("./img/pickup_coin.png");
 ASSET_MANAGER.queueDownload("./img/star.png");
+ASSET_MANAGER.queueDownload("./img/hearts.png");
 ASSET_MANAGER.queueDownload("./music/mario_overworld_theme.mp3");
 
 //Title Screen
@@ -193,6 +199,7 @@ ASSET_MANAGER.queueDownload("./img/titleLogo.png");
 ASSET_MANAGER.queueDownload("./img/pokeball.png");
 ASSET_MANAGER.queueDownload("./img/metroid_prime.png");
 ASSET_MANAGER.queueDownload("./img/mushroom.png");
+
 
 //Main Menu
 ASSET_MANAGER.queueDownload("./img/menu.png");
