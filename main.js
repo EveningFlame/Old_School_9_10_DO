@@ -49,7 +49,7 @@
 
 startGame = function(game){
 	
-	console.log("HERE");
+	//console.log("HERE");
 	for(var i = 0; i < game.entities.length; i++){
         game.entities[i].removeFromWorld = true;
     }
