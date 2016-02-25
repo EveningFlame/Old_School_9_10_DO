@@ -121,8 +121,8 @@ Button.prototype.bottom = function () {
 Button.prototype.update = function () {
 
     if (this.game.mouseX >= this.beginingX() && this.game.mouseX <= this.endingX()&&this.game.mouseY >= this.top() && this.game.mouseY <= this.bottom()){ 
-        //startMenu(this.gameE);//console.log("StartGame");
-		startGame(this.gameE);
+        startMenu(this.gameE);//console.log("StartGame");
+		//startGame(this.gameE);
     }
     Entity.prototype.update.call(this);
 };

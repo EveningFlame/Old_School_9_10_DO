@@ -18,7 +18,7 @@ startMenu = function(game){
     
   
     var background = new Icon(game, menuB, 800, 800, 0, 800, 0, 0, true);
-    var mario = new marioButton(game, marioIcon, 300, 300, 0, 300, 0, 0, true);
+    var mario = new Icon(game, marioIcon, 200, 200, 0, 200, 60, 100, true, "Mario");
 //    var link = new Icon(game, linkIcon, 800, 800, 0, 800, 0, 400, true);
 //    var pikachu = new Icon(game, pikachuIcon, 800, 800, 0, 800, 0, 0, true);
 //    var samus = new Icon(game, samusIcon, 800, 800, 0, 800, 0, 0, true);

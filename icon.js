@@ -19,7 +19,7 @@ Icon.prototype.beginingX = function () {
 };
 
 Icon.prototype.endingX = function () {
-    return this.x + this.width;
+    return this.x + this.frameWidth;
 };
 
 Icon.prototype.top = function () {
@@ -27,7 +27,7 @@ Icon.prototype.top = function () {
 };
 
 Icon.prototype.bottom = function () {
-    return this.y + this.height;
+    return this.y + this.frameHeight;
 };
 
 Icon.prototype.update = function () {
@@ -35,8 +35,8 @@ Icon.prototype.update = function () {
     if(this.name === "Mario"){
 		
         if (this.gameE.mouseX >= this.beginingX() && this.gameE.mouseX <= this.endingX()&&this.gameE.mouseY >= this.top() && this.gameE.mouseY <= this.bottom()){ 
-            console.log(this.name);
-			//startGame(this.gameE);//console.log("StartGame");//startGame();
+            //console.log(this.name);
+			startGame(this.gameE);//console.log("StartGame");//startGame();
         }
     }       
     
@@ -48,7 +48,7 @@ Icon.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 };
 
-function marioButton(game, minionSprite, frameHeight, frameWidth, startX, startY, placeX, placeY, loop) {
+/* function marioButton(game, minionSprite, frameHeight, frameWidth, startX, startY, placeX, placeY, loop) {
     this.gameE = game;
     
     this.mBut = new AnimationSprite(minionSprite, startX, (startY * 0), frameWidth, frameHeight, .5, 1, loop, false);  
@@ -94,4 +94,4 @@ marioButton.prototype.draw = function (ctx) {
     //.ctx.globalAlpha = 1;
     this.mBut.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
     Entity.prototype.draw.call(this);
-};
+}; */
