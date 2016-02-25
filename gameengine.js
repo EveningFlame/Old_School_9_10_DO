@@ -51,6 +51,8 @@ function GameEngine() {
     this.coins = [];
     this.baddies = [];
     this.platforms = [];
+	this.mouseX = 0;
+    this.mouseY = 0;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -74,6 +76,14 @@ GameEngine.prototype.start = function () {
 GameEngine.prototype.startInput = function () {
     console.log('Starting input');
     var that = this;
+ 
+	var getY = function (e) {
+        return e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+    };
+
+    var getX = function (e) {
+        return e.clientX - that.ctx.canvas.getBoundingClientRect().left;
+    };
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
         switch (e.which) {
@@ -101,6 +111,14 @@ GameEngine.prototype.startInput = function () {
         }
         e.preventDefault();
     }, false);
+	
+	this.ctx.canvas.addEventListener("mousedown", function (e) {
+        if (e.button === 0) {
+            that.mouseX = getX(e);
+            that.mouseY = getY(e);
+        }
+    }, false);
+    
     
     console.log('Input started');
 }
