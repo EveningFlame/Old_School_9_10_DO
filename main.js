@@ -65,6 +65,8 @@ startGame = function(game){
     var starSprite = ASSET_MANAGER.getAsset("./img/star.png");
     
     var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
+    
+    var hearts = ASSET_MANAGER.getAsset("./img/hearts.png");
 
     
     var bg = new Platform(game, world1, 800, game.defaultGround, 0, 0, true);
