@@ -48,6 +48,7 @@ function GameEngine() {
     this.sb2 = 0;
     this.hero = null;
     this.coinMove = 0;
+    this.starTime = 50;
     this.score = 0;
     this.coins = [];
     this.baddies = [];
