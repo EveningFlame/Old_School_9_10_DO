@@ -38,7 +38,7 @@ AnimationSprite.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var locY = y;
     var offset = vindex === 0 ? this.startX : 0;
     if (scaleBy === 3) {
-        console.log("HERE");
+        //console.log("HERE");
         scaleBy = 1;
     }
     ctx.drawImage(this.spriteSheet,
