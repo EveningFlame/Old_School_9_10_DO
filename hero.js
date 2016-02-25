@@ -108,6 +108,10 @@ Hero.prototype.update = function () {
 
     var coinNum = checkCoin(this.game);
     if (coinNum >= 0) {
+        if (this.game.coins[coinNum].isPowerup === true) {  
+            this.game.poweredUp = true;
+            console.log("STAR");
+        }
         this.game.coins[coinNum].removeFromWorld = true
         this.game.score += 1; 
         this.game.coins.splice(coinNum, 1);
