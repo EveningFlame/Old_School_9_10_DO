@@ -1,5 +1,5 @@
  //coin
-function Coin(game, sprite,  frameWidth, frameHeight, startX, startY, frames, placeX, placeY, loop, speed, isPowerup) {
+function Coin(game, sprite,  frameWidth, frameHeight, startX, startY, frames, placeX, placeY, loop, speed, isPowerup, scale) {
 
     //this.spin = new AnimationSprite(sprite, startX, (startY * 0), frameWidth, frameHeight, speed, frames, loop, false);
     this.animation = new AnimationSprite(sprite, startX, startY, frameWidth, frameHeight, speed, frames, loop, false);
@@ -11,6 +11,7 @@ function Coin(game, sprite,  frameWidth, frameHeight, startX, startY, frames, pl
     this.width = frameWidth;
     this.height = frameHeight;
     this.speed = speed;
+    this.scale = scale;
     this.game = game;
     Entity.call(this, game, placeX, placeY);
 };
@@ -41,7 +42,7 @@ Coin.prototype.update = function () {
 
 Coin.prototype.draw = function (ctx) {
     //this.spin.drawFrame(this.game.clockTick, ctx, this.x - this.game.coinMove, this.y, 3);
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x - this.game.coinMove, this.y, 3);
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x - this.game.coinMove, this.y, this.scale);
     Entity.prototype.draw.call(this);
 
     // if (this.game.bgmove) {
