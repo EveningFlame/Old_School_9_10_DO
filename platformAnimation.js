@@ -13,6 +13,11 @@ function AnimationPlatform(image, frameWidth, frameHeight, imageX, imageY, image
 AnimationPlatform.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var scaleBy = scaleBy || 1;
     this.elapsedTime += tick;
+    
+    
+    ctx.font = "36px serif";
+    ctx.strokeText("Score: ", 10, 40);
+    ctx.strokeText(this.game.score, 110, 40);
 
     if (this.scroll) {
         ctx.drawImage(this.image,
