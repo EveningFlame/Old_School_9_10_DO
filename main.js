@@ -292,7 +292,7 @@ startGame = function(game){
    game.addEntity(score);
 //SCORE / POWERUP CONTROL
 	
-}
+};
 
 var ASSET_MANAGER = new AssetManager();
 
@@ -324,14 +324,19 @@ ASSET_MANAGER.queueDownload("./img/pokeball.png");
 ASSET_MANAGER.queueDownload("./img/metroid_prime.png");
 ASSET_MANAGER.queueDownload("./img/mushroom.png");
 
-
 //Main Menu
 ASSET_MANAGER.queueDownload("./img/menu.png");
 ASSET_MANAGER.queueDownload("./img/1marioIcon.png");
 ASSET_MANAGER.queueDownload("./img/2pikachuIcon.png");
 ASSET_MANAGER.queueDownload("./img/3linkIcon.png");
 ASSET_MANAGER.queueDownload("./img/4samusIcon.png");
+ASSET_MANAGER.queueDownload("./img/start.png");
+ASSET_MANAGER.queueDownload("./img/naviCircle.png");
+ASSET_MANAGER.queueDownload("./img/selectYourCharacter.png");
 
+//Game Over
+ASSET_MANAGER.queueDownload("./img/gameOver.png");
+ASSET_MANAGER.queueDownload("./img/retry.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -362,9 +367,9 @@ ASSET_MANAGER.downloadAll(function () {
     var linkFlute = new Icon(gameEngine, linkF, 243, 200, 0, 243, 20, 350, true);
     var marioPole = new Icon(gameEngine, mario, 800, 258, 0, 800, 548, 0, true);
     var chibiSamus = new Icon(gameEngine, samus, 280, 195, 0, 280, 400, 480, true);
-    var pokeball = new Icon(gameEngine, poke, 80, 80, 0, 80, 280, 520, true)
+    var pokeball = new Icon(gameEngine, poke, 80, 80, 0, 80, 280, 520, true);
     
-    var playButton = new Button(gameEngine, play, 60, 312, 0, 60, 2, 230, 400, true);
+    var playButton = new Button(gameEngine, play, 60, 312, 0, 60, 2, 230, 400, true, "play");
     
     var pikachu = new Creature(gameEngine, pikapika, 140, 345, 0, 140, 12, -20, 630, true, "pika", .5);
     var prime = new Creature(gameEngine, metroid, 85, 85, 0, 85, 2, 550, 30, true, "prime", .9);
