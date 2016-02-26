@@ -1,13 +1,21 @@
-function Icon(game, minionSprite, frameHeight, frameWidth, startX, startY, placeX, placeY, loop, name) {
+function Icon(game, minionSprite, frameHeight, frameWidth, startX, startY, placeX, placeY, loop, name, scale) {
     this.gameE = game;
-    
-    this.icon = new AnimationSprite(minionSprite, startX, (startY * 0), frameWidth, frameHeight, .5, 1, loop, false);  
+    this.name = name;
+    this.scale = 1;
+
+    if (name === "heart") {
+        this.scale = scale;
+        this.icon = new AnimationSprite(minionSprite, startX, startY, frameWidth, frameHeight, .5, 1, loop, false);
+    } else {
+        this.icon = new AnimationSprite(minionSprite, startX, (startY * 0), frameWidth, frameHeight, .5, 1, loop, false);
+    }
     this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
     this.y = placeY;
     this.x = placeX;
+
     this.group = "title";
-    this.name = name;
+    
     Entity.call(this, game, placeX, placeY);
 };
 
@@ -44,7 +52,7 @@ Icon.prototype.update = function () {
 };
 
 Icon.prototype.draw = function (ctx) {    
-    this.icon.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);	
+    this.icon.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);	
     Entity.prototype.draw.call(this);
 };
 
