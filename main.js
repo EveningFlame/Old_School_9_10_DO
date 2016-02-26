@@ -82,7 +82,7 @@ startGame = function(game){
     
     var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
     
-    //var hearts = ASSET_MANAGER.getAsset("./img/hearts.png");
+    var hearts = ASSET_MANAGER.getAsset("./img/hearts.png");
 
     
     var bg = new Platform(game, world1, 800, game.defaultGround, 0, 0, true);
@@ -193,12 +193,12 @@ startGame = function(game){
    game.baddies.push(m1);
    game.baddies.push(m2);
 
-
+   //game, minionSprite, frameHeight, frameWidth, startX, startY, placeX, placeY, loop, name
    
-   //var heart = new Icon(game, hearts, 32, 32, 0, 32, 740, 0, true, "heart", 2);  
-
-   //game.addEntity(heart);
-   //game.coins.push(heart);
+   var heart = new Icon(game, hearts, 32, 32, 0, 32, 740, 0, true, "heart", 2);  
+//game, minionSprite, frameHeight, frameWidth, startX, startY, placeX, placeY, loop, name) {
+   game.addEntity(heart);
+   game.coins.push(heart);
 
     
     //var coin1 = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09);
