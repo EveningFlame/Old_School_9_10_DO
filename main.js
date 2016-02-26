@@ -1,63 +1,43 @@
-//// Animation for both the coin and the powerup 
 
-//function Coin(game, pos_on_mapx, pos_on_mapy, coinSheet, frameWidth, frameHeight, frames, ispowerup) {
-//    this.ispowerup = ispowerup;
-//    this.width = frameWidth;
-//    this.height = frameHeight;
-//    this.animation = new AnimationSprite(coinSheet, 0, 0, frameWidth, frameHeight, 0.1, frames, true, false);
-//    Entity.call(this, game, pos_on_mapx, pos_on_mapy);
-//}
+function addMinion(game, minionSprite, frameHeight, frameWidth, startX, startY, walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) {
+    var minion = new Minion(game, minionSprite, frameHeight, frameWidth, startX, startY, walking1, walking2, placeX, placeY, loop, speed, leftX, rightX);
+    game.addEntity(minion);
+    game.baddies.push(minion);
+}
 
-//Coin.prototype = new Entity();
-//Coin.prototype.constructor = Coin;
-
-//Coin.prototype.draw = function (ctx) {
-
-//    this.animation.drawFrame(this.game.clockTick, ctx, this.x - coinMove, this.y);
-//    Entity.prototype.draw.call(this);
-//}
-
-//Coin.prototype.collide = function (other) {
-
-//    //JASON SAYS HE WILL DO IT 
-
-//}
-
-//Coin.prototype.update = function () {
-//    var ent = this.game.entities[0];
-//    for (var i = 0; i < this.game.entities.length; i++) {
-//        if (this.game.entities[i] instanceof Hero) {
-//            var ent = this.game.entities[i];
-//        }
-//    }
-
-//    if (this.collide(ent)) { //ent !== this &&
-//        if (this.ispowerup) {
-//            //do someting to mario // may need to use a global variable
-//        }
-//        this.removeFromWorld = true;
-//    }
-//    Entity.prototype.update.call(this);
-//}
-
-//function addCoins(coinAmount, coins_posx, coins_posy, gameEngine, coinSprite) {
-//    for (var i = 0; i < coinAmount; i++) {
-//        var coin1 = new Coin(gameEngine, coins_posx + (i * 40), coins_posy, coinSprite, 32, 32, 20, false);
-//        game.addEntity(coin1);
-//    }
-//}
+function addPlatformWall(game, platformSprite, platformWidth, platformHeight, platformX, platformY, scroll, wallHeight) {
+    for (var i = 0; i < wallHeight; i++) {
+        var plat = new Platform(game, platformSprite, platformWidth, platformHeight, platformX, platformY - (i * platformHeight), scroll);
+        game.addEntity(plat);
+        game.platforms.push(plat);
+    }
+}
 
 function addPlatform(game, platformSprite, platformWidth, platformHeight, platformX, platformY, scroll) {
     var plat = new Platform(game, platformSprite, platformWidth, platformHeight, platformX, platformY, scroll);
     game.addEntity(plat);
     game.platforms.push(plat);
-    console.log("ADDED PLAT");
-
 }
 
 function addCoinStraightLine(game, coinSprite,  frameWidth, frameHeight, startX, startY, frames, placeX, placeY, loop, speed, isPowerup, scale, coinAmount) {
     for (var i = 0; i < coinAmount; i++) {
         var coin = new Coin(game, coinSprite, frameWidth, frameHeight, startX, startY, frames, placeX + (i * 50), placeY, loop, speed, isPowerup, scale);   
+        game.addEntity(coin);
+        game.coins.push(coin);
+    }
+}
+
+function addCoinArcDown(game, coinSprite,  frameWidth, frameHeight, startX, startY, frames, placeX, placeY, loop, speed, isPowerup, scale, coinAmount) {
+    for (var i = 0; i < coinAmount; i++) {
+        var coin = new Coin(game, coinSprite, frameWidth, frameHeight, startX, startY, frames, placeX + (i * 50), placeY + (i * 50), loop, speed, isPowerup, scale);   
+        game.addEntity(coin);
+        game.coins.push(coin);
+    }
+}
+
+function addCoinArcUp(game, coinSprite,  frameWidth, frameHeight, startX, startY, frames, placeX, placeY, loop, speed, isPowerup, scale, coinAmount) {
+    for (var i = 0; i < coinAmount; i++) {
+        var coin = new Coin(game, coinSprite, frameWidth, frameHeight, startX, startY, frames, placeX + (i * 50), placeY -(i * 50), loop, speed, isPowerup, scale);   
         game.addEntity(coin);
         game.coins.push(coin);
     }
@@ -102,22 +82,13 @@ startGame = function(game){
 
 
 
-    //addPlatform(game, platform, 190, 30, 100, 100, false);
-
 /* 	function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) { */
-	
+
     var m1 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 1300, 595, true, .2, 1265, 2190);
     var m2 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 3250, 290, true, .2, 3180, 3331);
-	
 
-//    function Coin(game, minionSprite, frameHeight, frameWidth, startX, startY,
-//    frames, placeX, placeY, loop, speed) {
 
-   
-    
-
-    
 	var sound = false;
 	
 	if(sound){
@@ -128,17 +99,16 @@ startGame = function(game){
 
     game.addEntity(gr);
     game.addEntity(bg);
-    // game.addEntity(gr1);
-    // game.addEntity(bg1);
     game.hero = hero;
     game.addEntity(hero);
-	//Boss of the level
+	
+    //Boss of the level
 	game.addEntity(boss);
 
 
 
 //PLATFORMS
-    // var p1 = new Platform(game, platform, 190, 3, 1500, 600, false);
+    //var p1 = new Platform(game, platform, 190, 3, 1500, 600, false);
     // var p2 = new Platform(game, platform, 190, 3, 1600, 500, false);
     // var b1 = new Platform(game, platform, 31, 31, 1250, 674, false);
     // var b2 = new Platform(game, platform, 160, 31, 2250, 674, false);
@@ -166,44 +136,77 @@ startGame = function(game){
     // game.platforms.push(t2);
 
     addPlatform(game, platform, 190, 30, 1300, 600, false);
+    addPlatform(game, platform, 190, 30, 1490, 550, false);
+    addPlatform(game, platform, 190, 30, 1680, 520, false);
+    addPlatform(game, platform, 190, 30, 1870, 520, false); 
+
+
+    addPlatform(game, platform, 80, 30, 2660, 610, false);
+    addPlatform(game, platform, 80, 30, 2740, 580, false);
+    addPlatform(game, platform, 80, 30, 2820, 550, false);    
+    addPlatform(game, platform, 80, 30, 2900, 520, false); 
+    addPlatform(game, platform, 80, 30, 2980, 490, false); 
+    addPlatform(game, platform, 80, 30, 3060, 460, false); 
+    addPlatform(game, platform, 80, 30, 3140, 430, false); 
+    addPlatform(game, platform, 190, 30, 3210, 400, false);  
+    addPlatform(game, platform, 80, 30, 3390, 430, false); 
+    addPlatform(game, platform, 80, 30, 3470, 460, false); 
+    addPlatform(game, platform, 80, 30, 3550, 490, false); 
+    addPlatform(game, platform, 80, 30, 3630, 520, false); 
+    addPlatform(game, platform, 80, 30, 3710, 550, false);
+    addPlatform(game, platform, 80, 30, 3790, 580, false);
+    addPlatform(game, platform, 80, 30, 3870, 610, false);
+
+
+
+    addPlatformWall(game, platform, 30, 30, 4250, 675, false, 5);
+
+    addPlatformWall(game, platform, 30, 30, 4550, 675, false, 5);
+    
 
 
 
 
 //PLATFORMS
 
-
-
-
-
-   
+//PIPES
+    addPlatform(game, pipe, 98, 150, 3250, 556, false);
+//PIPES
+ 
 
 //COINS
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09, false, 3, 6);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 1490, 480, true, 0.09, false, 3, 6);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 300, 480, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 400, 650, true, 0.09, false, 3, 6);
+    addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 1785, 480, true, 0.09, false, 3, 4);
 //COINS
 
 //STARS   
-   var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 1420, 460, true, 0.1, true, 3);
+   var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 3020, 350, true, 0.1, true, 3);
    game.addEntity(star);
    game.coins.push(star);
 //STARS
 
-   game.addEntity(m1);
-   game.addEntity(m2);
-   game.baddies.push(m1);
-   game.baddies.push(m2);
+//MINIONS
+//addMinion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 1300, 595, true, .2, 1265, 2190);
+    
+    game.addEntity(m1);
+    game.addEntity(m2);
+    game.baddies.push(m1);
+    game.baddies.push(m2);
+//MINIONS
 
-   //game, minionSprite, frameHeight, frameWidth, startX, startY, placeX, placeY, loop, name
    
    var heart = new Icon(game, hearts, 32, 32, 0, 32, 740, 0, true, "heart", 2);  
-//game, minionSprite, frameHeight, frameWidth, startX, startY, placeX, placeY, loop, name) {
+
    game.addEntity(heart);
    game.coins.push(heart);
 
-    
-    //var coin1 = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09);
-
-   
+   // for (var i = 0; i < gameEngine.entities.length; i++) {
+   //      if (gameEngine.entities[i].x < this.totalDistance) {
+   //          gameEngine.entities[i].removeFromWorld = true;
+   //      }
+   // }
 	
 }
 
