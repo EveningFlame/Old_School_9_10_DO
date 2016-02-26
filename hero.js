@@ -123,10 +123,10 @@ Hero.prototype.update = function () {
 Hero.prototype.draw = function (ctx) {
 
     var yPlace = this.ground;
-    if (this.game.sb1 > 2400) {
+    if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
-    if (this.game.sb2 > 2400) {
+    if (this.game.sb2 > 2380) {
         this.game.sb2 = 0;
     }
     if (this.x >= this.game.defaultScroll) {
