@@ -47,6 +47,22 @@
 //    }
 //}
 
+function addPlatform(game, platformSprite, platformWidth, platformHeight, platformX, platformY, scroll) {
+    var plat = new Platform(game, platformSprite, platformWidth, platformHeight, platformX, platformY, scroll);
+    game.addEntity(plat);
+    game.platforms.push(plat);
+    console.log("ADDED PLAT");
+
+}
+
+function addCoinStraightLine(game, coinSprite,  frameWidth, frameHeight, startX, startY, frames, placeX, placeY, loop, speed, isPowerup, scale, coinAmount) {
+    for (var i = 0; i < coinAmount; i++) {
+        var coin = new Coin(game, coinSprite, frameWidth, frameHeight, startX, startY, frames, placeX + (i * 50), placeY, loop, speed, isPowerup, scale);   
+        game.addEntity(coin);
+        game.coins.push(coin);
+    }
+}
+
 startGame = function(game){
 	
 	//console.log("HERE");
@@ -66,11 +82,13 @@ startGame = function(game){
     
     var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
     
-    var hearts = ASSET_MANAGER.getAsset("./img/hearts.png");
+    //var hearts = ASSET_MANAGER.getAsset("./img/hearts.png");
 
     
     var bg = new Platform(game, world1, 800, game.defaultGround, 0, 0, true);
     var gr = new Platform(game, ground1, 800, 95, 0, game.defaultGround, true);
+    //var bg1 = new Platform(game, world1, 800, game.defaultGround, 4600, 0, true);
+    var gr1 = new Platform(game, ground1, 800, 95, 4600, game.defaultGround, true);
     
 /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
@@ -81,14 +99,10 @@ startGame = function(game){
     var boss = new Boss(game, bowserSprite, 55.968, 55.968, 0, 55.968,
     4, 6, 1100, 595, true, 0.16, 500);
 
-    var p1 = new Platform(game, platform, 190, 31, 1500, 600, false);
-    var p2 = new Platform(game, platform, 190, 31, 1600, 500, false);
-    var b1 = new Platform(game, platform, 31, 31, 1250, 674, false);
-    var b2 = new Platform(game, platform, 160, 31, 2250, 674, false);
-    var t1 = new Platform(game, pipe, 98, 150, 2281, 556, false);
-    var b3 = new Platform(game, platform, 94, 31, 3025, 474, false);
-    var t2 = new Platform(game, pipe, 98, 150, 3022, 325, false);
-    var p3 = new Platform(game, platform, 190, 31, 3200, 400, false);
+
+
+
+    //addPlatform(game, platform, 190, 30, 100, 100, false);
 
 /* 	function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) { */
@@ -114,56 +128,77 @@ startGame = function(game){
 
     game.addEntity(gr);
     game.addEntity(bg);
+    // game.addEntity(gr1);
+    // game.addEntity(bg1);
     game.hero = hero;
     game.addEntity(hero);
 	//Boss of the level
 	game.addEntity(boss);
 
-    game.addEntity(p1);
-    game.addEntity(p2);
-    game.addEntity(b1);
-    game.addEntity(b2);
-    game.addEntity(t1);
-    game.addEntity(b3);
-    game.addEntity(t2); 
-    game.addEntity(p3);
-    game.platforms.push(p1);
-    game.platforms.push(p2);
-    game.platforms.push(p3);
-    game.platforms.push(b1);
-    game.platforms.push(b2);
-    game.platforms.push(b3);
-    game.platforms.push(t1);
-    game.platforms.push(t2);
 
-    game.addEntity(m1);
-    game.addEntity(m2);
-    game.baddies.push(m1);
-    game.baddies.push(m2);
 
-    var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 1420, 460, true, 0.1, true, 3);
+//PLATFORMS
+    // var p1 = new Platform(game, platform, 190, 3, 1500, 600, false);
+    // var p2 = new Platform(game, platform, 190, 3, 1600, 500, false);
+    // var b1 = new Platform(game, platform, 31, 31, 1250, 674, false);
+    // var b2 = new Platform(game, platform, 160, 31, 2250, 674, false);
+    // var t1 = new Platform(game, pipe, 98, 150, 2281, 556, false);
+    // var b3 = new Platform(game, platform, 94, 31, 3025, 474, false);
+    // var t2 = new Platform(game, pipe, 98, 150, 3022, 325, false);
+    // var p3 = new Platform(game, platform, 190, 31, 3200, 400, false);
 
-    for (var i = 0; i < 5; i++) {
-        var coin = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 200 + (i * 50), 650, true, 0.09, false, 3);   
-        game.addEntity(coin);
-        game.coins.push(coin);
-    }
+    // game.addEntity(p1);
+    // game.addEntity(p2);
+    // game.addEntity(b1);
+    // game.addEntity(b2);
+    // game.addEntity(t1);
+    // game.addEntity(b3);
+    // game.addEntity(t2); 
+    // game.addEntity(p3);
 
-    for (var i = 0; i < 8; i++) {
-        var coin = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 1600 + (i * 50), 650, true, 0.09, false, 3);   
-        game.addEntity(coin);
-        game.coins.push(coin);
-    }
+    // game.platforms.push(p1);
+    // game.platforms.push(p2);
+    // game.platforms.push(p3);
+    // game.platforms.push(b1);
+    // game.platforms.push(b2);
+    // game.platforms.push(b3);
+    // game.platforms.push(t1);
+    // game.platforms.push(t2);
+
+    addPlatform(game, platform, 190, 30, 1300, 600, false);
 
 
 
+
+//PLATFORMS
+
+
+
+
+
+   
+
+//COINS
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09, false, 3, 6);
+//COINS
+
+//STARS   
+   var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 1420, 460, true, 0.1, true, 3);
    game.addEntity(star);
    game.coins.push(star);
-   
-   var heart = new Coin(game, hearts, 32, 32, 0, 32, 1, 740, 0, true, 0.09, false, 2);  
+//STARS
 
-   game.addEntity(heart);
-   game.coins.push(heart);
+   game.addEntity(m1);
+   game.addEntity(m2);
+   game.baddies.push(m1);
+   game.baddies.push(m2);
+
+
+   
+   //var heart = new Icon(game, hearts, 32, 32, 0, 32, 740, 0, true, "heart", 2);  
+
+   //game.addEntity(heart);
+   //game.coins.push(heart);
 
     
     //var coin1 = new Coin(game, coinSprite, 32, 32, 0, 0, 20, 200, 650, true, 0.09);
