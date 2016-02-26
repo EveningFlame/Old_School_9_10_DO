@@ -37,7 +37,7 @@ Boss.prototype = new Entity();
 Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function () {
-    if (this.game.totalDistance >= 4300 && this.entryCount === 0) {
+    if (this.game.totalDistance >= 10300 && this.entryCount === 0) {
         this.x -= 2;
         this.moveRight = true;
         console.log("this.x: " + this.x + "     this.FarLeft: " + this.farLeft);
