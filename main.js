@@ -70,7 +70,7 @@ startGame = function(game){
     
 /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
-    var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 3.5);//2.5);
+    var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 20);//2.5);
 	 
 /* 	function Boss(game, sprite, frameHeight, frameWidth, startX, startY, 
     stand, walking1, placeX, placeY, loop, speed, farLeft)  */
@@ -91,6 +91,9 @@ startGame = function(game){
     var m6 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 5050, 595, true, .2, 4970, 5080);
     var m7 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6600, 595, true, .2, 6400, 6700);
     var m8 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6900, 595, true, .2, 6800, 7000);
+    var m9 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 7600, 445, true, .15, 7500, 7700);
+    var m10 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 7850, 445, true, .15, 7750, 7950);
+    var m11 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 8100, 445, true, .15, 8000, 8125);
 
 
 	var sound = false;
@@ -162,6 +165,14 @@ startGame = function(game){
     addPlatformWall(game, platform, 30, 30, 6700, 475, false, 5);
     addPlatformWall(game, platform, 30, 30, 6800, 425, false, 5);
     addPlatformWall(game, platform, 30, 30, 6900, 375, false, 5);
+
+    addPlatform(game, platform, 190, 10, 7500, 300, false);
+    addPlatform(game, platform, 190, 10, 7690, 300, false);
+    addPlatform(game, platform, 190, 10, 7880, 300, false);
+    addPlatform(game, platform, 130, 10, 8070, 300, false);
+
+
+
 //PLATFORMS
 
 //PIPES
@@ -174,6 +185,16 @@ startGame = function(game){
     addPlatform(game, pipe, 98, 150, 5576, 406, false);
     addPlatform(game, pipe, 98, 150, 5674, 406, false);
     addPlatform(game, pipe, 98, 150, 5772, 406, false);
+
+    addPlatform(game, pipe, 98, 150, 7500, 556, false);
+    addPlatform(game, pipe, 98, 150, 7598, 556, false);
+    addPlatform(game, pipe, 98, 150, 7696, 556, false);
+    addPlatform(game, pipe, 98, 150, 7794, 556, false);
+    addPlatform(game, pipe, 98, 150, 7892, 556, false);
+    addPlatform(game, pipe, 98, 150, 7990, 556, false);
+    addPlatform(game, pipe, 98, 150, 8086, 556, false);
+
+
 
 
 
@@ -188,6 +209,10 @@ startGame = function(game){
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 5500, 650, true, 0.09, false, 3, 7);
     //addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 5900, 650, true, 0.09, false, 3, 10);
 
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4360, 650, true, 0.09, false, 3, 2);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4560, 650, true, 0.09, false, 3, 2);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4760, 650, true, 0.09, false, 3, 2);
+    
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6039, 470, true, 0.09, false, 3, 1);
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6139, 420, true, 0.09, false, 3, 1);
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6239, 370, true, 0.09, false, 3, 1);
@@ -206,6 +231,30 @@ startGame = function(game){
     var star1 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 6800, 200, true, 0.1, true, 3);
     game.addEntity(star1);
     game.coins.push(star1);
+
+    var star2 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7300, 250, true, 0.1, true, 3);
+    game.addEntity(star2);
+    game.coins.push(star2);
+
+    var star3 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7400, 250, true, 0.1, true, 3);
+    game.addEntity(star3);
+    game.coins.push(star3);
+
+    var star4 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7500, 250, true, 0.1, true, 3);
+    game.addEntity(star4);
+    game.coins.push(star4);
+
+    var star5 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7600, 250, true, 0.1, true, 3);
+    game.addEntity(star5);
+    game.coins.push(star5);
+
+    var star6 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7700, 250, true, 0.1, true, 3);
+    game.addEntity(star6);
+    game.coins.push(star6);
+
+    var star7 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7800, 250, true, 0.1, true, 3);
+    game.addEntity(star7);
+    game.coins.push(star7);
 //STARS
 
 //MINIONS
@@ -217,6 +266,9 @@ startGame = function(game){
     game.addEntity(m6);
     game.addEntity(m7);
     game.addEntity(m8);
+    game.addEntity(m9);
+    game.addEntity(m10);
+    game.addEntity(m11);
     game.baddies.push(m1);
     game.baddies.push(m2);
     game.baddies.push(m3);
@@ -225,6 +277,9 @@ startGame = function(game){
     game.baddies.push(m6);
     game.baddies.push(m7);
     game.baddies.push(m8);
+    game.baddies.push(m9);
+    game.baddies.push(m10);
+    game.baddies.push(m11);
 //MINIONS
 
 //HEALTH  
