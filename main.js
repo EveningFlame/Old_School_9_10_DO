@@ -70,7 +70,7 @@ startGame = function(game){
     
 /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
-    var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 2.5);
+    var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 3.5);//2.5);
 	 
 /* 	function Boss(game, sprite, frameHeight, frameWidth, startX, startY, 
     stand, walking1, placeX, placeY, loop, speed, farLeft)  */
@@ -89,9 +89,12 @@ startGame = function(game){
     var m4 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 4650, 595, true, .2, 4570, 4680);
     var m5 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 4850, 595, true, .2, 4770, 4880);
     var m6 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 5050, 595, true, .2, 4970, 5080);
+    var m7 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6600, 595, true, .2, 6400, 6700);
+    var m8 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6900, 595, true, .2, 6800, 7000);
 
 
 	var sound = false;
+
 	
 	if(sound){
 		var sound = new Howl({
@@ -142,19 +145,38 @@ startGame = function(game){
     addPlatform(game, platform, 80, 30, 3870, 610, false);
 
     addPlatformWall(game, platform, 30, 30, 4250, 675, false, 5);
-
     addPlatformWall(game, platform, 30, 30, 4550, 675, false, 5);
-
     addPlatformWall(game, platform, 30, 30, 4750, 675, false, 5);
-
     addPlatformWall(game, platform, 30, 30, 4950, 675, false, 5);
-
     addPlatformWall(game, platform, 30, 30, 5150, 675, false, 5);
-    
+
+    addPlatform(game, platform, 100, 30, 5480, 556, false);
+    addPlatform(game, platform, 100, 30, 5580, 556, false);
+    addPlatform(game, platform, 100, 30, 5680, 556, false);
+    addPlatform(game, platform, 100, 30, 5780, 556, false);
+
+    addPlatformWall(game, platform, 30, 30, 6300, 675, false, 5);
+    addPlatformWall(game, platform, 30, 30, 6400, 625, false, 5);
+    addPlatformWall(game, platform, 30, 30, 6500, 575, false, 5);
+    addPlatformWall(game, platform, 30, 30, 6600, 525, false, 5);
+    addPlatformWall(game, platform, 30, 30, 6700, 475, false, 5);
+    addPlatformWall(game, platform, 30, 30, 6800, 425, false, 5);
+    addPlatformWall(game, platform, 30, 30, 6900, 375, false, 5);
 //PLATFORMS
 
 //PIPES
     addPlatform(game, pipe, 98, 150, 3250, 556, false);
+    
+    addPlatform(game, pipe, 98, 150, 5180, 556, false);
+
+    addPlatform(game, pipe, 98, 150, 5380, 556, false);
+    addPlatform(game, pipe, 98, 150, 5478, 406, false);
+    addPlatform(game, pipe, 98, 150, 5576, 406, false);
+    addPlatform(game, pipe, 98, 150, 5674, 406, false);
+    addPlatform(game, pipe, 98, 150, 5772, 406, false);
+
+
+
 //PIPES
  
 
@@ -163,12 +185,27 @@ startGame = function(game){
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 300, 480, true, 0.09, false, 3, 1);
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 400, 650, true, 0.09, false, 3, 6);
     addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 1785, 480, true, 0.09, false, 3, 4);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 5500, 650, true, 0.09, false, 3, 7);
+    //addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 5900, 650, true, 0.09, false, 3, 10);
+
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6039, 470, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6139, 420, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6239, 370, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6339, 320, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6439, 270, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6539, 220, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6639, 170, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6739, 120, true, 0.09, false, 3, 1);
 //COINS
 
 //STARS   
-   var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 3020, 350, true, 0.1, true, 3);
-   game.addEntity(star);
-   game.coins.push(star);
+    var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 3020, 350, true, 0.1, true, 3);
+    game.addEntity(star);
+    game.coins.push(star);
+
+    var star1 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 6800, 200, true, 0.1, true, 3);
+    game.addEntity(star1);
+    game.coins.push(star1);
 //STARS
 
 //MINIONS
@@ -178,25 +215,27 @@ startGame = function(game){
     game.addEntity(m4);
     game.addEntity(m5);
     game.addEntity(m6);
+    game.addEntity(m7);
+    game.addEntity(m8);
     game.baddies.push(m1);
     game.baddies.push(m2);
     game.baddies.push(m3);
     game.baddies.push(m4);
     game.baddies.push(m5);
     game.baddies.push(m6);
+    game.baddies.push(m7);
+    game.baddies.push(m8);
 //MINIONS
 
-   
+//HEALTH  
    var heart = new Icon(game, hearts, 32, 32, 0, 32, 740, 0, true, "heart", 2);  
-
    game.addEntity(heart);
-   game.coins.push(heart);
+//HEALTH
 
-   // for (var i = 0; i < gameEngine.entities.length; i++) {
-   //      if (gameEngine.entities[i].x < this.totalDistance) {
-   //          gameEngine.entities[i].removeFromWorld = true;
-   //      }
-   // }
+//SCORE / POWERUP CONTROL
+   var score = new gameScore(game);
+   game.addEntity(score);
+//SCORE / POWERUP CONTROL
 	
 }
 

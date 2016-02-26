@@ -94,7 +94,7 @@ Hero.prototype.update = function () {
 
     if (this.game.bgmove && this.game.walkRight) {
         this.game.sb1 += this.scrollSpeed;           // background movement lock
-        this.game.sb2 += this.scrollSpeed;
+        //this.game.sb2 += this.scrollSpeed;
         this.game.coinMove += this.scrollSpeed;
     }
 
@@ -110,7 +110,9 @@ Hero.prototype.update = function () {
     if (coinNum >= 0) {
         if (this.game.coins[coinNum].isPowerup === true) {  
             this.game.poweredUp = true;
-            console.log("STAR");
+            this.game.powerUpMusic.play();
+        } else {
+            this.game.coinMusic.play();
         }
         this.game.coins[coinNum].removeFromWorld = true
         this.game.score += 1; 
@@ -126,9 +128,9 @@ Hero.prototype.draw = function (ctx) {
     if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
-    if (this.game.sb2 > 2380) {
-        this.game.sb2 = 0;
-    }
+    // if (this.game.sb2 > 2380) {
+    //     this.game.sb2 = 0;
+    // }
     if (this.x >= this.game.defaultScroll) {
         this.game.unlocked = false;
         this.game.bgmove = true;

@@ -15,28 +15,28 @@ AnimationPlatform.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     this.elapsedTime += tick;
     
     
-    ctx.font = "36px serif";
-    ctx.strokeText("Score: ", 10, 40);
-    ctx.strokeText(this.game.score, 110, 40);
+    // ctx.font = "36px serif";
+    // ctx.strokeText("Score: ", 10, 40);
+    // ctx.strokeText(this.game.score, 110, 40);
     
-        if (this.game.poweredUp) {
-      //console.log(this.game.starTime);
-        this.game.starTime -= this.game.clockTick;
+    // if (this.game.poweredUp) {
+    //   //console.log(this.game.starTime);
+    //     this.game.starTime -= this.game.clockTick;
 
-        ctx.strokeText("IM SUPER", 300, 200);
-        if (this.game.starTime < 0) {
-          this.game.poweredUp = false;
-          this.game.starTime = 50;
-        }
-    }
+    //     ctx.strokeText("IM SUPER", 300, 200);
+    //     if (this.game.starTime < 0) {
+    //       this.game.poweredUp = false;
+    //       this.game.starTime = 50;
+    //     }
+    // }
 
     if (this.scroll) {
-        ctx.drawImage(this.image,
-                  this.game.sb2, 0,  // source from sheet
-                  this.width, this.height,
-                  this.imageX, this.imageY,
-                  this.width, this.height
-                  );
+        // ctx.drawImage(this.image,
+        //           this.game.sb2, 0,  // source from sheet
+        //           this.width, this.height,
+        //           this.imageX, this.imageY,
+        //           this.width, this.height
+        //           );
 
         ctx.drawImage(this.image,
                   this.game.sb1, 0,  // source from sheet

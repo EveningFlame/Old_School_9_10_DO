@@ -45,10 +45,14 @@ function GameEngine() {
     this.bgmove;
     this.maxX = 0;
     this.sb1 = 0;
-    this.sb2 = 0;
+    // this.sb2 = 0;
+    this.powerUpMusic = new Howl({urls: ["./music/Mario_Invincible_Theme.mp3"]});
+    this.coinMusic = new Howl({urls: ["./music/coinsound.wav"]});
     this.hero = null;
     this.coinMove = 0;
-    this.starTime = 50;
+    this.starTime = 14;
+    this.keyLeft = true;
+    this.keyRight = true;
     this.score = 0;
     this.coins = [];
     this.baddies = [];
@@ -92,11 +96,13 @@ GameEngine.prototype.startInput = function () {
             case 32:
                 that.space = true;
                 break;
-            case 37:
-                that.walkLeft = true;
+            case 37: 
+                that.walkLeft = true; 
                 break;
             case 39:
-                that.walkRight = true;
+                //if (!that.walkLeft) {
+                    that.walkRight = true;
+               // }
                 break;
         }
         e.preventDefault();
@@ -105,10 +111,10 @@ GameEngine.prototype.startInput = function () {
     this.ctx.canvas.addEventListener("keyup", function (e) {
         switch (e.which) {
             case 37:
-                that.walkLeft = false;
+                that.walkLeft = false;               
                 break;
             case 39:
-                that.walkRight = false;
+                that.walkRight = false;               
                 break;
         }
         e.preventDefault();
