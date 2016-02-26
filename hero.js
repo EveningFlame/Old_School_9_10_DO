@@ -133,7 +133,7 @@ Hero.prototype.draw = function (ctx) {
         this.game.unlocked = false;
         this.game.bgmove = true;
     }
-    if (this.x < this.game.defaultScroll || this.game.totalDistance > 4600) {
+    if (this.x < this.game.defaultScroll || this.game.totalDistance > 10600) {
         this.game.unlocked = true;
         this.game.bgmove = false;
     }
