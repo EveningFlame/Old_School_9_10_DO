@@ -31,7 +31,7 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.width = frameWidth;
     this.radius = 100;
     this.heroHeight = heroHeight;
-    this.ground = game.defaultGround - heroHeight;
+    this.ground = game.defaultGround - heroHeight - 1;
     this.x = startX;
     this.y = this.ground;
     this.game = game;
@@ -96,22 +96,22 @@ Hero.prototype.update = function () {
                 this.game.unlocked = false;
                 this.game.bgmove = true;
             }
-            if (this.x < this.game.defaultScroll || this.game.totalDistance > 4600) {
+            if (this.x < this.game.defaultScroll || this.game.totalDistance > 10600) {
                 this.game.unlocked = true;
                 this.game.bgmove = false;
             }
         }
     }
 
-    for (var i = 0; i < this.game.platforms.length && !found; i++) {
-        var pf = this.game.platforms[i];
-        if (this.boundingbox.left > pf.boundingbox.left && this.boundingbox.right < pf.boundingbox.right &&
-            this.boundingbox.top > pf.boundingbox.bottom) {
-            this.jumpHeight = this.top() - pf.boundingbox.bottom;
-            found = true;
-        }
+    //for (var i = 0; i < this.game.platforms.length && !found; i++) {
+    //    var pf = this.game.platforms[i];
+    //    if (this.boundingbox.left > pf.boundingbox.left && this.boundingbox.right < pf.boundingbox.right &&
+    //        this.boundingbox.top > pf.boundingbox.bottom) {
+    //        this.jumpHeight = this.top() - pf.boundingbox.bottom;
+    //        found = true;
+    //    }
 
-    }
+    //}
 
     if (this.jumpHeight < 0) this.jumpHeight = this.game.defaultJumpHeight;
     if (this.jumpHeight > this.game.defaultJumpHeight && !found) this.jumpHeight = this.game.defaultJumpHeight;
@@ -254,8 +254,11 @@ Hero.prototype.update = function () {
 
 Hero.prototype.draw = function (ctx) {
 
-    var yPlace = this.ground;
-
+    var yPlace = this.y;
+    if (this.boxes) {
+        ctx.strokeStyle = "blue";
+        ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+    }
     if (this.jumping) {
         if (this.standLeft) {
             this.jumpAnimationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);

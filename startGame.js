@@ -251,35 +251,35 @@ startGame = function(game){
 
 
 //STARS   
-    var star = new Coin(game, starSprite, 64, 40, 0, 0, 7, 3020, 350, true, 0.1, true, 3);
+    var star = new Coin(game, starSprite, 40, 40, 0, 0, 7, 3020, 350, true, 0.1, true, 3);
     game.addEntity(star);
     game.coins.push(star);
 
-    var star1 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 6800, 200, true, 0.1, true, 3);
+    var star1 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 6800, 200, true, 0.1, true, 3);
     game.addEntity(star1);
     game.coins.push(star1);
 
-    var star2 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7300, 250, true, 0.1, true, 3);
+    var star2 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7300, 250, true, 0.1, true, 3);
     game.addEntity(star2);
     game.coins.push(star2);
 
-    var star3 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7400, 250, true, 0.1, true, 3);
+    var star3 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7400, 250, true, 0.1, true, 3);
     game.addEntity(star3);
     game.coins.push(star3);
 
-    var star4 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7500, 250, true, 0.1, true, 3);
+    var star4 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7500, 250, true, 0.1, true, 3);
     game.addEntity(star4);
     game.coins.push(star4);
 
-    var star5 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7600, 250, true, 0.1, true, 3);
+    var star5 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7600, 250, true, 0.1, true, 3);
     game.addEntity(star5);
     game.coins.push(star5);
 
-    var star6 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7700, 250, true, 0.1, true, 3);
+    var star6 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7700, 250, true, 0.1, true, 3);
     game.addEntity(star6);
     game.coins.push(star6);
 
-    var star7 = new Coin(game, starSprite, 64, 40, 0, 0, 7, 7800, 250, true, 0.1, true, 3);
+    var star7 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7800, 250, true, 0.1, true, 3);
     game.addEntity(star7);
     game.coins.push(star7);
 //STARS
