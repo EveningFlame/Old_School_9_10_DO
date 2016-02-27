@@ -42,7 +42,7 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.jumpHeight = game.defaultJumpHeight;
     this.boxes = true;
     this.heroMove = true;
-    this.platform = game.platforms[1];
+    this.platform = game.platforms[0];
 
     this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.animation.frameWidth + 4, this.animation.frameHeight + 28);
     Entity.call(this, game, this.x, this.y);

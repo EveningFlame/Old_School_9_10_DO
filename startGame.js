@@ -23,8 +23,9 @@ startGame = function(game){
     //var gr = new Platform(game, ground1, 800, 95, 0, game.defaultGround, true);
     ////var bg1 = new Platform(game, world1, 800, game.defaultGround, 4600, 0, true);
     //var gr1 = new Platform(game, ground1, 800, 95, 4600, game.defaultGround, true);
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 15; i++) {
         var gr = new Platform(game, ground1, 800, 95, 800 * i, game.defaultGround, false);
+        console.log("adding ground");
         game.addEntity(gr);
         game.platforms.push(gr);
     }
