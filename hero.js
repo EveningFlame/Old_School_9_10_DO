@@ -25,7 +25,6 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
         frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation / 2, false, true);
     this.fallingRight = new AnimationSprite(heroSprite, startX + (frameWidth * 3), (startY * 2) + charYOffset,
         frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation / 2, false, false);
-
     this.standLeft;
     this.height = frameHeight;
     this.width = frameWidth;
