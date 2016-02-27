@@ -19,6 +19,8 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
     this.y = placeY;
     this.x = placeX;
     this.game = game;
+    this.frameWidth = frameWidth
+    this.frameHeight = frameHeight;
     //this.heroHeight = heroHeight;
     //this.ground = defaultGround - heroHeight;
     //this.scrollSpeed = scrollSpeed;
@@ -28,6 +30,10 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
     this.moveRight = false;
     //this.offScreen = farRight;
     this.farLeft = farLeft;
+    this.boxes = true;
+
+    this.boundingbox = new BoundingBox(this.x + 14, this.y, this.frameWidth, this.frameHeight);
+
     Entity.call(this, game, placeX, placeY);
 
 
@@ -47,12 +53,19 @@ Boss.prototype.update = function () {
         }
     }
 
+    this.boundingbox = new BoundingBox(this.x + 14, this.y + 20, this.frameWidth + 30, this.frameHeight + 35);
+
     Entity.prototype.update.call(this);
 };
 
 Boss.prototype.draw = function (ctx) {
     //(tick, ctx, x, y, scaleBy)	
     //this.walkAnimation.drawFrame(this.game.clockTick, ctx, this.x - maxX, this.y, 2);
+
+    if (this.boxes) {
+        ctx.strokeStyle = "red";
+        ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+    }
     if (this.moveRight) {
         this.walkAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
     } else {

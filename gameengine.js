@@ -50,6 +50,7 @@ function GameEngine() {
     this.coinMusic = new Howl({urls: ["./music/coinsound.wav"]});
     this.hero = null;
     this.coinMove = 0;
+    this.mjump = 0;
     this.starTime = 14;
     this.keyLeft = true;
     this.keyRight = true;

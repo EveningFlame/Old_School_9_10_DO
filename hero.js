@@ -21,6 +21,10 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
         frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation, false, true);
     this.leftWalkAnimation = new AnimationSprite(heroSprite, startX, (startY * 7) + charYOffset,
         frameWidth, frameHeight - charYOffset, movementSpeed, walkAnimation, true, true);
+    this.fallingLeft = new AnimationSprite(heroSprite, startX, (startY * 3) + charYOffset,
+        frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation / 2, false, true);
+    this.fallingRight = new AnimationSprite(heroSprite, startX + (frameWidth * 3), (startY * 2) + charYOffset,
+        frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation / 2, false, false);
 
     this.standLeft;
     this.height = frameHeight;
@@ -33,7 +37,14 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.game = game;
     this.scrollSpeed = scrollSpeed;
     this.speed = movementSpeed;
+    this.jumping = false;
+    this.falling = false;
     this.jumpHeight = game.defaultJumpHeight;
+    this.boxes = true;
+    this.heroMove = true;
+    this.platform = game.platforms[1];
+
+    this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.animation.frameWidth + 4, this.animation.frameHeight + 28);
     Entity.call(this, game, this.x, this.y);
 
 };
@@ -59,51 +70,162 @@ Hero.prototype.bottom = function () {
 };
 
 Hero.prototype.update = function () {
-    if (this.jumpHeight < 0) this.jumpHeight = this.game.defaultJumpHeight;
+    var found = false;
 
-    if (this.game.space) this.jumping = true;
-    if (this.jumping) {
+    if (this.game.sb1 > 2380) {
+        this.game.sb1 = 0;
+    }
+
+    if (this.game.walkLeft) {
+        if (this.x > 5) {
+            this.game.unlocked = true;
+            this.heroMove = true;
+        }
+        if (this.x < 5 || checkPlatform(this.game)) {
+            this.game.unlocked = false;
+            this.heroMove = false;
+        }
+    } else {
+        if (checkPlatform(this.game)) {
+            this.game.unlocked = false;
+            this.game.bgmove = false;
+            this.heroMove = false;
+        } else {
+            this.heroMove = true;
+            if (this.x >= this.game.defaultScroll) {
+                this.game.unlocked = false;
+                this.game.bgmove = true;
+            }
+            if (this.x < this.game.defaultScroll || this.game.totalDistance > 4600) {
+                this.game.unlocked = true;
+                this.game.bgmove = false;
+            }
+        }
+    }
+
+    for (var i = 0; i < this.game.platforms.length && !found; i++) {
+        var pf = this.game.platforms[i];
+        if (this.boundingbox.left > pf.boundingbox.left && this.boundingbox.right < pf.boundingbox.right &&
+            this.boundingbox.top > pf.boundingbox.bottom) {
+            this.jumpHeight = this.top() - pf.boundingbox.bottom;
+            found = true;
+        }
+
+    }
+
+    if (this.jumpHeight < 0) this.jumpHeight = this.game.defaultJumpHeight;
+    if (this.jumpHeight > this.game.defaultJumpHeight && !found) this.jumpHeight = this.game.defaultJumpHeight;
+
+    found = false;
+
+    if (this.game.space && !this.jumping && !this.falling) {
+        this.jumping = true;
+        this.base = this.y;
+        console.log(this.y);
+    }
+    if (this.jumping && !this.standLeft) {
         if (this.jumpAnimation.isDone()) {
             this.jumpAnimation.elapsedTime = 0;
             this.jumping = false;
+            this.game.mjump = 0
         }
         var jumpDistance = this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime;
         var totalHeight = this.jumpHeight;
+        this.game.mjump = 1;
 
-        if (jumpDistance > 0.5)
+        if (jumpDistance > 0.5) {
             jumpDistance = 1 - jumpDistance;
-
+            this.game.mjump = -1;
+        }
         var height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
-        this.y = this.ground - height;
+        this.lastBottom = this.boundingbox.bottom;
+        this.y = this.base - height;
+        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.jumpAnimation.frameWidth + 4, this.jumpAnimation.frameHeight + 28);
+        for (var i = 0; i < this.game.platforms.length; i++) {
+            var pf = this.game.platforms[i];
+            if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
+                this.jumping = false;
+                this.y = pf.boundingbox.top - this.heroHeight - 3;
+                this.platform = pf;
+                this.jumpAnimation.elapsedTime = 0;
+            }
+        }
     }
 
     if (this.jumping && this.standLeft) {
         if (this.jumpAnimationLeft.isDone()) {
             this.jumpAnimationLeft.elapsedTime = 0;
             this.jumping = false;
+            this.game.mjump = 0;
+
         }
         var jumpDistance = this.jumpAnimationLeft.elapsedTime / this.jumpAnimationLeft.totalTime;
         var totalHeight = this.jumpHeight;
+        this.game.mjump = 1;
 
-        if (jumpDistance > 0.5)
+
+        if (jumpDistance > 0.5) {
             jumpDistance = 1 - jumpDistance;
+            this.game.mjump = -1;
 
-        var height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
-        this.y = this.ground - height;
+        }
+        var height = totalHeight * (4 * jumpDistance - 4 * jumpDistance * jumpDistance);
+        this.lastBottom = this.boundingbox.bottom;
+        this.y = this.base - height;
+        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.jumpAnimationLeft.frameWidth + 4, this.jumpAnimationLeft.frameHeight + 28);
+        console.log("checking jump bottom")
+        for (var i = 0; i < this.game.platforms.length; i++) {
+            var pf = this.game.platforms[i];
+            if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
+                this.jumping = false;
+                this.y = pf.boundingbox.top - this.heroHeight - 3;
+                this.platform = pf;
+                this.jumpAnimation.elapsedTime = 0;
+            }
+        }
+    }
+
+    if (this.falling) {
+        this.lastBottom = this.boundingbox.bottom;
+        this.y += this.game.clockTick / this.jumpAnimation.totalTime * 4 * this.jumpHeight;
+        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.jumpAnimation.frameWidth + 4, this.jumpAnimation.frameHeight + 28);
+        this.game.mjump = -1;
+        for (var i = 0; i < this.game.platforms.length && !found; i++) {
+            var pf = this.game.platforms[i];
+            console.log(pf.top())
+            if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
+                this.falling = false;
+                this.y = pf.boundingbox.top - this.heroHeight - 3;
+                this.platform = pf;
+                this.fallingRight.elapsedTime = 0;
+                this.game.mjump = 0;
+                found = true;
+            }
+        }
+    }
+
+    if (!this.jumping && !this.falling) {
+        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.animation.frameWidth + 4, this.animation.frameHeight + 28);
+        if (this.platform != null) {
+            if (this.boundingbox.left > this.platform.boundingbox.right || this.boundingbox.right < this.platform.boundingbox.left) this.falling = true;
+        }
     }
 
     if (this.game.bgmove && this.game.walkRight) {
         this.game.sb1 += this.scrollSpeed;           // background movement lock
         //this.game.sb2 += this.scrollSpeed;
         this.game.coinMove += this.scrollSpeed;
+        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.rightWalkAnimation.frameWidth + 4, this.rightWalkAnimation.frameHeight + 28);
     }
 
     if (this.game.unlocked && this.game.walkRight) {
         this.x += this.scrollSpeed;
+        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.rightWalkAnimation.frameWidth + 4, this.rightWalkAnimation.frameHeight + 28);
     }
 
     if (this.game.unlocked && this.game.walkLeft) {
         this.x -= this.scrollSpeed;
+        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.leftWalkAnimation.frameWidth + 4, this.leftWalkAnimation.frameHeight + 28);
     }
 
     var coinNum = checkCoin(this.game);
@@ -119,32 +241,20 @@ Hero.prototype.update = function () {
         this.game.coins.splice(coinNum, 1);
     }
 
+    var minionKill = checkMinion(this.game);
+    if (minionKill > 0) {
+        this.game.baddies[minionKill - 1].removeFromWorld = true;
+        this.game.baddies.splice(minionKill - 1, 1);
+    } else if (minionKill < 0) {
+        console.log("mario dead");
+    }
+
     Entity.prototype.update.call(this);
 };
 
 Hero.prototype.draw = function (ctx) {
 
     var yPlace = this.ground;
-    if (this.game.sb1 > 2380) {
-        this.game.sb1 = 0;
-    }
-    // if (this.game.sb2 > 2380) {
-    //     this.game.sb2 = 0;
-    // }
-    if (this.x >= this.game.defaultScroll) {
-        this.game.unlocked = false;
-        this.game.bgmove = true;
-    }
-    if (this.x < this.game.defaultScroll || this.game.totalDistance > 10600) {
-        this.game.unlocked = true;
-        this.game.bgmove = false;
-    }
-    if (this.game.walkLeft && this.x > 5) {
-        this.game.unlocked = true;
-    }
-    if (this.game.walkLeft && this.x < 5) {
-        this.game.unlocked = false;
-    }
 
     if (this.jumping) {
         if (this.standLeft) {
@@ -153,14 +263,14 @@ Hero.prototype.draw = function (ctx) {
         } else {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
             if (this.game.walkRight) {
-                this.game.totalDistance += this.scrollSpeed;
+                if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
                 if (this.game.totalDistance > this.game.maxX) this.game.maxX += this.scrollSpeed;
             }
         }
     } else if (this.game.walkRight) {
         this.standLeft = false;
         this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
-        this.game.totalDistance += this.scrollSpeed;
+        if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
         if (this.game.totalDistance > this.game.maxX) this.game.maxX += this.scrollSpeed;
     } else if (this.game.walkLeft) {
         this.standLeft = true;

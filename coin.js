@@ -13,6 +13,9 @@ function Coin(game, sprite,  frameWidth, frameHeight, startX, startY, frames, pl
     this.speed = speed;
     this.scale = scale;
     this.game = game;
+    this.boxes = true;
+
+    this.boundingbox = new BoundingBox(this.x, this.y, this.animation.frameWidth, this.animation.frameHeight);
     Entity.call(this, game, placeX, placeY);
 };
 
@@ -37,25 +40,29 @@ Coin.prototype.bottom = function () {
 };
 
 Coin.prototype.update = function () {
+    var i = 0;
+
+    //Check to see if coins are off the screen
+    while (this.game.coins.length >= 0 && i < this.game.length) {
+        if (this.game.coins[i].endingX() < 0) {
+            this.game.coins[i].removeFromWorld = true;
+            this.game.coins.splice(i, 1);
+        } else {
+            i++;
+        }
+
+    }
+
+    this.boundingbox = new BoundingBox(this.beginingX(), this.top(), this.animation.frameWidth, this.animation.frameHeight);
+
     Entity.prototype.update.call(this);
 };
 
 Coin.prototype.draw = function (ctx) {
-    //this.spin.drawFrame(this.game.clockTick, ctx, this.x - this.game.coinMove, this.y, 3);
+    if (this.boxes) {
+        ctx.strokeStyle = "blue";
+        ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+    }
     this.animation.drawFrame(this.game.clockTick, ctx, this.x - this.game.coinMove, this.y, this.scale);
-    Entity.prototype.draw.call(this);
-
-    // if (this.game.bgmove) {
-    //     console.log(this.x);
-    //     //console.log(defaultScroll - maxX);
-    //     var newX = this.startX - (maxX - defaultScroll);
-    //     console.log(newX);
-    //     if (this.x <= newX) this.x = newX;
-    //     //this.x = defaultScroll - maxX;
-    //     this.spin.drawFrame(this.game.clockTick, ctx, this.x, this.y, 3);
-    // } else {
-        // this.spin.drawFrame(this.game.clockTick, ctx, this.x, this.y, 3);
-    //}
-
     Entity.prototype.draw.call(this);
 };
