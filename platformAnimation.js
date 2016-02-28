@@ -24,7 +24,7 @@ AnimationPlatform.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     } else {
         ctx.drawImage(this.image,
             0, 0, this.width, this.height,
-            this.imageX - this.game.maxX, this.imageY,
+            x, y,
             this.width, this.height);
     }
 };

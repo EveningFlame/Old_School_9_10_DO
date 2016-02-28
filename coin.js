@@ -63,6 +63,6 @@ Coin.prototype.draw = function (ctx) {
         ctx.strokeStyle = "blue";
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
     }
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x - this.game.coinMove, this.y, this.scale);
+    this.animation.drawFrame(this.game.clockTick, ctx, this.beginingX(), this.y, this.scale);
     Entity.prototype.draw.call(this);
 };

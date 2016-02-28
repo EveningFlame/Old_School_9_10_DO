@@ -56,6 +56,6 @@ Platform.prototype.draw = function (ctx) {
         ctx.strokeStyle = "orange";
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
     }
-    this.animation.drawFrame(this.game.clockTick, ctx, 0, 0, 0);
+    this.animation.drawFrame(this.game.clockTick, ctx, this.beginingX(), this.top());
     Entity.prototype.draw.call(this);
 };

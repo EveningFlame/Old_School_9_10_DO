@@ -10,6 +10,16 @@ var checkCoin = function (game) {
     }
 }
 
+var superCollide = function (game) {
+    for (var i = 0; i < game.baddies.length; i++) {
+        if (game.baddies[i].boundingbox.left < 300) {
+            if (game.hero.boundingbox.collide(game.baddies[i].boundingbox)) {
+                return i;
+            }
+        }
+    }
+}
+
 var checkMinion = function (game) {
     var crash = 0;
     for (var i = 0; i < game.baddies.length && crash == 0; i++) {

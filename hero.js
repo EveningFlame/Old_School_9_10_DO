@@ -25,6 +25,7 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
         frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation / 2, false, true);
     this.fallingRight = new AnimationSprite(heroSprite, startX + (frameWidth * 3), (startY * 2) + charYOffset,
         frameWidth, frameHeight - charYOffset, movementSpeed, jumpAnimation / 2, false, false);
+
     this.standLeft;
     this.height = frameHeight;
     this.width = frameWidth;
@@ -101,7 +102,7 @@ Hero.prototype.update = function () {
             }
         }
     }
-
+    // make sure the hero does not go through the bricks.
     //for (var i = 0; i < this.game.platforms.length && !found; i++) {
     //    var pf = this.game.platforms[i];
     //    if (this.boundingbox.left > pf.boundingbox.left && this.boundingbox.right < pf.boundingbox.right &&
@@ -109,9 +110,9 @@ Hero.prototype.update = function () {
     //        this.jumpHeight = this.top() - pf.boundingbox.bottom;
     //        found = true;
     //    }
-
     //}
 
+    //reset the jump hight.
     if (this.jumpHeight < 0) this.jumpHeight = this.game.defaultJumpHeight;
     if (this.jumpHeight > this.game.defaultJumpHeight && !found) this.jumpHeight = this.game.defaultJumpHeight;
 
@@ -240,14 +241,24 @@ Hero.prototype.update = function () {
         this.game.coins.splice(coinNum, 1);
     }
 
-    var minionKill = checkMinion(this.game);
-    if (minionKill > 0) {
-        this.game.baddies[minionKill - 1].removeFromWorld = true;
-        this.game.baddies.splice(minionKill - 1, 1);
-    } else if (minionKill < 0) {
-        console.log("mario dead");
+    var minionKill = 0;
+    if (!this.game.poweredUp) {
+        minionKill = checkMinion(this.game);
+        if (minionKill > 0) {
+            this.game.baddies[minionKill - 1].removeFromWorld = true;
+            this.game.baddies.splice(minionKill - 1, 1);
+            this.game.score += 10;
+        } else if (minionKill < 0) {
+            console.log("mario dead");
+        }
+    } else {
+        minionKill = superCollide(this.game);
+        if (minionKill >= 0) {
+            this.game.baddies[minionKill].removeFromWorld = true;
+            this.game.baddies.splice(minionKill, 1);
+            this.game.score += 10;
+        }
     }
-
     Entity.prototype.update.call(this);
 };
 
@@ -266,14 +277,14 @@ Hero.prototype.draw = function (ctx) {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
             if (this.game.walkRight) {
                 if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
-                if (this.game.totalDistance > this.game.maxX) this.game.maxX += this.scrollSpeed;
+                if (this.game.bgmove) this.game.maxX += this.scrollSpeed;
             }
         }
     } else if (this.game.walkRight) {
         this.standLeft = false;
         this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
         if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
-        if (this.game.totalDistance > this.game.maxX) this.game.maxX += this.scrollSpeed;
+        if (this.game.bgmove) this.game.maxX += this.scrollSpeed;
     } else if (this.game.walkLeft) {
         this.standLeft = true;
         this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
@@ -285,6 +296,8 @@ Hero.prototype.draw = function (ctx) {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
         }
     }
+
+    console.log(this.game.maxX);
 
     Entity.prototype.draw.call(this);
 };

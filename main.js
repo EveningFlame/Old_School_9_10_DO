@@ -46,10 +46,7 @@ function addCoinArcUp(game, coinSprite,  frameWidth, frameHeight, startX, startY
 
 var ASSET_MANAGER = new AssetManager();
 
-//Characters
 ASSET_MANAGER.queueDownload("./img/mariosprite2.png");
-ASSET_MANAGER.queueDownload("./img/linkSprite.png");
-
 ASSET_MANAGER.queueDownload("./img/skybg2.png");
 ASSET_MANAGER.queueDownload("./img/groundbg2.png");
 ASSET_MANAGER.queueDownload("./img/platform.png");

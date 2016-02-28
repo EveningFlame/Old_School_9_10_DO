@@ -1,20 +1,10 @@
 
 startGame = function(game){
-    clearEngine(game);
-	
-    if(game.chosenCharacter === "Mario"){
-        var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
-        /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
-    heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
-        var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 3.5);//2.5);
-        
-    } else if(game.chosenCharacter === "Link"){
-        var linkSprite = ASSET_MANAGER.getAsset("./img/linkSprite.png");
-        /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
-        heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
-        var hero = new Hero(game, linkSprite, 96, 64, 0, 64, 0, 115, 13, 10, 5, .15, 3.5);//2.5);
+	for(var i = 0; i < game.entities.length; i++){
+        game.entities[i].removeFromWorld = true;
     }
-        
+	
+    var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
     var world1 = ASSET_MANAGER.getAsset("./img/skybg2.png");
     var ground1 = ASSET_MANAGER.getAsset("./img/groundbg2.png");
     var platform = ASSET_MANAGER.getAsset("./img/platform.png");
@@ -40,11 +30,17 @@ startGame = function(game){
         game.platforms.push(gr);
     }
 
-     
+    
+/* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
+    heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
+    var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 3.5);//2.5);
+	 
 /* 	function Boss(game, sprite, frameHeight, frameWidth, startX, startY, 
     stand, walking1, placeX, placeY, loop, speed, farLeft)  */
     var boss = new Boss(game, bowserSprite, 55.968, 55.968, 0, 55.968,
     4, 6, 1100, 595, true, 0.16, 500);
+
+
 
 
 /* 	function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
