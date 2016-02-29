@@ -30,8 +30,9 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     this.frameHeight = frameHeight;
     this.use1 = (walking1 > 0);
     this.boxes = true;
+    this.name = "Baddies";
 
-    this.boundingbox = new BoundingBox(this.x + 14 - this.game.maxX, this.y + 45, this.frameWidth + 8, this.frameHeight + 12);
+    this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 45, this.frameWidth + 4, this.frameHeight + 12);
     Entity.call(this, game, placeX, placeY);
 };
 
@@ -49,14 +50,17 @@ Minion.prototype.update = function () {
         if (this.x <= this.farLeft && this.farLeft > 0) this.moveRight = true;
     }
 
-    this.boundingbox = new BoundingBox(this.x + 14 - this.game.maxX, this.y + 45, this.frameWidth + 8, this.frameHeight + 12);
-    if (checkMinion(this, this.game) != 0) this.moveRight = !this.moveRight;
+    this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10);
+   
+    if (checkMinion(this, this.game) !== 0) {
+        this.moveRight = !this.moveRight;
+    }
 
-    if (this.farLeft == 0 && this.farRight == 0) {
+    if (this.farLeft === 0 && this.farRight === 0) {
         if (checkPlatform(this, this.game)) this.moveRight = !this.moveRight;
     }
 
-
+    
     Entity.prototype.update.call(this);
 };
 

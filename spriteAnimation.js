@@ -46,7 +46,8 @@ AnimationSprite.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
             this.frameWidth, this.frameHeight,
             locX, locY,
             this.frameWidth * scaleBy,
-            this.frameHeight * scaleBy);
+            this.frameHeight * scaleBy);           
+            
 };
 
 AnimationSprite.prototype.currentFrame = function () {

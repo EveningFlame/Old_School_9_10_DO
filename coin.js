@@ -14,6 +14,7 @@ function Coin(game, sprite,  frameWidth, frameHeight, startX, startY, frames, pl
     this.scale = scale;
     this.game = game;
     this.boxes = true;
+	this.name = "Coins";
 
     this.boundingbox = new BoundingBox(this.x, this.y, this.animation.frameWidth, this.animation.frameHeight);
     Entity.call(this, game, placeX, placeY);

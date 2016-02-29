@@ -2,28 +2,28 @@
 function addMinion(game, minionSprite, frameHeight, frameWidth, startX, startY, walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) {
     var minion = new Minion(game, minionSprite, frameHeight, frameWidth, startX, startY, walking1, walking2, placeX, placeY, loop, speed, leftX, rightX);
     game.addEntity(minion);
-    game.baddies.push(minion);
+//    game.baddies.push(minion);
 }
 
 function addPlatformWall(game, platformSprite, platformWidth, platformHeight, platformX, platformY, scroll, wallHeight) {
     for (var i = 0; i < wallHeight; i++) {
         var plat = new Platform(game, platformSprite, platformWidth, platformHeight, platformX, platformY - (i * platformHeight), scroll);
         game.addEntity(plat);
-        game.platforms.push(plat);
+//        game.platforms.push(plat);
     }
 }
 
 function addPlatform(game, platformSprite, platformWidth, platformHeight, platformX, platformY, scroll) {
     var plat = new Platform(game, platformSprite, platformWidth, platformHeight, platformX, platformY, scroll);
     game.addEntity(plat);
-    game.platforms.push(plat);
+//    game.platforms.push(plat);
 }
 
 function addCoinStraightLine(game, coinSprite,  frameWidth, frameHeight, startX, startY, frames, placeX, placeY, loop, speed, isPowerup, scale, coinAmount) {
     for (var i = 0; i < coinAmount; i++) {
         var coin = new Coin(game, coinSprite, frameWidth, frameHeight, startX, startY, frames, placeX + (i * 50), placeY, loop, speed, isPowerup, scale);   
         game.addEntity(coin);
-        game.coins.push(coin);
+//        game.coins.push(coin);
     }
 }
 
@@ -31,7 +31,7 @@ function addCoinArcDown(game, coinSprite,  frameWidth, frameHeight, startX, star
     for (var i = 0; i < coinAmount; i++) {
         var coin = new Coin(game, coinSprite, frameWidth, frameHeight, startX, startY, frames, placeX + (i * 50), placeY + (i * 50), loop, speed, isPowerup, scale);   
         game.addEntity(coin);
-        game.coins.push(coin);
+//        game.coins.push(coin);
     }
 }
 
@@ -39,14 +39,17 @@ function addCoinArcUp(game, coinSprite,  frameWidth, frameHeight, startX, startY
     for (var i = 0; i < coinAmount; i++) {
         var coin = new Coin(game, coinSprite, frameWidth, frameHeight, startX, startY, frames, placeX + (i * 50), placeY -(i * 50), loop, speed, isPowerup, scale);   
         game.addEntity(coin);
-        game.coins.push(coin);
+//        game.coins.push(coin);
     }
 }
 
 
 var ASSET_MANAGER = new AssetManager();
 
+//Characters
 ASSET_MANAGER.queueDownload("./img/mariosprite2.png");
+ASSET_MANAGER.queueDownload("./img/linkSprite.png");
+
 ASSET_MANAGER.queueDownload("./img/skybg2.png");
 ASSET_MANAGER.queueDownload("./img/groundbg2.png");
 ASSET_MANAGER.queueDownload("./img/platform.png");

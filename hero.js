@@ -7,7 +7,7 @@
 * jumpAnimation: the amount of animations in the hero's jumping movement
 */
 function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
-    heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) {
+    heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed, scale) {
 
     this.animation = new AnimationSprite(heroSprite, startX, (startY * 0) + charYOffset,
         frameWidth, frameHeight - charYOffset, movementSpeed, standAnimation, true, false);
@@ -42,11 +42,12 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.jumpHeight = game.defaultJumpHeight;
     this.boxes = true;
     this.heroMove = true;
-    this.platform = game.platforms[0];
+    this.platform = null;
+    this.scale = scale;
     this.heroBlink = false;
     this.blinkDone = 0;
 
-    this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.animation.frameWidth + 4, this.animation.frameHeight + 28);
+    this.boundingbox = new BoundingBox(this.x , this.y, this.width, this.height);
     Entity.call(this, game, this.x, this.y);
 
 };
@@ -77,13 +78,14 @@ Hero.prototype.update = function () {
     if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
-
+    
     if (this.game.walkLeft) {
-        if (this.x > 5) {
+        if (this.x > 0) {
             this.game.unlocked = true;
             this.heroMove = true;
         }
-        if (this.x < 5 || checkPlatform(this, this.game)) {
+        if (this.x < 0 || checkPlatform(this, this.game)) { 
+            console.log(this.x);
             this.game.unlocked = false;
             this.heroMove = false;
         }
@@ -92,6 +94,7 @@ Hero.prototype.update = function () {
             this.game.unlocked = false;
             this.game.bgmove = false;
             this.heroMove = false;
+         
         } else {
             this.heroMove = true;
             if (this.x >= this.game.defaultScroll) {
@@ -116,20 +119,23 @@ Hero.prototype.update = function () {
 
     //reset the jump hight.
     if (this.jumpHeight < 0) this.jumpHeight = this.game.defaultJumpHeight;
-    if (this.jumpHeight > this.game.defaultJumpHeight && !found) this.jumpHeight = this.game.defaultJumpHeight;
+    if (this.jumpHeight > this.game.defaultJumpHeight && !found) {
+        this.jumpHeight = this.game.defaultJumpHeight;
+    }
 
     found = false;
 
     if (this.game.space && !this.jumping && !this.falling) {
         this.jumping = true;
         this.base = this.y;
-        console.log(this.y);
+//        console.log(this.y);
+//console.log(this.game.platforms.length);
     }
     if (this.jumping && !this.standLeft) {
         if (this.jumpAnimation.isDone()) {
             this.jumpAnimation.elapsedTime = 0;
             this.jumping = false;
-            this.game.mjump = 0
+            this.game.mjump = 0;
         }
         var jumpDistance = this.jumpAnimation.elapsedTime / this.jumpAnimation.totalTime;
         var totalHeight = this.jumpHeight;
@@ -142,12 +148,14 @@ Hero.prototype.update = function () {
         var height = totalHeight * (-4 * (jumpDistance * jumpDistance - jumpDistance));
         this.lastBottom = this.boundingbox.bottom;
         this.y = this.base - height;
-        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.jumpAnimation.frameWidth + 4, this.jumpAnimation.frameHeight + 28);
+        this.boundingbox.setChangingBox(this.game, this.x , this.y, this.width, this.height);
         for (var i = 0; i < this.game.platforms.length; i++) {
             var pf = this.game.platforms[i];
+            //console.log("before collision");
             if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
+//                console.log("after collision");
                 this.jumping = false;
-                this.y = pf.boundingbox.top - this.heroHeight - 3;
+                this.y = pf.boundingbox.top - this.heroHeight - 2.5;
                 this.platform = pf;
                 this.jumpAnimation.elapsedTime = 0;
             }
@@ -166,16 +174,16 @@ Hero.prototype.update = function () {
         this.game.mjump = 1;
 
 
-        if (jumpDistance > 0.5) {
-            jumpDistance = 1 - jumpDistance;
-            this.game.mjump = -1;
-
-        }
+//        if (jumpDistance > 0.5) {
+//            jumpDistance = 1 - jumpDistance;
+//            this.game.mjump = -1;
+//
+//        }
         var height = totalHeight * (4 * jumpDistance - 4 * jumpDistance * jumpDistance);
         this.lastBottom = this.boundingbox.bottom;
         this.y = this.base - height;
-        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.jumpAnimationLeft.frameWidth + 4, this.jumpAnimationLeft.frameHeight + 28);
-        console.log("checking jump bottom")
+        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
+//        console.log("checking jump bottom");
         for (var i = 0; i < this.game.platforms.length; i++) {
             var pf = this.game.platforms[i];
             if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
@@ -190,11 +198,11 @@ Hero.prototype.update = function () {
     if (this.falling) {
         this.lastBottom = this.boundingbox.bottom;
         this.y += this.game.clockTick / this.jumpAnimation.totalTime * 4 * this.jumpHeight;
-        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.jumpAnimation.frameWidth + 4, this.jumpAnimation.frameHeight + 28);
+        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
         this.game.mjump = -1;
         for (var i = 0; i < this.game.platforms.length && !found; i++) {
             var pf = this.game.platforms[i];
-            console.log(pf.top())
+            //console.log(pf.top());
             if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
                 this.falling = false;
                 this.y = pf.boundingbox.top - this.heroHeight - 3;
@@ -207,26 +215,28 @@ Hero.prototype.update = function () {
     }
 
     if (!this.jumping && !this.falling) {
-        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.animation.frameWidth + 4, this.animation.frameHeight + 28);
-        if (this.platform != null) {
-            if (this.boundingbox.left > this.platform.boundingbox.right || this.boundingbox.right < this.platform.boundingbox.left) this.falling = true;
+        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
+        if (this.platform !== null) {
+            if (this.boundingbox.left > this.platform.boundingbox.right || this.boundingbox.right < this.platform.boundingbox.left) {
+                this.falling = true;
+            }
         }
     }
 
     if (this.game.bgmove && this.game.walkRight) {
         this.game.sb1 += this.scrollSpeed;           // background movement lock
         this.game.coinMove += this.scrollSpeed;
-        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.rightWalkAnimation.frameWidth + 4, this.rightWalkAnimation.frameHeight + 28);
+        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
     if (this.game.unlocked && this.game.walkRight) {
         this.x += this.scrollSpeed;
-        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.rightWalkAnimation.frameWidth + 4, this.rightWalkAnimation.frameHeight + 28);
+       this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
     if (this.game.unlocked && this.game.walkLeft) {
         this.x -= this.scrollSpeed;
-        this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.leftWalkAnimation.frameWidth + 4, this.leftWalkAnimation.frameHeight + 28);
+       this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
     var coinNum = checkCoin(this.game);
@@ -237,7 +247,7 @@ Hero.prototype.update = function () {
         } else {
             this.game.coinMusic.play();
         }
-        this.game.coins[coinNum].removeFromWorld = true
+        this.game.coins[coinNum].removeFromWorld = true;
         this.game.score += 1; 
         this.game.coins.splice(coinNum, 1);
     }
@@ -253,9 +263,9 @@ Hero.prototype.update = function () {
             this.heroBlink = true;
             this.game.heroLife--;
             console.log(this.game.heroLife);
-            if (this.game.heroLife === 0) {
+            if(this.game.heroLife === 0){
                 console.log("mario dead");
-            }
+            }                
         }
     } else {
         minionKill = superCollide(this.game);
@@ -274,24 +284,26 @@ Hero.prototype.draw = function (ctx) {
     if (this.boxes) {
         ctx.strokeStyle = "blue";
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
-    }
 
-    if (this.heroBlink) {
-        if (this.blinkDone % 5 == 0)
+    }
+    
+    if(this.heroBlink){
+        if(this.blinkDone % 5 === 0){
             ctx.globalAlpha = this.blinkDone % 2;
+        }
         this.blinkDone++;
-        if (this.blinkDone >= 200) {
+        if(this.blinkDone >= 200){
             this.heroBlink = false;
             this.blinkDone = 0;
         }
     }
-
+    
     if (this.jumping) {
         if (this.standLeft) {
-            this.jumpAnimationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
+            this.jumpAnimationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
             if (this.game.walkLeft) if (this.game.unlocked) this.game.totalDistance -= this.scrollSpeed;
         } else {
-            this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
+            this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
             if (this.game.walkRight) {
                 if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
                 if (this.game.bgmove) this.game.maxX += this.scrollSpeed;
@@ -299,20 +311,22 @@ Hero.prototype.draw = function (ctx) {
         }
     } else if (this.game.walkRight) {
         this.standLeft = false;
-        this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
+        this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);
         if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
         if (this.game.bgmove) this.game.maxX += this.scrollSpeed;
     } else if (this.game.walkLeft) {
         this.standLeft = true;
-        this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
+        this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);
         if (this.game.unlocked) this.game.totalDistance -= this.scrollSpeed;
     } else {
         if (this.standLeft) {
-            this.animationStandLeft.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
+            this.animationStandLeft.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);
         } else {
-            this.animation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
+            this.animation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);
         }
     }
+
+//    console.log(this.game.maxX);
     ctx.globalAlpha = 1;
     Entity.prototype.draw.call(this);
 };

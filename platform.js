@@ -1,4 +1,5 @@
-function Platform(game, platformSprite, width, height, startX, startY, scroll) {
+function Platform(game, platformSprite, width, height, startX, startY, scroll, isSky) {
+    
     this.animation = new AnimationPlatform(platformSprite, width, height, startX, startY, scroll, game);
 
     this.startX = startX;
@@ -8,8 +9,10 @@ function Platform(game, platformSprite, width, height, startX, startY, scroll) {
     this.game = game;
     this.radius = height / 2;
     this.boxes = true;
+    this.isSky = isSky || false;
+    this.name = "Platform";
 
-    this.boundingbox = new BoundingBox(startX - .5, startY, this.width + .5, this.height);
+    this.boundingbox = new BoundingBox(startX, startY, this.width, this.height - 2);
     Entity.call(this, game, startX, startY);
 };
 
@@ -18,7 +21,7 @@ Platform.prototype = new Entity();
 Platform.prototype.constructor = Platform;
 
 Platform.prototype.beginingX = function () {
-    return this.startX - this.game.maxX - .5;
+    return this.startX - this.game.maxX;
 };
 
 Platform.prototype.endingX = function () {
@@ -26,7 +29,7 @@ Platform.prototype.endingX = function () {
 };
 
 Platform.prototype.top = function () {
-    return this.startY;
+    return this.startY+4;
 };
 
 Platform.prototype.bottom = function () {
@@ -47,15 +50,16 @@ Platform.prototype.update = function () {
 
     }
 
-    this.boundingbox = new BoundingBox(this.beginingX(), this.top(), this.width + .5, this.height);
+    this.boundingbox = new BoundingBox(this.beginingX(), this.top(), this.width-3, this.height-4);
     Entity.prototype.update.call(this);
 };
 
 Platform.prototype.draw = function (ctx) {
     if (this.boxes) {
-        ctx.strokeStyle = "orange";
+        ctx.strokeStyle = "darkmagenta";
+        //ctx.lineWidth = 4;
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
     }
-    this.animation.drawFrame(this.game.clockTick, ctx, this.beginingX(), this.top());
+    this.animation.drawFrame(this.game.clockTick, ctx, this.beginingX(), this.startY);
     Entity.prototype.draw.call(this);
 };

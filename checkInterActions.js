@@ -8,7 +8,7 @@ var checkCoin = function (game) {
             collide = true;
         }
     }
-}
+};
 
 var superCollide = function (game) {
     for (var i = 0; i < game.baddies.length; i++) {
@@ -18,12 +18,13 @@ var superCollide = function (game) {
             }
         }
     }
-}
+};
 
 var checkMinion = function (me, game) {
     var crash = 0;
-    for (var i = 0; i < game.baddies.length && crash == 0; i++) {
-        if (game.baddies[i] != me) {
+    //console.log(game.baddies.length);
+    for (var i = 0; i < game.baddies.length && crash === 0; i++) {
+        if (game.baddies[i] !== me) {
             if (me.boundingbox.collide(game.baddies[i].boundingbox)) {
                 if (game.mjump === -1) {
                     crash = i + 1;
@@ -35,15 +36,15 @@ var checkMinion = function (me, game) {
     }
 
     return crash;
-}
+};
 
 var checkPlatform = function (me, game) {
     var block = false;
     for (var i = 0; i < game.platforms.length && !block; i++) {
-        //if (game.platforms[i].beginingX() < 300) {
-            if (me.boundingbox.collide(game.platforms[i].boundingbox))
-                block = true;
-        //}
+        if (me.boundingbox.collide(game.platforms[i].boundingbox)){
+            block = true;
+        }                
     }
     return block;
-}
+};
+

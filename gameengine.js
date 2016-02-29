@@ -30,6 +30,9 @@ Timer.prototype.tick = function () {
 
 function GameEngine() {
     this.entities = [];
+    this.coins = [];
+    this.baddies = [];
+    this.platforms = [];
     this.showOutlines = false;
     this.ctx = null;
     this.click = null;
@@ -49,21 +52,18 @@ function GameEngine() {
     this.powerUpMusic = new Howl({urls: ["./music/Mario_Invincible_Theme.mp3"]});
     this.coinMusic = new Howl({urls: ["./music/coinsound.wav"]});
     this.hero = null;
-    this.heroLife = 4;
-    this.lives = 3;
     this.coinMove = 0;
     this.mjump = 0;
     this.starTime = 14;
     this.keyLeft = true;
     this.keyRight = true;
     this.score = 0;
-    this.coins = [];
-    this.baddies = [];
-    this.platforms = [];
     this.mouseX = 0;
     this.mouseY = 0;
     this.chosenCharacter = null;
-    this.bossDefeat = false;
+    this.defeatBoss = false;
+    this.heroLife = 4;
+    this.lives = 3;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -139,6 +139,18 @@ GameEngine.prototype.startInput = function () {
 GameEngine.prototype.addEntity = function (entity) {
     console.log('added entity');
     this.entities.push(entity);
+    if(entity.name === "Coins"){
+    	console.log("entered coins");
+    	this.coins.push(entity);
+    } 
+    if(entity.name === "Baddies"){
+	console.log("entered baddies");
+	this.baddies.push(entity);
+    }
+    if(entity.name === "Platform" && !entity.isSky){
+        console.log("entered platforms");
+        this.platforms.push(entity);
+    }
 };
 
 GameEngine.prototype.draw = function () {
