@@ -48,6 +48,7 @@ function GameEngine() {
     this.bgmove;
     this.maxX = 0;
     this.hearts = ASSET_MANAGER.getAsset("./img/hearts.png");
+    this.gameOver = ASSET_MANAGER.getAsset("./img/gameOver.png");
     this.heartIcon = null;
     this.sb1 = 0;
     // this.sb2 = 0;
@@ -140,7 +141,7 @@ GameEngine.prototype.startInput = function () {
 };
 
 GameEngine.prototype.addEntity = function (entity) {
-    console.log('added entity');
+    //console.log('added entity');
     this.entities.push(entity);
     if(entity.name === "Coins"){
     	console.log("entered coins");

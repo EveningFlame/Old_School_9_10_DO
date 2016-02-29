@@ -162,7 +162,6 @@ function Icon(game, minionSprite, frameHeight, frameWidth, startX, startY, place
     
     if (name === "heart") {
         this.scale = scale;
-        console.log("DDD" + this.gameE.heroLife);
         this.icon = new AnimationSprite(minionSprite, startX, startY, frameWidth, frameHeight, .5, 1, loop, false);
     } else {
         this.icon = new AnimationSprite(minionSprite, startX, (startY * 0), frameWidth, frameHeight, .5, 1, loop, false);
@@ -203,8 +202,6 @@ Icon.prototype.update = function () {
         selectCharacter(this.game, this.name, 252, 255);
     } else if(this.name === "Pikachu" && this.checkMouse()){
         selectCharacter(this.game, this.name, 118, 472);
-    } else if(this.name === "heart") {
-        this.startY = 64;
     }
 
     switch (this.gameE.heroLife) { 

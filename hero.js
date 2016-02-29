@@ -271,6 +271,7 @@ Hero.prototype.update = function () {
             console.log(this.game.heroLife);
             if(this.game.heroLife === 0){
                 console.log("mario dead");
+                //startMenu(this.game);
             }                
         }
     } else {
@@ -285,6 +286,14 @@ Hero.prototype.update = function () {
 };
 
 Hero.prototype.draw = function (ctx) {
+
+
+    ctx.drawImage(this.game.gameOver,
+            0, 0,  // source from sheet
+            800, 800,
+            0, 0,
+            1,
+            1);        
 
     var yPlace = this.y;
     if (this.boxes) {
