@@ -125,9 +125,15 @@ Hero.prototype.update = function () {
 
     found = false;
 
+    // if (this.game.space) {
+    //     this.jumping = true;
+    //     this.game.jumpMusic.play();
+    // }
+
     if (this.game.space && !this.jumping && !this.falling) {
         this.jumping = true;
         this.base = this.y;
+        this.game.jumpMusic.play();
 //        console.log(this.y);
 //console.log(this.game.platforms.length);
     }

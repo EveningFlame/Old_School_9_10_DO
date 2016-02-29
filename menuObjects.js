@@ -158,9 +158,11 @@ function Icon(game, minionSprite, frameHeight, frameWidth, startX, startY, place
     this.x = placeX;
     this.group = "title";
     this.selected = false;
+    this.minionSprite = minionSprite;
     
     if (name === "heart") {
         this.scale = scale;
+        console.log("DDD" + this.gameE.heroLife);
         this.icon = new AnimationSprite(minionSprite, startX, startY, frameWidth, frameHeight, .5, 1, loop, false);
     } else {
         this.icon = new AnimationSprite(minionSprite, startX, (startY * 0), frameWidth, frameHeight, .5, 1, loop, false);
@@ -201,8 +203,33 @@ Icon.prototype.update = function () {
         selectCharacter(this.game, this.name, 252, 255);
     } else if(this.name === "Pikachu" && this.checkMouse()){
         selectCharacter(this.game, this.name, 118, 472);
-    } 
-        
+    } else if(this.name === "heart") {
+        this.startY = 64;
+    }
+
+    switch (this.gameE.heroLife) { 
+        case 3:
+            this.gameE.heartIcon.removeFromWorld = true;
+            this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 64, 740, 0, true, "heart", 2); 
+            this.gameE.addEntity(this.gameE.heartIcon);
+            break;
+        case 2:
+            this.gameE.heartIcon.removeFromWorld = true;
+            this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 96, 740, 0, true, "heart", 2); 
+            this.gameE.addEntity(this.gameE.heartIcon);
+            break;
+        case 1:
+            this.gameE.heartIcon.removeFromWorld = true;
+            this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 128, 740, 0, true, "heart", 2); 
+            this.gameE.addEntity(this.gameE.heartIcon);
+            break;
+        case 0:
+            this.gameE.heartIcon.removeFromWorld = true;
+            this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 160, 740, 0, true, "heart", 2); 
+            this.gameE.addEntity(this.gameE.heartIcon);
+            break;
+
+    }
     Entity.prototype.update.call(this);
 };
 
