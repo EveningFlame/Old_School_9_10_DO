@@ -6,7 +6,7 @@ startGame = function(game){
         var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
         /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed, scale) { */
-        var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 3.5, 2);//2.5);
+        var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 4, 2);//2.5);
         
     } else if(game.chosenCharacter === "Link"){
         var linkSprite = ASSET_MANAGER.getAsset("./img/linkSprite.png");
@@ -68,17 +68,6 @@ startGame = function(game){
     var m9 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 7600, 445, true, .15, 7500, 7700);
     var m10 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 7850, 445, true, .15, 7750, 7950);
     var m11 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 8100, 445, true, .15, 8000, 8125);
-//    var m1 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 1300, 592, true, .2, 0, 0);
-//    var m2 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 3250, 287, true, .2, 3180, 3331);
-//    var m3 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 4400, 592, true, .2, 0, 0);
-//    var m4 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 4650, 592, true, .2, 0, 0);
-//    var m5 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 4850, 592, true, .2, 0, 0);
-//    var m6 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 5050, 592, true, .2, 0, 0);
-//    var m7 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6600, 592, true, .2, 0, 0);
-//    var m8 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6900, 592, true, .2, 0, 0);
-//    var m9 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 7600, 442, true, .15, 7500, 8125);
-//    var m10 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 7850, 442, true, .15, 7500, 8125);
-//    var m11 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 8100, 442, true, .15, 7500, 8125);
 
 //
 //	var sound = false;
@@ -101,15 +90,6 @@ startGame = function(game){
 
 
 //PLATFORMS
-    // var p1 = new Platform(game, platform, 190, 3, 1500, 600, false);
-    // var p2 = new Platform(game, platform, 190, 3, 1600, 500, false);
-    // var b1 = new Platform(game, platform, 31, 31, 1250, 674, false);
-    // var b2 = new Platform(game, platform, 160, 31, 2250, 674, false);
-    // var t1 = new Platform(game, pipe, 98, 150, 2281, 556, false);
-    // var b3 = new Platform(game, platform, 94, 31, 3025, 474, false);
-    // var t2 = new Platform(game, pipe, 98, 150, 3022, 325, false);
-    // var p3 = new Platform(game, platform, 190, 31, 3200, 400, false);
-
     addPlatform(game, platform, 190, 30, 1300, 600, false);
     addPlatform(game, platform, 190, 30, 1490, 550, false);
     addPlatform(game, platform, 190, 30, 1680, 520, false);
@@ -151,10 +131,10 @@ startGame = function(game){
     addPlatformWall(game, platform, 30, 30, 6800, 425, false, 5);
     addPlatformWall(game, platform, 30, 30, 6900, 375, false, 5);
 
-    addPlatform(game, platform, 190, 10, 7500, 300, false);
-    addPlatform(game, platform, 190, 10, 7690, 300, false);
-    addPlatform(game, platform, 190, 10, 7880, 300, false);
-    addPlatform(game, platform, 130, 10, 8070, 300, false);
+    addPlatform(game, platform, 190, 10, 7500, 250, false);
+    addPlatform(game, platform, 190, 10, 7690, 250, false);
+    addPlatform(game, platform, 190, 10, 7880, 250, false);
+    addPlatform(game, platform, 130, 10, 8070, 250, false);
 
     addPlatform(game, platform, 130, 30, 8600, 675, false);
     addPlatform(game, platform, 130, 30, 8730, 675, false);

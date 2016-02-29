@@ -53,8 +53,8 @@ Boss.prototype = new Entity();
 Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function () {
-   // console.log(this.moveLeft);
-   //console.log("this.x: " + this.x + "     Mario: " +  this.game.entities[17].x);
+    //console.log(this.moveLeft);
+    //console.log("this.x: " + this.x + "     Mario: " +  this.game.entities[17].x);
     if (this.game.totalDistance >= 10300 && this.entryCount === 0) {
         this.moveLeft = true;
         if (this.x  === this.game.entities[17].x) {
@@ -68,13 +68,13 @@ Boss.prototype.update = function () {
             this.moveRight = false;
             this.faceLeft = true;
             this.faceRight = false;
-            this.x -= 5;
+            this.x -= 2;
         } else if (this.x  < this.game.entities[17].x) {
             this.moveRight = true;
             this.moveLeft = false;
             this.faceLeft = false;
             this.faceRight = true;
-            this.x += 5;
+            this.x += 2;
         }
     }
 
