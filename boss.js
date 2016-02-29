@@ -13,7 +13,7 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
 
     /* this.animation = new AnimationSprite(heroSprite, startX, (startY * 0) + charYOffset,
         frameWidth, frameHeight - charYOffset, movementSpeed, standAnimation, true, false);	 */
-
+ 
 
     this.radius = frameHeight / 2;
     this.y = placeY;
