@@ -53,8 +53,8 @@ Boss.prototype = new Entity();
 Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function () {
-    console.log(this.moveLeft);
-    console.log("this.x: " + this.x + "     Mario: " +  this.game.entities[17].x);
+   // console.log(this.moveLeft);
+   //console.log("this.x: " + this.x + "     Mario: " +  this.game.entities[17].x);
     if (this.game.totalDistance >= 10300 && this.entryCount === 0) {
         this.moveLeft = true;
         if (this.x  === this.game.entities[17].x) {

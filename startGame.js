@@ -6,7 +6,7 @@ startGame = function(game){
         var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
         /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed, scale) { */
-        var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 30, 2);//2.5);
+        var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 3.5, 2);//2.5);
         
     } else if(game.chosenCharacter === "Link"){
         var linkSprite = ASSET_MANAGER.getAsset("./img/linkSprite.png");
