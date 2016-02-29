@@ -61,6 +61,7 @@ function GameEngine() {
     this.mouseX = 0;
     this.mouseY = 0;
     this.chosenCharacter = null;
+    this.bossDefeat = false;
 }
 
 GameEngine.prototype.init = function (ctx) {

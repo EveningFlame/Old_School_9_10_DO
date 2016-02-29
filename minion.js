@@ -43,13 +43,20 @@ Minion.prototype.update = function () {
 
     if (this.moveRight) {
         this.x += 1;
-        if (this.x >= this.farRight) this.moveRight = false;
+        if (this.x >= this.farRight && this.farRight > 0) this.moveRight = false;
     } else {
         this.x -= 1;
-        if (this.x <= this.farLeft) this.moveRight = true;
+        if (this.x <= this.farLeft && this.farLeft > 0) this.moveRight = true;
     }
 
     this.boundingbox = new BoundingBox(this.x + 14 - this.game.maxX, this.y + 45, this.frameWidth + 8, this.frameHeight + 12);
+    if (checkMinion(this, this.game) != 0) this.moveRight = !this.moveRight;
+
+    if (this.farLeft == 0 && this.farRight == 0) {
+        if (checkPlatform(this, this.game)) this.moveRight = !this.moveRight;
+    }
+
+
     Entity.prototype.update.call(this);
 };
 

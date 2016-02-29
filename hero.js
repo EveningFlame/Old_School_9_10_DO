@@ -81,12 +81,12 @@ Hero.prototype.update = function () {
             this.game.unlocked = true;
             this.heroMove = true;
         }
-        if (this.x < 5 || checkPlatform(this.game)) {
+        if (this.x < 5 || checkPlatform(this, this.game)) {
             this.game.unlocked = false;
             this.heroMove = false;
         }
     } else {
-        if (checkPlatform(this.game)) {
+        if (checkPlatform(this, this.game)) {
             this.game.unlocked = false;
             this.game.bgmove = false;
             this.heroMove = false;
@@ -243,7 +243,7 @@ Hero.prototype.update = function () {
 
     var minionKill = 0;
     if (!this.game.poweredUp) {
-        minionKill = checkMinion(this.game);
+        minionKill = checkMinion(this, this.game);
         if (minionKill > 0) {
             this.game.baddies[minionKill - 1].removeFromWorld = true;
             this.game.baddies.splice(minionKill - 1, 1);
