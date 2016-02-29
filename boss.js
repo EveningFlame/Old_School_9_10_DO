@@ -30,7 +30,7 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
     this.moveRight = false;
     //this.offScreen = farRight;
     this.farLeft = farLeft;
-    this.boxes = true;
+    this.boxes = false;
 
     this.boundingbox = new BoundingBox(this.x + 14, this.y, this.frameWidth, this.frameHeight);
 
