@@ -49,6 +49,8 @@ function GameEngine() {
     this.powerUpMusic = new Howl({urls: ["./music/Mario_Invincible_Theme.mp3"]});
     this.coinMusic = new Howl({urls: ["./music/coinsound.wav"]});
     this.hero = null;
+    this.heroLife = 4;
+    this.lives = 3;
     this.coinMove = 0;
     this.mjump = 0;
     this.starTime = 14;

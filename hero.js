@@ -43,6 +43,8 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.boxes = true;
     this.heroMove = true;
     this.platform = game.platforms[0];
+    this.heroBlink = false;
+    this.blinkDone = 0;
 
     this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.animation.frameWidth + 4, this.animation.frameHeight + 28);
     Entity.call(this, game, this.x, this.y);
@@ -213,7 +215,6 @@ Hero.prototype.update = function () {
 
     if (this.game.bgmove && this.game.walkRight) {
         this.game.sb1 += this.scrollSpeed;           // background movement lock
-        //this.game.sb2 += this.scrollSpeed;
         this.game.coinMove += this.scrollSpeed;
         this.boundingbox = new BoundingBox(this.x + 15, this.y + 20, this.rightWalkAnimation.frameWidth + 4, this.rightWalkAnimation.frameHeight + 28);
     }
@@ -248,8 +249,13 @@ Hero.prototype.update = function () {
             this.game.baddies[minionKill - 1].removeFromWorld = true;
             this.game.baddies.splice(minionKill - 1, 1);
             this.game.score += 10;
-        } else if (minionKill < 0) {
-            console.log("mario dead");
+        } else if (minionKill < 0 && !this.heroBlink) {
+            this.heroBlink = true;
+            this.game.heroLife--;
+            console.log(this.game.heroLife);
+            if (this.game.heroLife === 0) {
+                console.log("mario dead");
+            }
         }
     } else {
         minionKill = superCollide(this.game);
@@ -269,6 +275,17 @@ Hero.prototype.draw = function (ctx) {
         ctx.strokeStyle = "blue";
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
     }
+
+    if (this.heroBlink) {
+        if (this.blinkDone % 5 == 0)
+            ctx.globalAlpha = this.blinkDone % 2;
+        this.blinkDone++;
+        if (this.blinkDone >= 200) {
+            this.heroBlink = false;
+            this.blinkDone = 0;
+        }
+    }
+
     if (this.jumping) {
         if (this.standLeft) {
             this.jumpAnimationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
@@ -296,8 +313,6 @@ Hero.prototype.draw = function (ctx) {
             this.animation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, 2);
         }
     }
-
-    console.log(this.game.maxX);
-
+    ctx.globalAlpha = 1;
     Entity.prototype.draw.call(this);
 };
