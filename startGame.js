@@ -240,68 +240,68 @@ startGame = function(game){
 //PIPES
 
 //COINS
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 1490, 480, true, 0.09, false, 3, 6);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 1760, 480, true, 0.09, false, 3, 6);
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 300, 480, true, 0.09, false, 3, 1);
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 400, 650, true, 0.09, false, 3, 6);
-    addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 1785, 480, true, 0.09, false, 3, 4);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 5500, 650, true, 0.09, false, 3, 7);
+    addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 2070, 480, true, 0.09, false, 3, 4);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 5700, 650, true, 0.09, false, 3, 7);
     //addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 5900, 650, true, 0.09, false, 3, 10);
 
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4360, 650, true, 0.09, false, 3, 2);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4560, 650, true, 0.09, false, 3, 2);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4760, 650, true, 0.09, false, 3, 2);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4380, 650, true, 0.09, false, 3, 2);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4610, 650, true, 0.09, false, 3, 2);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4810, 650, true, 0.09, false, 3, 2);
     
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6039, 470, true, 0.09, false, 3, 1);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6139, 420, true, 0.09, false, 3, 1);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6239, 370, true, 0.09, false, 3, 1);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6339, 320, true, 0.09, false, 3, 1);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6439, 270, true, 0.09, false, 3, 1);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6539, 220, true, 0.09, false, 3, 1);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6639, 170, true, 0.09, false, 3, 1);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6739, 120, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6294, 470, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6394, 420, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6494, 370, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6594, 320, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6694, 270, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6794, 220, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6894, 170, true, 0.09, false, 3, 1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 6994, 120, true, 0.09, false, 3, 1);
 
     //addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 10300, 650, true, 0.09, false, 3, 9);
 
-    addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 10150, 460, true, 0.09, false, 3, 4);
+    addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 10350, 460, true, 0.09, false, 3, 4);
 
-    addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 10350, 650, true, 0.09, false, 3, 5);
+    //addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 10550, 650, true, 0.09, false, 3, 5);
 
-    addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 10600, 510, true, 0.09, false, 3, 3);
+    //addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 10800, 510, true, 0.09, false, 3, 3);
 
 
 //COINS
 
 
 //STARS   
-    var star = new Coin(game, starSprite, 40, 40, 0, 0, 7, 3020, 350, true, 0.1, true, 3);
+    var star = new Coin(game, starSprite, 40, 40, 0, 0, 7, 3290, 350, true, 0.1, true, 3);
     game.addEntity(star);
 //    game.coins.push(star);
 
-    var star1 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 6800, 200, true, 0.1, true, 3);
+    var star1 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7070, 200, true, 0.1, true, 3);
     game.addEntity(star1);
 //    game.coins.push(star1);
 
-    var star2 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7300, 250, true, 0.1, true, 3);
+    var star2 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7550, 200, true, 0.1, true, 3);
     game.addEntity(star2);
 //    game.coins.push(star2);
 
-    var star3 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7400, 250, true, 0.1, true, 3);
+    var star3 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7650, 200, true, 0.1, true, 3);
     game.addEntity(star3);
 //    game.coins.push(star3);
 
-    var star4 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7500, 250, true, 0.1, true, 3);
+    var star4 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7750, 200, true, 0.1, true, 3);
     game.addEntity(star4);
 //    game.coins.push(star4);
 
-    var star5 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7600, 250, true, 0.1, true, 3);
+    var star5 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7850, 200, true, 0.1, true, 3);
     game.addEntity(star5);
 //    game.coins.push(star5);
 
-    var star6 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7700, 250, true, 0.1, true, 3);
+    var star6 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7950, 200, true, 0.1, true, 3);
     game.addEntity(star6);
 //    game.coins.push(star6);
 
-    var star7 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7800, 250, true, 0.1, true, 3);
+    var star7 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 8050, 200, true, 0.1, true, 3);
     game.addEntity(star7);
 //    game.coins.push(star7);
 //STARS
