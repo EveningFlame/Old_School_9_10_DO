@@ -51,10 +51,10 @@ function GameEngine() {
     this.gameOver = ASSET_MANAGER.getAsset("./img/gameOver.png");
     this.heartIcon = null;
     this.sb1 = 0;
-    // this.sb2 = 0;
     this.powerUpMusic = new Howl({urls: ["./music/Mario_Invincible_Theme.mp3"]});
     this.coinMusic = new Howl({urls: ["./music/coinsound.wav"]});
     this.jumpMusic = new Howl({urls: ["./music/jumpsound.wav"]});
+    this.stompMusic = new Howl({urls: ["./music/stomp.wav"]});
     this.hero = null;
     this.coinMove = 0;
     this.mjump = 0;

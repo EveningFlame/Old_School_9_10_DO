@@ -262,6 +262,7 @@ Hero.prototype.update = function () {
     if (!this.game.poweredUp) {
         minionKill = checkMinion(this, this.game);
         if (minionKill > 0) {
+            this.game.stompMusic.play();
             this.game.baddies[minionKill - 1].removeFromWorld = true;
             this.game.baddies.splice(minionKill - 1, 1);
             this.game.score += 10;
@@ -277,6 +278,7 @@ Hero.prototype.update = function () {
     } else {
         minionKill = superCollide(this.game);
         if (minionKill >= 0) {
+            this.game.stompMusic.play();
             this.game.baddies[minionKill].removeFromWorld = true;
             this.game.baddies.splice(minionKill, 1);
             this.game.score += 10;
@@ -286,15 +288,7 @@ Hero.prototype.update = function () {
 };
 
 Hero.prototype.draw = function (ctx) {
-
-
-    ctx.drawImage(this.game.gameOver,
-            0, 0,  // source from sheet
-            800, 800,
-            0, 0,
-            1,
-            1);        
-
+   
     var yPlace = this.y;
     if (this.boxes) {
         ctx.strokeStyle = "blue";
