@@ -13,7 +13,7 @@ function Coin(game, sprite,  frameWidth, frameHeight, startX, startY, frames, pl
     this.speed = speed;
     this.scale = scale;
     this.game = game;
-    this.boxes = true;
+    this.boxes = false;
 	this.name = "Coins";
 
     this.boundingbox = new BoundingBox(this.x, this.y, this.animation.frameWidth, this.animation.frameHeight);
