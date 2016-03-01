@@ -130,7 +130,7 @@ Button.prototype.update = function () {
         startMenu(this.gameE);//console.log("StartGame");//startGame();
     } else if(this.name === "start" && this.checkMouse()){
         startGame(this.gameE);
-    } else if(this.name === "retry"&& this.checkMouse()){
+    } else if(this.name === "retry" && this.checkMouse()){
         startMenu(this.gameE);
     }
     
@@ -139,9 +139,9 @@ Button.prototype.update = function () {
 Button.prototype.draw = function (ctx) {
 
     //.ctx.globalAlpha = 1;
-    if(this.name === "start" && this.game.chosenCharacter != null){
+    if(this.name === "start" && this.game.chosenCharacter !== null){
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
-    } else if(this.name != "start") {
+    } else if(this.name !== "start") {
         this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y, 1);
     }
     

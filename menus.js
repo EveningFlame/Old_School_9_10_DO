@@ -98,6 +98,7 @@ winGame = function(game){
     var pikachuIcon = ASSET_MANAGER.getAsset("./img/pikachuBlanket.png");
     var samusIcon = ASSET_MANAGER.getAsset("./img/Samus.png");
     var retry = ASSET_MANAGER.getAsset("./img/retry.png");
+    var congrat = ASSET_MANAGER.getAsset("./img/congrats.png"); 
     
 
     
@@ -107,14 +108,16 @@ winGame = function(game){
     var samus = new Icon(game, samusIcon, 500, 238, 0, 500, 350, 250, true, "Samus");
     var pikachu = new Icon(game, pikachuIcon, 235, 261, 0, 235, 545, 500, true, "Pikachu");
     var retryButton = new Button(game, retry, 50, 300, 0, 50, 2, 480, 740, true, "retry");
+    var congrats = new Creature(game, congrat, 170, 520, 0, 170, 2, 0, 0, true, "Congrats", 1);
 
-
+//function Creature(game, critterSheet, frameHeight, frameWidth, startX, startY, fire, placeX, placeY, loop, name, speed) {
     game.addEntity(background);
     game.addEntity(link);
     game.addEntity(samus);
     game.addEntity(mario);
     game.addEntity(pikachu);
     game.addEntity(retryButton);
+    game.addEntity(congrats);
     
     
 };

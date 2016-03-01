@@ -91,6 +91,7 @@ ASSET_MANAGER.queueDownload("./img/selectYourCharacter.png");
 ASSET_MANAGER.queueDownload("./img/gameOver.png");
 
 //Win screen
+ASSET_MANAGER.queueDownload("./img/congrats.png");
 ASSET_MANAGER.queueDownload("./img/MarioWin.png");
 ASSET_MANAGER.queueDownload("./img/pikachuBlanket.png");
 ASSET_MANAGER.queueDownload("./img/Link.png");
