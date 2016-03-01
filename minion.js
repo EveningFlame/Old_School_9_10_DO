@@ -42,6 +42,14 @@ Minion.prototype.constructor = Minion;
 
 Minion.prototype.update = function () {
 
+    if (checkMinion(this, this.game) !== 0) {
+        this.moveRight = !this.moveRight;
+    }
+
+    if (this.farLeft === 0 && this.farRight === 0) {
+        if (checkPlatform(this, this.game)) this.moveRight = !this.moveRight;
+    }
+
     if (this.moveRight) {
         this.x += 1;
         if (this.x >= this.farRight && this.farRight > 0) this.moveRight = false;
@@ -51,15 +59,13 @@ Minion.prototype.update = function () {
     }
 
     this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10);
-   
-    if (checkMinion(this, this.game) !== 0) {
-        this.moveRight = !this.moveRight;
-    }
 
-    if (this.farLeft === 0 && this.farRight === 0) {
-        if (checkPlatform(this, this.game)) this.moveRight = !this.moveRight;
+    for (var i = 0; i < this.game.baddies.length; i++) {
+        if (this.game.baddies[i].boundingbox.right < 0) {
+            this.game.baddies[i].removeFromWorld = true;
+            this.game.baddies.splice(i, 1);
+        }
     }
-
     
     Entity.prototype.update.call(this);
 };

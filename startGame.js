@@ -85,7 +85,8 @@ startGame = function(game){
     game.addEntity(hero);
 	
     //Boss of the level
-	game.addEntity(boss);
+    game.addEntity(boss);
+    game.bigBoss = boss;
 
 
 
@@ -181,7 +182,7 @@ startGame = function(game){
 
 
     addPlatformWall(game, platform, 30, 30, 9820, 645, false, 3);
-    var m15 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9900, 565, true, .15, 0, 0);
+    var m15 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9850, 565, true, .15, 0, 0);
 
     addPlatform(game, platform, 130, 30, 9900, 435, false);
 

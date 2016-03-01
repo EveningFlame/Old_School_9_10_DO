@@ -71,6 +71,8 @@ function GameEngine() {
     this.defeatBoss = false;
     this.heroLife = 4;
     this.lives = 3;
+    this.bigBoss;
+    this.bossLife = 4;
 }
 
 GameEngine.prototype.init = function (ctx) {

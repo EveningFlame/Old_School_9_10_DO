@@ -28,9 +28,6 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
     this.game = game;
     this.frameWidth = frameWidth
     this.frameHeight = frameHeight;
-    //this.heroHeight = heroHeight;
-    //this.ground = defaultGround - heroHeight;
-    //this.scrollSpeed = scrollSpeed;
     this.speed = speed;
     this.jumpHeight = game.defaultJumpHeight;
     this.entryCount = 0;
@@ -40,6 +37,8 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
     this.faceRight = false;
     //this.offScreen = farRight;
     this.farLeft = farLeft;
+    this.bossBlink = false;
+    this.blinkDone = 0;
     this.boxes = false;
 
     this.boundingbox = new BoundingBox(this.x + 14, this.y, this.frameWidth, this.frameHeight);
@@ -54,24 +53,24 @@ Boss.prototype.constructor = Boss;
 
 Boss.prototype.update = function () {
     //console.log(this.moveLeft);
-    //console.log("this.x: " + this.x + "     Mario: " +  this.game.entities[17].x);
-    // console.log(this.game.totalDistance);
+    //console.log("this.x: " + this.x + "     Mario: " +  this.game.hero.x);
+    //console.log(this.game.totalDistance);
     if (this.game.totalDistance >= 10300 && this.entryCount === 0) {
         //console.log(this.game.totalDistance);
         this.moveLeft = true;
-        if (this.x  === this.game.entities[17].x) {
+        if (this.x  === this.game.hero.x) {
             //this.x -= 2;
             //this.entryCount = 1;
             this.moveLeft = false;
             this.moveRight = false;
             //this.moveLeft = false;
-        } else if (this.x  > this.game.entities[17].x) {
+        } else if (this.x  > this.game.hero.x) {
             this.moveLeft = true;
             this.moveRight = false;
             this.faceLeft = true;
             this.faceRight = false;
             this.x -= 2;
-        } else if (this.x  < this.game.entities[17].x) {
+        } else if (this.x  < this.game.hero.x) {
             this.moveRight = true;
             this.moveLeft = false;
             this.faceLeft = false;
@@ -91,6 +90,17 @@ Boss.prototype.draw = function (ctx) {
         ctx.strokeStyle = "red";
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
     }
+
+    if (this.bossBlink) {
+        if (this.blinkDone % 5 === 0) {
+            ctx.globalAlpha = this.blinkDone % 2;
+        }
+        this.blinkDone++;
+        if (this.blinkDone >= 200) {
+            this.bossBlink = false;
+            this.blinkDone = 0;
+        }
+    }
     
     if (this.moveLeft) {
         this.walkAnimationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
@@ -102,5 +112,6 @@ Boss.prototype.draw = function (ctx) {
         this.animationFaceRight.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
     }
 
+    ctx.globalAlpha = 1;
     Entity.prototype.draw.call(this);
 };

@@ -74,7 +74,7 @@ Hero.prototype.bottom = function () {
 
 Hero.prototype.update = function () {
     var found = false;
-
+    //console.log(this.game.totalDistance);
     if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
@@ -101,10 +101,11 @@ Hero.prototype.update = function () {
             this.heroMove = true;
         }
         if (this.x < 0 || checkPlatform(this, this.game)) { 
-            console.log(this.x);
+            //console.log(this.x);
             this.game.unlocked = false;
             this.heroMove = false;
             this.x += this.scrollSpeed;
+            this.game.totalDistance += this.scrollSpeed;
         }
     } else {
         if (checkPlatform(this, this.game)) {
@@ -112,6 +113,7 @@ Hero.prototype.update = function () {
             this.game.bgmove = false;
             this.heroMove = false;
             this.x -= this.scrollSpeed;
+            this.game.totalDistance -= this.scrollSpeed;
         } else {
             this.heroMove = true;
             if (this.x >= this.game.defaultScroll) {
@@ -206,11 +208,11 @@ Hero.prototype.update = function () {
         this.game.mjump = 1;
 
 
-//        if (jumpDistance > 0.5) {
-//            jumpDistance = 1 - jumpDistance;
-//            this.game.mjump = -1;
-//
-//        }
+        if (jumpDistance > 0.5) {
+            jumpDistance = 1 - jumpDistance;
+            this.game.mjump = -1;
+
+        }
         var height = totalHeight * (4 * jumpDistance - 4 * jumpDistance * jumpDistance);
         this.lastBottom = this.boundingbox.bottom;
         this.y = this.base - height;
@@ -320,6 +322,38 @@ Hero.prototype.update = function () {
             this.game.score += 10;
         }
     }
+
+    var boshit = checkBoss(this.game);
+    console.log(boshit);
+    if (boshit === 1 && !this.game.bigBoss.bossBlink && !this.heroBlink) {
+        // mario hit bowser
+        this.game.bigBoss.bossBlink = true;
+        this.game.bossLife--;
+        console.log(this.game.bossLife);
+        if (this.game.bossLife === 0) {
+            this.game.score += 50;
+            this.game.bigBoss.removeFromWorld = true;
+
+        }
+    } else if (boshit === 0 && !this.game.bigBoss.bossBlink && !this.heroBlink) {
+        // bowser hit mario
+        this.heroBlink = true;
+        this.game.heroLife--;
+        this.game.marioDamaged.play();
+        console.log(this.game.heroLife);
+        if (this.game.heroLife === 0) {
+            console.log("mario dead");
+            //this.game.heroDies.play();
+            this.game.lives--;
+
+            if (this.game.lives === 0) {
+                gameOver(this.game);
+            } else {
+                lifeOver(this.game);
+            }
+        }
+    }
+
     Entity.prototype.update.call(this);
 };
 

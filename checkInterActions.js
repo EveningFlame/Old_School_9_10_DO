@@ -20,6 +20,18 @@ var superCollide = function (game) {
     }
 };
 
+var checkBoss = function (game) {
+    if (game.hero.boundingbox.collide(game.bigBoss.boundingbox)) {
+
+        console.log(game.mjump);
+        if (game.mjump === -1) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
 var checkMinion = function (me, game) {
     var crash = 0;
     //console.log(game.baddies.length);

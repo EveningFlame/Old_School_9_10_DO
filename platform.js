@@ -50,7 +50,7 @@ Platform.prototype.update = function () {
 
     }
 
-    this.boundingbox = new BoundingBox(this.beginingX(), this.top() - 4, this.width, this.height);
+    this.boundingbox = new BoundingBox(this.beginingX(), this.top(), this.width, this.height);
     Entity.prototype.update.call(this);
 };
 
