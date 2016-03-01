@@ -317,6 +317,7 @@ Hero.prototype.update = function () {
             this.game.score += 50;
             this.game.bigBoss.removeFromWorld = true;
             this.game.bowserMusic.stop();
+            this.game.congratulationsMusic.play();
             winGame(this.game);
 
         }

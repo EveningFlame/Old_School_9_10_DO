@@ -60,6 +60,7 @@ function GameEngine() {
     this.marioDamaged = new Howl({urls: ["./music/marioDamaged.wav"]});
     this.marioDieMusic = new Howl({urls: ["./music/mariodie.wav"]});
     this.gameOverMusic = new Howl({urls: ["./music/gameover.wav"]});
+    this.congratulationsMusic = new Howl({urls: ["./music/Congratulations.mp3"]}); 
     this.hero = null;
     this.coinMove = 0;
     this.mjump = 0;
