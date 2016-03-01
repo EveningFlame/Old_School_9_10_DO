@@ -88,23 +88,16 @@ Hero.prototype.update = function () {
             //console.log(this.x);
             this.game.unlocked = false;
             this.heroMove = false;
-<<<<<<< HEAD
             this.x += this.scrollSpeed;
             this.game.totalDistance += this.scrollSpeed;
-=======
->>>>>>> origin/master
         }
     } else {
         if (checkPlatform(this, this.game)) {
             this.game.unlocked = false;
             this.game.bgmove = false;
             this.heroMove = false;
-<<<<<<< HEAD
             this.x -= this.scrollSpeed;
             this.game.totalDistance -= this.scrollSpeed;
-=======
-         
->>>>>>> origin/master
         } else {
             this.heroMove = true;
             if (this.x >= this.game.defaultScroll) {
