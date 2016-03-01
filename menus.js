@@ -115,6 +115,8 @@ winGame = function(game){
     game.addEntity(mario);
     game.addEntity(pikachu);
     game.addEntity(retryButton);
+    
+    
 };
 
 

@@ -79,22 +79,6 @@ Hero.prototype.update = function () {
         this.game.sb1 = 0;
     }
     
-    if (this.jumping) {
-        if (this.standLeft) {
-            if (this.game.walkLeft) if (this.game.unlocked) this.game.totalDistance -= this.scrollSpeed;
-        } else {
-            if (this.game.walkRight) {
-                if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
-            }
-        }
-    } else if (this.game.walkRight) {
-        this.standLeft = false;
-        if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
-    } else if (this.game.walkLeft) {
-        this.standLeft = true;
-        if (this.game.unlocked) this.game.totalDistance -= this.scrollSpeed;
-    }
-
     if (this.game.walkLeft) {
         if (this.x > 0) {
             this.game.unlocked = true;
@@ -104,14 +88,13 @@ Hero.prototype.update = function () {
             console.log(this.x);
             this.game.unlocked = false;
             this.heroMove = false;
-            this.x += this.scrollSpeed;
         }
     } else {
         if (checkPlatform(this, this.game)) {
             this.game.unlocked = false;
             this.game.bgmove = false;
             this.heroMove = false;
-            this.x -= this.scrollSpeed;
+         
         } else {
             this.heroMove = true;
             if (this.x >= this.game.defaultScroll) {
@@ -258,7 +241,6 @@ Hero.prototype.update = function () {
     if (this.game.bgmove && this.game.walkRight) {
         this.game.sb1 += this.scrollSpeed;           // background movement lock
         this.game.coinMove += this.scrollSpeed;
-        this.game.maxX += this.scrollSpeed;
         this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
@@ -346,13 +328,23 @@ Hero.prototype.draw = function (ctx) {
     if (this.jumping) {
         if (this.standLeft) {
             this.jumpAnimationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
+            if (this.game.walkLeft) if (this.game.unlocked) this.game.totalDistance -= this.scrollSpeed;
         } else {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
+            if (this.game.walkRight) {
+                if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
+                if (this.game.bgmove) this.game.maxX += this.scrollSpeed;
+            }
         }
     } else if (this.game.walkRight) {
+        this.standLeft = false;
         this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);
+        if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
+        if (this.game.bgmove) this.game.maxX += this.scrollSpeed;
     } else if (this.game.walkLeft) {
+        this.standLeft = true;
         this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);
+        if (this.game.unlocked) this.game.totalDistance -= this.scrollSpeed;
     } else {
         if (this.standLeft) {
             this.animationStandLeft.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);
@@ -361,6 +353,7 @@ Hero.prototype.draw = function (ctx) {
         }
     }
 
+//    console.log(this.game.maxX);
     ctx.globalAlpha = 1;
     Entity.prototype.draw.call(this);
 };

@@ -40,7 +40,7 @@ Platform.prototype.update = function () {
     var i = 1;
 
     //Check to see if platforms are off the screen
-    while (this.game.platforms.length >= 1 && i < this.game.platforms.length) {
+    while (this.game.platforms.length >= 1 && i < this.game.length) {
         if (this.game.platforms[i].endingX() < 0) {
             this.game.platforms[i].removeFromWorld = true;
             this.game.platforms.splice(i, 1);
@@ -50,7 +50,7 @@ Platform.prototype.update = function () {
 
     }
 
-    this.boundingbox = new BoundingBox(this.beginingX(), this.top() - 4, this.width, this.height);
+    this.boundingbox = new BoundingBox(this.beginingX(), this.top(), this.width-3, this.height-4);
     Entity.prototype.update.call(this);
 };
 
