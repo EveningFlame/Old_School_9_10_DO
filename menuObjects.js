@@ -152,6 +152,7 @@ function Icon(game, minionSprite, frameHeight, frameWidth, startX, startY, place
     this.gameE = game;
     this.name = name;
     this.scale = 1;
+    this.time = 0;
     this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
     this.y = placeY;
@@ -204,33 +205,53 @@ Icon.prototype.update = function () {
         selectCharacter(this.game, this.name, 118, 472);
     }
 
-    switch (this.gameE.heroLife) { 
-        case 3:
-            this.gameE.heartIcon.removeFromWorld = true;
-            this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 64, 740, 0, true, "heart", 2); 
-            this.gameE.addEntity(this.gameE.heartIcon);
-            break;
-        case 2:
-            this.gameE.heartIcon.removeFromWorld = true;
-            this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 96, 740, 0, true, "heart", 2); 
-            this.gameE.addEntity(this.gameE.heartIcon);
-            break;
-        case 1:
-            this.gameE.heartIcon.removeFromWorld = true;
-            this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 128, 740, 0, true, "heart", 2); 
-            this.gameE.addEntity(this.gameE.heartIcon);
-            break;
-        case 0:
-            this.gameE.heartIcon.removeFromWorld = true;
-            this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 160, 740, 0, true, "heart", 2); 
-            this.gameE.addEntity(this.gameE.heartIcon);
-            break;
+    //Prints out the right heart icon based on the game.heroLife
+    if (!(this.game.heartIcon === null)) {
+        switch (this.gameE.heroLife) {
+            case 4:
+                this.gameE.heartIcon.removeFromWorld = true;
+                this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 32, 740, 0, true, "heart", 2);
+                this.gameE.addEntity(this.gameE.heartIcon);
+                break;
+            case 3:
+                this.gameE.heartIcon.removeFromWorld = true;
+                this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 64, 740, 0, true, "heart", 2);
+                this.gameE.addEntity(this.gameE.heartIcon);
+                break;
+            case 2:
+                this.gameE.heartIcon.removeFromWorld = true;
+                this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 96, 740, 0, true, "heart", 2);
+                this.gameE.addEntity(this.gameE.heartIcon);
+                break;
+            case 1:
+                this.gameE.heartIcon.removeFromWorld = true;
+                this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 128, 740, 0, true, "heart", 2);
+                this.gameE.addEntity(this.gameE.heartIcon);
+                break;
+            case 0:
+                this.gameE.heartIcon.removeFromWorld = true;
+                this.gameE.heartIcon = new Icon(this.gameE, this.gameE.hearts, 32, 32, 0, 160, 740, 0, true, "heart", 2);
+                this.gameE.addEntity(this.gameE.heartIcon);
+                break;
+            default:
+                this.gameE.heartIcon.removeFromWorld = true;
+                this.gameE.heartIcon = null;
+        }
+    }
 
+    if (this === this.gameE.gameOverScreen) {
+        this.time += this.gameE.clockTick;
+        console.log(this.time);
+        if (this.time > 4) {
+            clearEngine(this.gameE);
+            mainScreen(this.gameE);
+        }
     }
     Entity.prototype.update.call(this);
 };
 
-Icon.prototype.draw = function (ctx) {    
+Icon.prototype.draw = function (ctx) {
+
     this.icon.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
     
     

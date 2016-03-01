@@ -271,7 +271,14 @@ Hero.prototype.update = function () {
             console.log(this.game.heroLife);
             if(this.game.heroLife === 0){
                 console.log("mario dead");
-                //startMenu(this.game);
+                this.game.heroDies.play();
+                this.game.lives--;
+
+                if (this.game.lives === 0) {
+                    gameOver(this.game);
+                } else {
+                    lifeOver(this.game);
+                }
             }                
         }
     } else {

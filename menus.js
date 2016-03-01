@@ -54,23 +54,37 @@ selectCharacter = function(game, character, xPlace, yPlace){
     
 };
 
-gameOver = function(game){
+lifeOver = function (game) {
     clearEngine(game);
-  
-    var gameOver = ASSET_MANAGER.getAsset("./img/gameOver.png");
-    var retry = ASSET_MANAGER.getAsset("./img/retry.png");
-   
-    var background = new Icon(game, gameOver, 800, 800, 0, 800, 0, 0, true, "bg");
-    var retryButton = new Button(game, retry, 60, 360, 0, 60, 2, 215, 550, true, "retry");
 
-    game.addEntity(background);
-    game.addEntity(retryButton);
+    startGame(game);
+}
+
+gameOver = function (game) {
+    var gameOver = ASSET_MANAGER.getAsset("./img/gameOver.png");
+
+    clearEngine(game);
+
+    game.score = 0;
+    game.heartIcon = null;
+    game.gameOverScreen = new Icon(game, gameOver, 800, 800, 0, 800, 0, 0, true, "bg");
+    game.addEntity(game.gameOverScreen);
+    game.gameOverMusic.play();
 };
 
 
-clearEngine = function(game){
-    for(var i = 0; i < game.entities.length; i++){
+clearEngine = function (game) {
+    for (var i = 0; i < game.entities.length; i++) {
         game.entities[i].removeFromWorld = true;
     }
+
+    game.sb1 = 0;
+    game.totalDistance = 0;
+    game.maxX = 0;
+    game.mjump = 0;
+    game.coinMove = 0;
+    game.heroLife = 4;
+    game.lives = 1;
 };
+
 
