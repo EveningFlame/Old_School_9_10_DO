@@ -80,6 +80,10 @@ clearEngine = function (game) {
         game.entities[i].removeFromWorld = true;
     }
 
+    game.coins = [];
+    game.baddies = [];
+    game.platforms = [];
+
     game.sb1 = 0;
     game.totalDistance = 0;
     game.maxX = 0;

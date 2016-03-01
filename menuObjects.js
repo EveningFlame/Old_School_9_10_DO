@@ -241,7 +241,7 @@ Icon.prototype.update = function () {
 
     if (this === this.gameE.gameOverScreen) {
         this.time += this.gameE.clockTick;
-        console.log(this.time);
+        //console.log(this.time);
         if (this.time > 4) {
             clearEngine(this.gameE);
             mainScreen(this.gameE);
