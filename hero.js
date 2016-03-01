@@ -107,6 +107,15 @@ Hero.prototype.update = function () {
             }
         }
     }
+
+    if (this.game.totalDistance === 10220) {
+        this.game.themeMusic.stop();
+        this.game.bowserMusic.play();
+        //this.game.
+    }
+
+    //console.log(this.game.totalDistance);
+    
     // make sure the hero does not go through the bricks.
     //for (var i = 0; i < this.game.platforms.length && !found; i++) {
     //    var pf = this.game.platforms[i];
@@ -250,6 +259,7 @@ Hero.prototype.update = function () {
         if (this.game.coins[coinNum].isPowerup === true) {  
             this.game.poweredUp = true;
             this.game.powerUpMusic.play();
+            this.game.themeMusic.pause();
         } else {
             this.game.coinMusic.play();
         }
@@ -269,10 +279,11 @@ Hero.prototype.update = function () {
         } else if (minionKill < 0 && !this.heroBlink) {
             this.heroBlink = true;
             this.game.heroLife--;
+            this.game.marioDamaged.play();
             console.log(this.game.heroLife);
             if(this.game.heroLife === 0){
                 console.log("mario dead");
-                this.game.heroDies.play();
+                //this.game.heroDies.play();
                 this.game.lives--;
 
                 if (this.game.lives === 0) {

@@ -55,7 +55,9 @@ Boss.prototype.constructor = Boss;
 Boss.prototype.update = function () {
     //console.log(this.moveLeft);
     //console.log("this.x: " + this.x + "     Mario: " +  this.game.entities[17].x);
+    // console.log(this.game.totalDistance);
     if (this.game.totalDistance >= 10300 && this.entryCount === 0) {
+        //console.log(this.game.totalDistance);
         this.moveLeft = true;
         if (this.x  === this.game.entities[17].x) {
             //this.x -= 2;

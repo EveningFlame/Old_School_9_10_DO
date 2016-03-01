@@ -6,6 +6,8 @@ startGame = function(game){
         var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
         /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed, scale) { */
+
+        //SCROLL SPEED WARNING: the music is affected by scroll speed
         var hero = new Hero(game, marioSprite, 48, 48, 0, 48, 0.192, 95, 12, 8, 6, .1, 4, 2);//2.5);
         
     } else if(game.chosenCharacter === "Link"){
@@ -69,15 +71,13 @@ startGame = function(game){
     var m10 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 7850, 442, true, .15, 7500, 8125);
     var m11 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 8100, 442, true, .15, 7500, 8125);
 
-//
-//	var sound = false;
-//
-//	
-//	if(sound){
-//		var sound = new Howl({
-//			urls: ["./music/mario_overworld_theme.mp3"]
-//		}).play();
-//	}
+
+	var sound = true;
+
+	
+	if(sound){
+            game.themeMusic.play();
+	}
 
     game.addEntity(gr);
     game.addEntity(bg);
@@ -260,8 +260,8 @@ startGame = function(game){
     game.addEntity(star);
 //    game.coins.push(star);
 
-    var star1 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7070, 200, true, 0.1, true, 3);
-    game.addEntity(star1);
+    // var star1 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7070, 200, true, 0.1, true, 3);
+    // game.addEntity(star1);
 //    game.coins.push(star1);
 
     var star2 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 7550, 200, true, 0.1, true, 3);

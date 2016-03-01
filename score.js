@@ -33,6 +33,7 @@ gameScore1.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
         ctx.strokeText("IM SUPER", 300, 200);
         if (this.game.starTime < 0) {
           this.game.poweredUp = false;
+          this.game.themeMusic.play();
           this.game.starTime = 14;
         }
     }

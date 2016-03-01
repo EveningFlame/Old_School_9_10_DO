@@ -69,7 +69,9 @@ gameOver = function (game) {
     game.heartIcon = null;
     game.gameOverScreen = new Icon(game, gameOver, 800, 800, 0, 800, 0, 0, true, "bg");
     game.addEntity(game.gameOverScreen);
-    game.gameOverMusic.play();
+    game.themeMusic.stop();
+    game.bowserMusic.stop();
+    //game.gameOverMusic.play();
 };
 
 
