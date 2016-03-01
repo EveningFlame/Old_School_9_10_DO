@@ -286,7 +286,7 @@ Hero.prototype.update = function () {
             console.log(this.game.heroLife);
             if(this.game.heroLife === 0){
                 console.log("mario dead");
-                //this.game.heroDies.play();
+                this.game.marioDieMusic.play();
                 this.game.lives--;
 
                 if (this.game.lives === 0) {
@@ -316,6 +316,7 @@ Hero.prototype.update = function () {
         if (this.game.bossLife === 0) {
             this.game.score += 50;
             this.game.bigBoss.removeFromWorld = true;
+            this.game.bowserMusic.stop();
             winGame(this.game);
 
         }
@@ -327,7 +328,7 @@ Hero.prototype.update = function () {
         console.log(this.game.heroLife);
         if (this.game.heroLife === 0) {
             console.log("mario dead");
-            //this.game.heroDies.play();
+            this.game.marioDieMusic.play();
             this.game.lives--;
 
             if (this.game.lives === 0) {

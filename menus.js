@@ -71,7 +71,7 @@ gameOver = function (game) {
     game.addEntity(game.gameOverScreen);
     game.themeMusic.stop();
     game.bowserMusic.stop();
-    //game.gameOverMusic.play();
+    game.gameOverMusic.play();
 };
 
 

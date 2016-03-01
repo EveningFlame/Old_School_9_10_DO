@@ -58,6 +58,8 @@ function GameEngine() {
     this.bowserMusic = new Howl({urls: ["./music/bowserMusic.mp3"]});
     this.themeMusic =  new Howl({urls: ["./music/mario_overworld_theme.mp3"]});
     this.marioDamaged = new Howl({urls: ["./music/marioDamaged.wav"]});
+    this.marioDieMusic = new Howl({urls: ["./music/mariodie.wav"]});
+    this.gameOverMusic = new Howl({urls: ["./music/gameover.wav"]});
     this.hero = null;
     this.coinMove = 0;
     this.mjump = 0;
