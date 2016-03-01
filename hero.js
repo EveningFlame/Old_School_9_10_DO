@@ -88,7 +88,7 @@ Hero.prototype.update = function () {
             //console.log(this.x);
             this.game.unlocked = false;
             this.heroMove = false;
-            this.x += this.scrollSpeed;
+            //this.x += this.scrollSpeed;
             this.game.totalDistance += this.scrollSpeed;
         }
     } else {
@@ -96,7 +96,7 @@ Hero.prototype.update = function () {
             this.game.unlocked = false;
             this.game.bgmove = false;
             this.heroMove = false;
-            this.x -= this.scrollSpeed;
+            //this.x -= this.scrollSpeed;
             this.game.totalDistance -= this.scrollSpeed;
         } else {
             this.heroMove = true;
@@ -316,6 +316,7 @@ Hero.prototype.update = function () {
         if (this.game.bossLife === 0) {
             this.game.score += 50;
             this.game.bigBoss.removeFromWorld = true;
+            winGame(this.game);
 
         }
     } else if (boshit === 0 && !this.game.bigBoss.bossBlink && !this.heroBlink) {
