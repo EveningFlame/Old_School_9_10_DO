@@ -58,7 +58,7 @@ lifeOver = function (game) {
     clearEngine(game);
 
     startGame(game);
-}
+};
 
 gameOver = function (game) {
     var gameOver = ASSET_MANAGER.getAsset("./img/gameOver.png");
@@ -87,6 +87,36 @@ clearEngine = function (game) {
     game.coinMove = 0;
     game.heroLife = 4;
     game.lives = 1;
+};
+
+winGame = function(game){
+    clearEngine(game);
+    
+    var menuB = ASSET_MANAGER.getAsset("./img/menu.png"); 
+    var marioIcon = ASSET_MANAGER.getAsset("./img/MarioWin.png");
+    var linkIcon = ASSET_MANAGER.getAsset("./img/Link.png");
+    var pikachuIcon = ASSET_MANAGER.getAsset("./img/pikachuBlanket.png");
+    var samusIcon = ASSET_MANAGER.getAsset("./img/Samus.png");
+    var retry = ASSET_MANAGER.getAsset("./img/retry.png");
+    
+
+    
+    var background = new Icon(game, menuB, 800, 800, 0, 800, 0, 0, true, "bg");
+    var mario = new Icon(game, marioIcon, 300, 251, 0, 300, 160, 500, true, "Mario");
+    var link = new Icon(game, linkIcon, 440, 232, 0, 440, 0, 250, true, "Link");
+    var samus = new Icon(game, samusIcon, 500, 238, 0, 500, 350, 250, true, "Samus");
+    var pikachu = new Icon(game, pikachuIcon, 235, 261, 0, 235, 545, 500, true, "Pikachu");
+    var retryButton = new Button(game, retry, 50, 300, 0, 50, 2, 480, 740, true, "retry");
+
+
+    game.addEntity(background);
+    game.addEntity(link);
+    game.addEntity(samus);
+    game.addEntity(mario);
+    game.addEntity(pikachu);
+    game.addEntity(retryButton);
+    
+    
 };
 
 

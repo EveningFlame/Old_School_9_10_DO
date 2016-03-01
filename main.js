@@ -89,6 +89,12 @@ ASSET_MANAGER.queueDownload("./img/selectYourCharacter.png");
 
 //Game Over
 ASSET_MANAGER.queueDownload("./img/gameOver.png");
+
+//Win screen
+ASSET_MANAGER.queueDownload("./img/MarioWin.png");
+ASSET_MANAGER.queueDownload("./img/pikachuBlanket.png");
+ASSET_MANAGER.queueDownload("./img/Link.png");
+ASSET_MANAGER.queueDownload("./img/Samus.png");
 ASSET_MANAGER.queueDownload("./img/retry.png");
 
 ASSET_MANAGER.downloadAll(function () {
@@ -152,4 +158,4 @@ mainScreen = function (gameEngine) {
     gameEngine.addEntity(titleLogo1);
     gameEngine.addEntity(titleLogo2);
     gameEngine.addEntity(titleLogo3);
-}
+};
