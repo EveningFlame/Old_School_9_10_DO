@@ -146,6 +146,7 @@ GameEngine.prototype.startInput = function () {
 };
 
 GameEngine.prototype.addEntity = function (entity) {
+    //console.log('added entity');
     this.entities.push(entity);
     if(entity.name === "Coins"){
     	console.log("entered coins");
@@ -176,13 +177,9 @@ GameEngine.prototype.update = function () {
     for (var i = 0; i < entitiesCount; i++) {
         var entity = this.entities[i];
 
-        if (!entity.removeFromWorld && !(entity === this.hero)) {
+        if (!entity.removeFromWorld) {
             entity.update();
         }
-    }
-
-    if (this.hero) {
-        this.hero.update();
     }
 
     for (var i = this.entities.length - 1; i >= 0; --i) {

@@ -2,7 +2,7 @@ var checkCoin = function (game) {
     var collide = false;
 
     for (var i = 0; i < game.coins.length && !collide; i++) {
-        if (game.coins[i].beginingX() < 400 &&
+        if (game.coins[i].beginingX() < 300 &&
             game.hero.boundingbox.collide(game.coins[i].boundingbox)) {
             return i;
             collide = true;
@@ -12,7 +12,7 @@ var checkCoin = function (game) {
 
 var superCollide = function (game) {
     for (var i = 0; i < game.baddies.length; i++) {
-        if (game.baddies[i].boundingbox.left < 400) {
+        if (game.baddies[i].boundingbox.left < 300) {
             if (game.hero.boundingbox.collide(game.baddies[i].boundingbox)) {
                 return i;
             }
