@@ -89,7 +89,7 @@ Hero.prototype.update = function () {
             this.game.unlocked = false;
             this.heroMove = false;
             //this.x += this.scrollSpeed;
-            this.game.totalDistance += this.scrollSpeed;
+           // this.game.totalDistance += this.scrollSpeed;
         }
     } else {
         if (checkPlatform(this, this.game)) {
@@ -242,8 +242,9 @@ Hero.prototype.update = function () {
     }
 
     if (this.game.bgmove && this.game.walkRight) {
-        this.game.sb1 += this.scrollSpeed;           // background movement lock
-        this.game.coinMove += this.scrollSpeed;
+        //this.game.sb1 += this.scrollSpeed;           // background movement lock
+        //this.game.coinMove += this.scrollSpeed;
+        //this.game.maxX += this.scrollSpeed;
         this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
@@ -370,15 +371,27 @@ Hero.prototype.draw = function (ctx) {
         } else {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
             if (this.game.walkRight) {
-                if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
-                if (this.game.bgmove) this.game.maxX += this.scrollSpeed;
+                if (this.heroMove) {
+                    this.game.totalDistance += this.scrollSpeed;
+                    if (this.game.bgmove) {
+                        this.game.sb1 += this.scrollSpeed;           // background movement lock
+                        this.game.coinMove += this.scrollSpeed;
+                        this.game.maxX += this.scrollSpeed;
+                    }
+                }
             }
         }
     } else if (this.game.walkRight) {
         this.standLeft = false;
         this.rightWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);
-        if (this.heroMove) this.game.totalDistance += this.scrollSpeed;
-        if (this.game.bgmove) this.game.maxX += this.scrollSpeed;
+        if (this.heroMove) {
+            this.game.totalDistance += this.scrollSpeed;
+            if (this.game.bgmove) {
+                this.game.sb1 += this.scrollSpeed;           // background movement lock
+                this.game.coinMove += this.scrollSpeed;
+                this.game.maxX += this.scrollSpeed;
+            }
+        }
     } else if (this.game.walkLeft) {
         this.standLeft = true;
         this.leftWalkAnimation.drawFrame(this.game.clockTick, ctx, this.x, yPlace, this.scale);

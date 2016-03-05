@@ -83,7 +83,7 @@ clearEngine = function (game) {
     game.coins = [];
     game.baddies = [];
     game.platforms = [];
-
+    game.heartIcon = null;
     game.sb1 = 0;
     game.totalDistance = 0;
     game.maxX = 0;
