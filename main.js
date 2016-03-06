@@ -60,6 +60,8 @@ ASSET_MANAGER.queueDownload("./img/pickup_coin.png");
 ASSET_MANAGER.queueDownload("./img/star.png");
 ASSET_MANAGER.queueDownload("./img/hearts.png");
 ASSET_MANAGER.queueDownload("./music/mario_overworld_theme.mp3");
+ASSET_MANAGER.queueDownload("./img/platform5High.png");
+ASSET_MANAGER.queueDownload("./img/platform9High.png");
 
 //Title Screen
 ASSET_MANAGER.queueDownload("./img/titleBackground.png");

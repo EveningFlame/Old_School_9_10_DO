@@ -26,6 +26,8 @@ startGame = function(game){
     var bowserSprite = ASSET_MANAGER.getAsset("./img/bowser2.png");
     var coinSprite = ASSET_MANAGER.getAsset("./img/pickup_coin.png");
     var starSprite = ASSET_MANAGER.getAsset("./img/star.png");
+    var platWall = ASSET_MANAGER.getAsset("./img/platform5High.png");
+    var platWall9 = ASSET_MANAGER.getAsset("./img/platform9High.png");
     
     var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
     
@@ -82,7 +84,7 @@ startGame = function(game){
     game.addEntity(gr);
     game.addEntity(bg);
     game.hero = hero;
-    game.addEntity(hero);
+    
 	
     //Boss of the level
     game.addEntity(boss);
@@ -113,29 +115,80 @@ startGame = function(game){
     addPlatform(game, platform, 80, 30, 3790, 580, false);
     addPlatform(game, platform, 80, 30, 3870, 610, false);
 
-    addPlatformWall(game, platform, 30, 30, 4250, 675, false, 5);
-    addPlatformWall(game, platform, 30, 30, 4550, 675, false, 5);
-    addPlatformWall(game, platform, 30, 30, 4750, 675, false, 5);
-    addPlatformWall(game, platform, 30, 30, 4950, 675, false, 5);
-    addPlatformWall(game, platform, 30, 30, 5150, 675, false, 5);
+    //WALLS//
+    addPlatform(game, platWall, 30, 150, 4250, 554, false, 5);
+    addPlatform(game, platWall, 30, 150, 4550, 554, false, 5);
+    addPlatform(game, platWall, 30, 150, 4750, 554, false, 5);
+    addPlatform(game, platWall, 30, 150, 4950, 554, false, 5);
+    addPlatform(game, platWall, 30, 150, 5150, 554, false, 5);
+    //WALLS//
 
     addPlatform(game, platform, 100, 30, 5480, 556, false);
     addPlatform(game, platform, 100, 30, 5580, 556, false);
     addPlatform(game, platform, 100, 30, 5680, 556, false);
     addPlatform(game, platform, 100, 30, 5780, 556, false);
 
-    addPlatformWall(game, platform, 30, 30, 6300, 675, false, 5);
-    addPlatformWall(game, platform, 30, 30, 6400, 625, false, 5);
-    addPlatformWall(game, platform, 30, 30, 6500, 575, false, 5);
-    addPlatformWall(game, platform, 30, 30, 6600, 525, false, 5);
-    addPlatformWall(game, platform, 30, 30, 6700, 475, false, 5);
-    addPlatformWall(game, platform, 30, 30, 6800, 425, false, 5);
-    addPlatformWall(game, platform, 30, 30, 6900, 375, false, 5);
+    //WALLS//
+    addPlatform(game, platWall, 30, 150, 6300, 554, false, 5);
+    addPlatform(game, platWall, 30, 150, 6400, 504, false, 5);
+    addPlatform(game, platWall, 30, 150, 6500, 454, false, 5);
+    addPlatform(game, platWall, 30, 150, 6600, 404, false, 5);
+    addPlatform(game, platWall, 30, 150, 6700, 354, false, 5);
+    addPlatform(game, platWall, 30, 150, 6800, 304, false, 5);
+    addPlatform(game, platWall, 30, 150, 6900, 254, false, 5);
+    //WALLS//
 
     addPlatform(game, platform, 190, 10, 7500, 250, false);
     addPlatform(game, platform, 190, 10, 7690, 250, false);
     addPlatform(game, platform, 190, 10, 7880, 250, false);
     addPlatform(game, platform, 130, 10, 8070, 250, false);
+
+    
+
+
+    addPlatform(game, platWall, 30, 150, 8570, 554, false, 5);
+
+
+    addPlatform(game, platform, 100, 30, 8600, 555, false);
+
+    addPlatform(game, platWall, 30, 150, 8700, 434, false, 5);
+    var m16 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 8800, 565, true, .15, 0, 0);
+
+    addPlatform(game, platform, 130, 30, 8730, 435, false);
+    addPlatform(game, platform, 130, 30, 8860, 435, false);
+    
+
+    addPlatform(game, platWall, 30, 150, 9020, 555, false, 5);
+    var m12 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9100, 565, true, .15, 0, 0);
+
+    addPlatform(game, platform, 130, 30, 9120, 435, false);
+
+
+    addPlatform(game, platWall, 30, 150, 9300, 555, false, 5);
+    var m13 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9400, 565, true, .15, 0, 0);
+
+    addPlatform(game, platform, 130, 30, 9380, 435, false);
+
+
+    addPlatform(game, platWall, 30, 150, 9550, 555, false, 5);
+    var m14 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9700, 565, true, .15, 0, 0);
+
+    addPlatform(game, platform, 130, 30, 9640, 435, false);
+
+
+    addPlatform(game, platWall, 30, 150, 9820, 555, false, 5);
+    var m15 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9850, 565, true, .15, 0, 0);
+
+    addPlatform(game, platform, 130, 30, 9900, 435, false);
+
+    addPlatform(game, platWall, 30, 150, 10060, 555, false, 5);
+    var m17 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10200, 565, true, .15, 0, 0);
+    
+    addPlatform(game, platform, 130, 30, 10160, 435, false);
+
+    addPlatform(game, platWall9, 30, 270, 10290, 434, false, 5);
+
+    addPlatform(game, platform, 90, 30, 10700, 520, false);
 
     addPlatform(game, platform, 130, 30, 8600, 675, false);
     addPlatform(game, platform, 130, 30, 8730, 675, false);
@@ -151,50 +204,6 @@ startGame = function(game){
     addPlatform(game, platform, 130, 30, 9930, 675, false);
     addPlatform(game, platform, 130, 30, 10060, 675, false);
     addPlatform(game, platform, 130, 30, 10190, 675, false);
-
-    addPlatformWall(game, platform, 30, 30, 8570, 675, false, 5);
-
-    addPlatform(game, platform, 100, 30, 8600, 555, false);
-
-    addPlatformWall(game, platform, 30, 30, 8700, 555, false, 5);
-    var m16 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 8800, 565, true, .15, 0, 0);
-
-    addPlatform(game, platform, 130, 30, 8730, 435, false);
-    addPlatform(game, platform, 130, 30, 8860, 435, false);
-    
-
-    addPlatformWall(game, platform, 30, 30, 9020, 645, false, 3);
-    var m12 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9100, 565, true, .15, 0, 0);
-
-    addPlatform(game, platform, 130, 30, 9120, 435, false);
-
-
-    addPlatformWall(game, platform, 30, 30, 9300, 645, false, 3);
-    var m13 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9400, 565, true, .15, 0, 0);
-
-    addPlatform(game, platform, 130, 30, 9380, 435, false);
-
-
-    addPlatformWall(game, platform, 30, 30, 9550, 645, false, 3);
-    var m14 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9700, 565, true, .15, 0, 0);
-
-    addPlatform(game, platform, 130, 30, 9640, 435, false);
-
-
-    addPlatformWall(game, platform, 30, 30, 9820, 645, false, 3);
-    var m15 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9850, 565, true, .15, 0, 0);
-
-    addPlatform(game, platform, 130, 30, 9900, 435, false);
-
-
-    addPlatformWall(game, platform, 30, 30, 10060, 645, false, 3);
-    var m17 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10200, 565, true, .15, 0, 0);
-    
-    addPlatform(game, platform, 130, 30, 10160, 435, false);
-
-    addPlatformWall(game, platform, 30, 30, 10290, 675, false, 9);
-
-    addPlatform(game, platform, 90, 30, 10700, 520, false);
 
 
 
@@ -326,6 +335,8 @@ startGame = function(game){
     game.baddies.push(m16);
     game.baddies.push(m17);
 //MINIONS
+
+game.addEntity(hero);
 
 //HEALTH  
    var heart = new Icon(game, game.hearts, 32, 32, 0, 32, 740, 0, true, "heart", 2); 
