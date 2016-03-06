@@ -4,7 +4,7 @@ Members: Jason, Ariel, Chet
 
 Game: Old_School_9_10_DO
 
-Still in Creation Mode.
+Can now be played at: eveningflame.github.io/Old_School_9_10_DO/
 
 All pictures and sprites from Google Images.
 Chibi Samus by rongs1234.
