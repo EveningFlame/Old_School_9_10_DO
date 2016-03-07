@@ -11,4 +11,5 @@ Chibi Samus by rongs1234.
 Pikachu icon by Amaterasu 121.
 Pikachu with Pokeballs from wallpapercave.com
 Mobile Game Background (the one with castles) by Boris Vigec  https://bvigec.artstation.com/
+Custom Spearow (#21) by JoshR691
 
