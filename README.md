@@ -4,6 +4,8 @@ Members: Jason, Ariel, Chet
 
 Game: Old_School_9_10_DO
 
+Game Trailer: https://www.youtube.com/watch?v=uVbLSPhuWFA
+
 Can now be played at: eveningflame.github.io/Old_School_9_10_DO/
 
 All pictures and sprites from Google Images.
