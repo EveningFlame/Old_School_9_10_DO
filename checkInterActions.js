@@ -23,14 +23,14 @@ var superCollide = function (game) {
 var checkBoss = function (game) {
     if (game.hero.boundingbox.collide(game.bigBoss.boundingbox)) {
 
-        console.log(game.mjump);
+//        console.log(game.mjump);
         if (game.mjump === -1) {
             return 1;
         } else {
             return 0;
         }
     }
-}
+};
 
 var checkMinion = function (me, game) {
     var crash = 0;
@@ -42,6 +42,10 @@ var checkMinion = function (me, game) {
                     crash = i + 1;
                 } else {
                     crash = -1;
+                }
+                
+                if(me.name === "Baddies"){
+                    crash = 1;
                 }
             }
         } 

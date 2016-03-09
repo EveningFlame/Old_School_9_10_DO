@@ -8,11 +8,11 @@ function Platform(game, platformSprite, width, height, startX, startY, scroll, i
     this.height = height;
     this.game = game;
     this.radius = height / 2;
-    this.boxes = false;
+    this.boxes = true;
     this.isSky = isSky || false;
     this.name = "Platform";
 
-    this.boundingbox = new BoundingBox(startX, startY, this.width, this.height - 2);
+    this.boundingbox = new BoundingBox(startX - 10, startY, this.width, this.height - 2);
     Entity.call(this, game, startX, startY);
 };
 
@@ -49,7 +49,7 @@ Platform.prototype.update = function () {
         }
 
     }
-
+//    this.boundingbox.setChangingBox(this.game, this.beginingX(), this.top(), this.width, this.height);
     this.boundingbox = new BoundingBox(this.beginingX(), this.top(), this.width, this.height);
     Entity.prototype.update.call(this);
 };
@@ -57,7 +57,7 @@ Platform.prototype.update = function () {
 Platform.prototype.draw = function (ctx) {
     if (this.boxes) {
         ctx.strokeStyle = "darkmagenta";
-        //ctx.lineWidth = 4;
+        ctx.lineWidth = 4;
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
     }
     this.animation.drawFrame(this.game.clockTick, ctx, this.beginingX(), this.startY);
