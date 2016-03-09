@@ -57,10 +57,13 @@ function GameEngine() {
     this.stompMusic = new Howl({urls: ["./music/stomp.wav"]});
     this.bowserMusic = new Howl({urls: ["./music/bowserMusic.mp3"]});
     this.themeMusic =  new Howl({urls: ["./music/mario_overworld_theme.mp3"]});
-    this.marioDamaged = new Howl({urls: ["./music/marioDamaged.wav"]});
+    this.marioDamagedMusic = new Howl({urls: ["./music/marioDamaged.wav"]});
     this.marioDieMusic = new Howl({urls: ["./music/mariodie.wav"]});
     this.gameOverMusic = new Howl({urls: ["./music/gameover.wav"]});
-    this.congratulationsMusic = new Howl({urls: ["./music/Congratulations.mp3"]}); 
+    this.congratulationsMusic = new Howl({urls: ["./music/Congratulations.mp3"]});
+    this.introMusic = new Howl({urls: ["./music/Pokemon Red-Blue-Yellow - Route 1 Acapella.mp3"]});  
+    this.linkThemeMusic = new Howl({urls: ["./music/linkGameMusic.mp3"]});
+    this.linkBossMusic = new Howl({urls: ["./music/linkBossBattle.mp3"]});
     this.hero = null;
     this.coinMove = 0;
     this.mjump = 0;
@@ -74,6 +77,7 @@ function GameEngine() {
     this.defeatBoss = false;
     this.heroLife = 4;
     this.lives = 3;
+    this.level = 2;
     this.bigBoss;
     this.bossLife = 4;
 }
@@ -136,8 +140,8 @@ GameEngine.prototype.startInput = function () {
         }
         e.preventDefault();
     }, false);
-	
-	this.ctx.canvas.addEventListener("mousedown", function (e) {
+    
+    this.ctx.canvas.addEventListener("mousedown", function (e) {
         if (e.button === 0) {
             that.mouseX = getX(e);
             that.mouseY = getY(e);
@@ -152,12 +156,12 @@ GameEngine.prototype.addEntity = function (entity) {
     //console.log('added entity');
     this.entities.push(entity);
     if(entity.name === "Coins"){
-    	console.log("entered coins");
-    	this.coins.push(entity);
+        console.log("entered coins");
+        this.coins.push(entity);
     } 
     if(entity.name === "Baddies"){
-	console.log("entered baddies");
-	this.baddies.push(entity);
+    console.log("entered baddies");
+    this.baddies.push(entity);
     }
     if(entity.name === "Platform" && !entity.isSky){
         console.log("entered platforms");
