@@ -40,7 +40,7 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.jumping = false;
     this.falling = false;
     this.jumpHeight = game.defaultJumpHeight;
-    this.boxes = true;
+    this.boxes = false;
     this.heroMove = true;
     this.platform = null;
     this.scale = scale;
