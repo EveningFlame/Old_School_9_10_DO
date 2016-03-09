@@ -64,6 +64,16 @@ ASSET_MANAGER.queueDownload("./img/hearts.png");
 ASSET_MANAGER.queueDownload("./music/mario_overworld_theme.mp3");
 ASSET_MANAGER.queueDownload("./img/platform5High.png");
 ASSET_MANAGER.queueDownload("./img/platform9High.png");
+ASSET_MANAGER.queueDownload("./img/linkplatform5High.png");
+ASSET_MANAGER.queueDownload("./img/linkplatform9High.png");
+ASSET_MANAGER.queueDownload("./img/level2BG.png");
+ASSET_MANAGER.queueDownload("./img/Level2ground.png");
+ASSET_MANAGER.queueDownload("./img/linkplat.png");
+ASSET_MANAGER.queueDownload("./img/metabg.png");
+ASSET_MANAGER.queueDownload("./img/metagr.png");
+ASSET_MANAGER.queueDownload("./img/metaplatform5High.png");
+ASSET_MANAGER.queueDownload("./img/metaplatform9High.png");
+ASSET_MANAGER.queueDownload("./img/metaplatform.png");
 
 //Title Screen
 ASSET_MANAGER.queueDownload("./img/titleBackground.png");

@@ -24,6 +24,9 @@ function gameScore1(gameEngine) {
 gameScore1.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
     var scaleBy = scaleBy || 1;
     this.elapsedTime += tick;
+    if (this.game.level == 3) {
+        ctx.strokeStyle = 'white';
+    }
     ctx.font = "36px serif";
     ctx.strokeText("Score: ", 10, 40);
     ctx.strokeText(this.game.score, 110, 40); 
@@ -33,7 +36,13 @@ gameScore1.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
         ctx.strokeText("IM SUPER", 300, 200);
         if (this.game.starTime < 0) {
           this.game.poweredUp = false;
-          this.game.themeMusic.play();
+          if (this.game.level == 1) {
+            this.game.themeMusic.play();
+          } else if (this.game.level == 2) {
+            this.game.linkThemeMusic.play()
+          } else {
+            this.game.themeMusic.play();  ///CHANGE TO SAMUS
+          }
           this.game.starTime = 14;
         }
     }

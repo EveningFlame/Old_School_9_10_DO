@@ -48,6 +48,23 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.blinkDone = 0;
 
     this.boundingbox = new BoundingBox(this.x , this.y, this.width, this.height);
+
+    this.themeMusic = game.themeMusic;
+    this.bossMusic = game.bowserMusic;
+    this.powerUpMusic = game.powerUpMusic;
+    this.coinMusic = game.coinMusic;
+    this.jumpMusic = game.jumpMusic;
+    this.minionKillMusic = game.stompMusic;
+    this.dieMusic = game.marioDieMusic;
+    this.damagedMusic = game.marioDamagedMusic;
+    this.gameOverMusic = game.gameOverMusic;
+
+    if (game.level == 2) {
+        this.themeMusic = game.linkThemeMusic;
+        this.bossMusic = game.linkBossMusic;
+    }
+
+    this.themeMusic.play();
     Entity.call(this, game, this.x, this.y);
 
 };
@@ -112,8 +129,8 @@ Hero.prototype.update = function () {
     }
 
     if (this.game.totalDistance === 10220) {
-        this.game.themeMusic.stop();
-        this.game.bowserMusic.play();
+        this.themeMusic.stop();
+        this.bossMusic.play();
         //this.game.
     }
 
@@ -145,7 +162,7 @@ Hero.prototype.update = function () {
     if (this.game.space && !this.jumping && !this.falling) {
         this.jumping = true;
         this.base = this.y;
-        this.game.jumpMusic.play();
+        this.jumpMusic.play();
 //        console.log(this.y);
 //console.log(this.game.platforms.length);
     }
@@ -266,10 +283,10 @@ Hero.prototype.update = function () {
     if (coinNum >= 0) {
         if (this.game.coins[coinNum].isPowerup === true) {  
             this.game.poweredUp = true;
-            this.game.powerUpMusic.play();
-            this.game.themeMusic.pause();
+            this.powerUpMusic.play();
+            this.themeMusic.pause();
         } else {
-            this.game.coinMusic.play();
+            this.coinMusic.play();
         }
         this.game.coins[coinNum].removeFromWorld = true;
         this.game.score += 1; 
@@ -281,21 +298,24 @@ Hero.prototype.update = function () {
         minionKill = checkMinion(this, this.game);
         console.log(minionKill);
         if (minionKill > 0) {
-            this.game.stompMusic.play();
+            this.minionKillMusic.play();
             this.game.baddies[minionKill - 1].removeFromWorld = true;
             this.game.baddies.splice(minionKill - 1, 1);
             this.game.score += 10;
         } else if (minionKill < 0 && !this.heroBlink) {
             this.heroBlink = true;
             this.game.heroLife--;
-            this.game.marioDamaged.play();
+            this.damagedMusic.play();
             console.log(this.game.heroLife);
             if(this.game.heroLife === 0){
                 console.log("mario dead");
-                this.game.marioDieMusic.play();
+                this.dieMusic.play();
                 this.game.lives--;
 
                 if (this.game.lives === 0) {
+                    this.themeMusic.stop();
+                    this.bossMusic.stop();
+                    this.gameOverMusic.play(); 
                     gameOver(this.game);
                 } else {
                     lifeOver(this.game);
@@ -305,7 +325,7 @@ Hero.prototype.update = function () {
     } else {
         minionKill = superCollide(this.game);
         if (minionKill >= 0) {
-            this.game.stompMusic.play();
+            this.minionKillMusic.play();
             this.game.baddies[minionKill].removeFromWorld = true;
             this.game.baddies.splice(minionKill, 1);
             this.game.score += 10;
@@ -322,8 +342,9 @@ Hero.prototype.update = function () {
         if (this.game.bossLife === 0) {
             this.game.score += 50;
             this.game.bigBoss.removeFromWorld = true;
-            this.game.bowserMusic.stop();
+            this.bossMusic.stop();
             this.game.congratulationsMusic.play();
+            this.game.level++;
             winGame(this.game);
 
         }
@@ -331,14 +352,17 @@ Hero.prototype.update = function () {
         // bowser hit mario
         this.heroBlink = true;
         this.game.heroLife--;
-        this.game.marioDamaged.play();
+        this.damagedMusic.play();
         console.log(this.game.heroLife);
         if (this.game.heroLife === 0) {
             console.log("mario dead");
-            this.game.marioDieMusic.play();
+            this.dieMusic.play();
             this.game.lives--;
 
             if (this.game.lives === 0) {
+                this.themeMusic.stop();
+                this.bossMusic.stop();
+                this.gameOverMusic.play(); 
                 gameOver(this.game);
             } else {
                 lifeOver(this.game);

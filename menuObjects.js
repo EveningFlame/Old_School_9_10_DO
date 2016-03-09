@@ -126,11 +126,14 @@ Button.prototype.checkMouse = function(){
 Button.prototype.update = function () {
 
     if (this.name === "play" && this.checkMouse()){ 
+        this.game.introMusic.play();
 //       gameOver(this.gameE);
         startMenu(this.gameE);//console.log("StartGame");//startGame();
     } else if(this.name === "start" && this.checkMouse()){
         startGame(this.gameE);
+        this.game.introMusic.stop();
     } else if(this.name === "retry" && this.checkMouse()){
+        this.game.introMusic.play();
         startMenu(this.gameE);
     }
     
