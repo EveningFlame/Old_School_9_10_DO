@@ -1,4 +1,4 @@
-function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, platWall9, pipe, coinSprite, starSprite) {
+function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, platWall9, pipe, coinSprite, starSprite, spearowSprite) {
 	var boss = new Boss(game, bowserSprite, 55.968, 55.968, 0, 55.968,
     4, 6, 1100, 595, true, 0.16, 500);
 
@@ -146,7 +146,14 @@ function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, 
     game.addEntity(star7);
 //STARS
 //MINIONS
-    var m1 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 1300, 592, true, .2, 0, 0);
+    
+      //117.166667 width
+      //101.8 height
+      //SPEAROW TESTING
+    addPlatform(game, platWall, 30, 150, 200, 400, false, 5);
+    var m1 = new Minion(game, spearowSprite, 101.8 , 97.8333, 0, 101.8, 6, 8, 600, 450, true, .1, 0, 0);
+    addPlatform(game, platWall, 30, 150, 800, 400, false, 5);
+//SPEAROW TESTING
     var m2 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 3250, 287, true, .2, 3180, 3331);
     var m3 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 4400, 592, true, .2, 0, 0);
     var m4 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 4650, 592, true, .2, 0, 0);

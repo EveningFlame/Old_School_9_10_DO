@@ -4,18 +4,30 @@
 function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) {
 
-    if (walking1 > 0) {
-        this.animationWalkingLeft1 = new AnimationSprite(minionSprite, startX, (startY * 0),
-            frameWidth, frameHeight, speed, walking1, loop, false);
-        this.animationWalkingRight1 = new AnimationSprite(minionSprite, startX, (startY * 1),
-            frameWidth, frameHeight, speed, walking1, loop, true);
-    }
+    if (frameHeight == 55.968) {
 
-    if (walking2 > 0) {
-        this.animationWalkingLeft2 = new AnimationSprite(minionSprite, startX, (startY * 5),
-            frameWidth, frameHeight, speed, walking2, loop, false);
-        this.animationWalkingRight2 = new AnimationSprite(minionSprite, startX, (startY * 6),
-            frameWidth, frameHeight, speed, walking2, loop, true);
+        if (walking1 > 0) {
+            this.animationWalkingLeft1 = new AnimationSprite(minionSprite, startX, (startY * 0),
+                frameWidth, frameHeight, speed, walking1, loop, false);
+            this.animationWalkingRight1 = new AnimationSprite(minionSprite, startX, (startY * 1),
+                frameWidth, frameHeight, speed, walking1, loop, true);
+        }
+
+        if (walking2 > 0) {
+            this.animationWalkingLeft2 = new AnimationSprite(minionSprite, startX, (startY * 5),
+                frameWidth, frameHeight, speed, walking2, loop, false);
+            this.animationWalkingRight2 = new AnimationSprite(minionSprite, startX, (startY * 6),
+                frameWidth, frameHeight, speed, walking2, loop, true);
+        }
+
+  
+    } else if (frameHeight == 101.8) {
+        use1 = true;
+        this.animationWalkingLeft1 = new AnimationSprite(minionSprite, startX, (startY * 1),
+                frameWidth, frameHeight, speed, walking1, loop, true);
+        this.animationWalkingRight1 = new AnimationSprite(minionSprite, startX, (startY * 2),
+                frameWidth, frameHeight, speed, walking1, loop, false);
+
     }
 
     this.game = game;

@@ -345,6 +345,9 @@ Hero.prototype.update = function () {
             this.bossMusic.stop();
             this.game.congratulationsMusic.play();
             this.game.level++;
+            if (this.game.level > 3) {
+                this.game.level = 1;
+            }
             winGame(this.game);
 
         }

@@ -17,6 +17,7 @@ startGame = function(game){
     var platWall = ASSET_MANAGER.getAsset("./img/platform5High.png");
     var platWall9 = ASSET_MANAGER.getAsset("./img/platform9High.png");
     var marioMusic = ASSET_MANAGER.getAsset("./music/mario_overworld_theme.mp3");
+    var spearowSprite = ASSET_MANAGER.getAsset("./img/Spearow.png");
 //game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset, heroHeight, standAni, walkAni, jumpAni, movementSpeed, scrollSpeed, scale) { */
     if(game.chosenCharacter === "Mario"){
         var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
@@ -46,7 +47,7 @@ if (game.level == 2) {
 } else if (game.level == 3) {
     level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koopa);
 } else {
-    level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, platWall9, pipe, coinSprite, starSprite);
+    level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, platWall9, pipe, coinSprite, starSprite, spearowSprite);
 }
 
 
