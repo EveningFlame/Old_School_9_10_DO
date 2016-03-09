@@ -296,7 +296,7 @@ Hero.prototype.update = function () {
     var minionKill = 0;
     if (!this.game.poweredUp) {
         minionKill = checkMinion(this, this.game);
-        console.log(minionKill);
+        //console.log(minionKill);
         if (minionKill > 0) {
             this.minionKillMusic.play();
             this.game.baddies[minionKill - 1].removeFromWorld = true;
