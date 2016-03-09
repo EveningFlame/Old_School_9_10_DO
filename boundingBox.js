@@ -17,15 +17,24 @@ BoundingBox.prototype.setChangingBox = function(game, x, y, width, height){
     var addHeight = 0;
     var addWidth = 0;
     if(game.chosenCharacter === "Mario"){
-            addX = 15;
-            addY = 25;    
-            addHeight = 22;
-
+        addX = 15;
+        addY = 25;    
+        addHeight = 22;
     } else if(game.chosenCharacter === "Link") {
         addX = 38;
         addY = 35;    
         addHeight = 15;
         addWidth = -43;
+    } else if(game.chosenCharacter === "Pikachu") {
+        addX = 30;
+        addY = 30;    
+        addHeight = -16;
+        addWidth = -28;
+    } else if(game.chosenCharacter === "Samus") {
+        addX = 40;
+        addY = 36;    
+        addHeight = 2;
+        addWidth = -30;
     }
         
     this.x = x + addX;

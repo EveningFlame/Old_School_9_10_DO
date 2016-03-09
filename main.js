@@ -49,6 +49,8 @@ var ASSET_MANAGER = new AssetManager();
 //Characters
 ASSET_MANAGER.queueDownload("./img/mariosprite2.png");
 ASSET_MANAGER.queueDownload("./img/linkSprite.png");
+ASSET_MANAGER.queueDownload("./img/samusSprite.png");
+ASSET_MANAGER.queueDownload("./img/pikachuSprite.png");
 
 ASSET_MANAGER.queueDownload("./img/skybg2.png");
 ASSET_MANAGER.queueDownload("./img/groundbg2.png");

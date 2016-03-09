@@ -40,7 +40,7 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.jumping = false;
     this.falling = false;
     this.jumpHeight = game.defaultJumpHeight;
-    this.boxes = false;
+    this.boxes = true;
     this.heroMove = true;
     this.platform = null;
     this.scale = scale;
@@ -78,7 +78,7 @@ Hero.prototype.update = function () {
     if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
-    
+    this.additionalWidthForBoundBoxWhileRunning(this.width);
     if (this.game.walkLeft) {
         if (this.x > 0) {
             this.game.unlocked = true;
@@ -245,17 +245,21 @@ Hero.prototype.update = function () {
         //this.game.sb1 += this.scrollSpeed;           // background movement lock
         //this.game.coinMove += this.scrollSpeed;
         //this.game.maxX += this.scrollSpeed;
-        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
+        this.additionalWidthForBoundBoxWhileRunning(this.width);
+        
+        
     }
 
     if (this.game.unlocked && this.game.walkRight) {
         this.x += this.scrollSpeed;
-       this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
+        this.additionalWidthForBoundBoxWhileRunning(this.width);
+//        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
     if (this.game.unlocked && this.game.walkLeft) {
         this.x -= this.scrollSpeed;
-       this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
+        this.additionalWidthForBoundBoxWhileRunning(this.width);
+//        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
     var coinNum = checkCoin(this.game);
@@ -275,6 +279,7 @@ Hero.prototype.update = function () {
     var minionKill = 0;
     if (!this.game.poweredUp) {
         minionKill = checkMinion(this, this.game);
+        console.log(minionKill);
         if (minionKill > 0) {
             this.game.stompMusic.play();
             this.game.baddies[minionKill - 1].removeFromWorld = true;
@@ -308,7 +313,7 @@ Hero.prototype.update = function () {
     }
 
     var boshit = checkBoss(this.game);
-    console.log(boshit);
+//    console.log(boshit);
     if (boshit === 1 && !this.game.bigBoss.bossBlink && !this.heroBlink) {
         // mario hit bowser
         this.game.bigBoss.bossBlink = true;
@@ -407,4 +412,25 @@ Hero.prototype.draw = function (ctx) {
 //    console.log(this.game.maxX);
     ctx.globalAlpha = 1;
     Entity.prototype.draw.call(this);
+};
+
+//Because pikachu leans forward to run on all four paws, he needs extra width when running
+Hero.prototype.additionalWidthForBoundBoxWhileRunning = function(width){
+    //var additionalWidth = 0;
+    if(this.game.chosenCharacter === "Pikachu"){
+        if(this.game.walkRight){
+           this.boundingbox.setChangingBox(this.game, this.x, this.y, width + 15, this.height);
+        } else if (this.game.walkLeft){
+           this.boundingbox.setChangingBox(this.game, this.x - 15, this.y, width + 15, this.height);
+        }        
+    } else{
+        if(this.game.walkRight){
+           this.boundingbox.setChangingBox(this.game, this.x, this.y, width + 4, this.height);
+        } else if (this.game.walkLeft){
+           this.boundingbox.setChangingBox(this.game, this.x - 4, this.y, width + 4, this.height);
+        }  
+    }
+        
+    
+    //return additionalWidth;
 };

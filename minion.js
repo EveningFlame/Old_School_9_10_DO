@@ -29,7 +29,7 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
     this.use1 = (walking1 > 0);
-    this.boxes = false;
+    this.boxes = true;
     this.name = "Baddies";
 
     this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 45, this.frameWidth + 4, this.frameHeight + 12);
@@ -42,7 +42,7 @@ Minion.prototype.constructor = Minion;
 
 Minion.prototype.update = function () {
 
-    if (checkMinion(this, this.game) !== 0) {
+    if (checkMinion(this, this.game) === 1) {
         this.moveRight = !this.moveRight;
     }
 
@@ -52,18 +52,22 @@ Minion.prototype.update = function () {
 
     if (this.moveRight) {
         this.x += 1;
-        if (this.x >= this.farRight && this.farRight > 0) this.moveRight = false;
+        if (this.x >= this.farRight && this.farRight > 0){
+            this.moveRight = false;
+        }
     } else {
         this.x -= 1;
-        if (this.x <= this.farLeft && this.farLeft > 0) this.moveRight = true;
+        if (this.x <= this.farLeft && this.farLeft > 0){
+            this.moveRight = true;
+        }
     }
-
+//    this.boundingbox = this.additionalWidthForBoundBox();
     this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10);
 
     for (var i = 0; i < this.game.baddies.length; i++) {
         if (this.game.baddies[i].boundingbox.right < 0) {
             this.game.baddies[i].removeFromWorld = true;
-            this.game.baddies.splice(i, 1);
+//            this.game.baddies.splice(i, 1);
         }
     }
     
@@ -90,4 +94,19 @@ Minion.prototype.draw = function (ctx) {
         }
     }
     Entity.prototype.draw.call(this);
+};
+
+Minion.prototype.additionalWidthForBoundBox = function(){
+    var newBox = null;
+    //this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10
+    if(this.moveRight){
+        
+        newBox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 8, this.frameHeight + 10);
+    } else {
+       newBox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10);
+    }        
+
+        
+    
+    return newBox;
 };

@@ -1,7 +1,7 @@
 
 startGame = function(game){
 	clearEngine(game);
-	
+//game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset, heroHeight, standAni, walkAni, jumpAni, movementSpeed, scrollSpeed, scale) { */
     if(game.chosenCharacter === "Mario"){
         var marioSprite = ASSET_MANAGER.getAsset("./img/mariosprite2.png");
         /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
@@ -15,6 +15,12 @@ startGame = function(game){
         /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
         heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed, scale) { */
         var hero = new Hero(game, linkSprite, 96, 64, 0, 64, 0, 115, 13, 10, 5, .15, 4, 2);//2.5);
+    } else if(game.chosenCharacter === "Pikachu"){
+        var pikaSprite = ASSET_MANAGER.getAsset("./img/pikachuSprite.png");
+        var hero = new Hero(game, pikaSprite, 64, 64, 0, 64, 0, 80, 7, 4, 5, .15, 4, 1.5);//2.5);
+    } else if (game.chosenCharacter === "Samus"){
+        var samusSprite = ASSET_MANAGER.getAsset("./img/samusSprite.png");
+        var hero = new Hero(game, samusSprite, 64, 64, 0, 64, 0, 105, 3, 10, 8, .1, 4, 1.7);//2.5);
     }
         
     
