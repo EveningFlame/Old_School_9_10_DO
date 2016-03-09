@@ -8,7 +8,7 @@ function Platform(game, platformSprite, width, height, startX, startY, scroll, i
     this.height = height;
     this.game = game;
     this.radius = height / 2;
-    this.boxes = true;
+    this.boxes = false;
     this.isSky = isSky || false;
     this.name = "Platform";
 
