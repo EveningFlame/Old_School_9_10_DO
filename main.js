@@ -174,4 +174,7 @@ mainScreen = function (gameEngine) {
     gameEngine.addEntity(titleLogo1);
     gameEngine.addEntity(titleLogo2);
     gameEngine.addEntity(titleLogo3);
+
+    alert("Arrow Keys to move left and right, space bar to jump\n" + 
+        "Special feature: Your chosen character may randomly fall off the map (Magic Pitfalls)");
 };

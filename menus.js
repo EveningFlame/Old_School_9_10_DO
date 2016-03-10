@@ -91,6 +91,7 @@ clearEngine = function (game) {
     game.coinMove = 0;
     game.heroLife = 4;
     game.lives = 1;
+    game.bossLife = 4;
 };
 
 winGame = function(game){
