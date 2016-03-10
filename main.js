@@ -163,4 +163,6 @@ mainScreen = function (gameEngine) {
     gameEngine.addEntity(titleLogo1);
     gameEngine.addEntity(titleLogo2);
     gameEngine.addEntity(titleLogo3);
+    
+    alert("Use the Arrow keys to move and the space bar to jump! Have Fun!!");
 };

@@ -29,7 +29,7 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
     this.use1 = (walking1 > 0);
-    this.boxes = false;
+    this.boxes = true;
     this.name = "Baddies";
 
     this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 45, this.frameWidth + 4, this.frameHeight + 12);
