@@ -3,10 +3,13 @@
     heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed) { */
 function linkBoss(game, bossSprite, frameHeight, frameWidth, startX, startY, standingFrames, placeX, placeY, loop, speed, farLeft) {
 
-    this.shoot = new AnimationSprite(bossSprite, startX, (startY * 0),
+    this.energyBall = new AnimationSprite(bossSprite, startX, (startY * 0),
         frameWidth, frameHeight, speed, standingFrames, true, false);
 
-    this.animationFaceLeft = new AnimationSprite(bossSprite, startX, (startY),
+    this.shooting = new AnimationSprite(bossSprite, startX, (startY * 1),
+        frameWidth, frameHeight, speed, 6, true, false);
+
+    this.animationFaceLeft = new AnimationSprite(bossSprite, startX, (startY * 0),
         frameWidth, frameHeight, speed, standingFrames, true, false);
 
 
@@ -25,6 +28,8 @@ function linkBoss(game, bossSprite, frameHeight, frameWidth, startX, startY, sta
     this.blinkDone = 0;
     this.boxes = false;
     this.appear = false;
+    this.fire = false;
+    this.finishFiring = 4;;
 
     this.boundingbox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
 
@@ -32,6 +37,10 @@ function linkBoss(game, bossSprite, frameHeight, frameWidth, startX, startY, sta
 
 
 };
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 
 linkBoss.prototype = new Entity();
 linkBoss.prototype.constructor = Boss;
@@ -44,9 +53,20 @@ linkBoss.prototype.update = function () {
         this.y = this.y;
     }
 
+    if (getRandomInt(0, 100) == 3) {
+        this.fire = true;
+        this.finishFiring = 4;
+    } else if (this.finishFiring < 0) {
+        this.fire = false;    
+    }
+
+    this.finishFiring -= 0.03;
+
     this.boundingbox = new BoundingBox(this.x + 60, this.y + 62, this.frameWidth - 25, this.frameHeight + 30);
 
     Entity.prototype.update.call(this);
+    // console.log(this.finishFiring);
+    // console.log(this.fire);
 };
 
 linkBoss.prototype.draw = function (ctx) {
@@ -67,10 +87,11 @@ linkBoss.prototype.draw = function (ctx) {
         }
     }
 
-    if (this.appear) {
+    if (this.appear  && this.fire) {
+        this.shooting.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
+    } else if (this.appear && !this.fire) {
         this.animationFaceLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
     }
-
 
     ctx.globalAlpha = 1;
     Entity.prototype.draw.call(this);

@@ -3,7 +3,7 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     var platWall = ASSET_MANAGER.getAsset("./img/linkplatform5High.png");
     var platWall9 = ASSET_MANAGER.getAsset("./img/linkplatform9High.png");
     var bg = new Platform(game, linkbg, 800, game.defaultGround, 0, 0, true, true);
-    var boss = new linkBoss(game, linkBossSprite, 96, 96, 0, 0, 2, 670, 515, true, 0.16, 500);
+    var boss = new linkBoss(game, linkBossSprite, 96, 96, 0, 96, 2, 660, 515, true, 0.16, 500);
     game.addEntity(bg);
 
     addPlatform(game, platform, 190, 30, 1000, 550, false);
