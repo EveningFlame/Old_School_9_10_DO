@@ -39,7 +39,9 @@ gameScore1.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
           if (this.game.level == 1) {
             this.game.themeMusic.play();
           } else if (this.game.level == 2) {
-            this.game.linkThemeMusic.play()
+            this.game.linkThemeMusic.play();
+          } else if (this.game.level == 3) {
+            this.game.samusThemeMusic.play();
           } else {
             this.game.themeMusic.play();  ///CHANGE TO SAMUS
           }

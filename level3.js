@@ -74,6 +74,16 @@ function level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koop
     addPlatform(game, platWall, 30, 190, 4720, 350, false);
     addPlatform(game, platWall, 30, 190, 4750, 300, false);
 
+    var s3 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 4900, 350, true, .1, 0, 0);
+    game.addEntity(s3);
+    game.baddies.push(s3);
+
+    var m19 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 4900, 590, true, .15, 0, 0);
+    game.addEntity(m19);
+    game.baddies.push(m19);
+
+    addPlatform(game, platWall, 1, 1, 5020, 450, false);
+
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4670, 670, true, 0.09, false, 3, 6);
 
     addPlatform(game, platWall, 30, 190, 5000, 550, false);
@@ -83,6 +93,16 @@ function level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koop
     addPlatform(game, platWall, 30, 190, 5120, 350, false);
     addPlatform(game, platWall, 30, 190, 5150, 300, false);
 
+    var s4 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 5250, 350, true, .1, 0, 0);
+    game.addEntity(s4);
+    game.baddies.push(s4);
+
+    var m20 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 5250, 590, true, .15, 0, 0);
+    game.addEntity(m20);
+    game.baddies.push(m20);
+
+    addPlatform(game, platWall, 1, 1, 5420, 450, false);
+
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 5070, 670, true, 0.09, false, 3, 6);
 
     addPlatform(game, platWall, 30, 190, 5400, 550, false);
@@ -91,6 +111,16 @@ function level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koop
     addPlatform(game, platWall, 30, 190, 5490, 400, false);
     addPlatform(game, platWall, 30, 190, 5520, 350, false);
     addPlatform(game, platWall, 30, 190, 5550, 300, false);
+
+    var s5 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 5700, 350, true, .1, 0, 0);
+    game.addEntity(s5);
+    game.baddies.push(s5);
+
+    var m21 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 5700, 590, true, .15, 0, 0);
+    game.addEntity(m21);
+    game.baddies.push(m21);
+
+    addPlatform(game, platWall, 1, 1, 5820, 450, false);
 
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 5470, 670, true, 0.09, false, 3, 6);
 
@@ -162,9 +192,10 @@ function level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koop
     addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 9000, 670, true, 0.09, false, 3, 6);
     addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 9300, 470, true, 0.09, false, 3, 5);
 
-    addPlatform(game, platWall9, 30, 270, 9600, 250, false);
+    addPlatform(game, platWall9, 30, 240, 9600, 250, false);
     addPlatform(game, platWall9, 30, 250, 9600, 0, false);
-    
+
+    addPlatform(game, platWall, 30, 30, 9600, 620, false);
     addPlatform(game, platform, 190, 30, 9600, 650, false);
     addPlatform(game, platform, 190, 30, 9790, 650, false);
     addPlatform(game, platform, 190, 30, 9980, 650, false);
@@ -187,19 +218,45 @@ function level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koop
     addPlatform(game, platform, 190, 30, 11120, 0, false);
     addPlatform(game, platform, 190, 30, 11310, 0, false);
 
-    // var s1 = new Minion(game, spearowSprite, 96 , 96, 0, 101.8, 6, 8, 10200, 300, true, .1, 0, 0);
-    // game.addEntity(s1);
-    // game.baddies.push(s1);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 9800, 100, true, 0.09, false, 3, 35);
+
+    var s1 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 10200, 110, true, .1, 0, 0);
+    game.addEntity(s1);
+    game.baddies.push(s1);
+    var s2 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 10800, 0, true, .1, 0, 0);
+    game.addEntity(s2);
+    game.baddies.push(s2);
 
     addPlatform(game, platform, 100, 30, 9750, 500, false);
     addPlatform(game, platform, 100, 30, 9800, 400, false);
     addPlatform(game, platform, 190, 30, 9900, 350, false);
     addPlatform(game, platform, 190, 30, 10090, 350, false);
     addPlatform(game, platform, 190, 30, 10280, 350, false);
+    addPlatform(game, platform, 190, 30, 10470, 350, false);
+    addPlatform(game, platform, 190, 30, 10660, 350, false);
+    addPlatform(game, platform, 190, 30, 10850, 350, false);
+    addPlatform(game, platform, 190, 30, 11040, 350, false);
+    addPlatform(game, platform, 100, 30, 11230, 350, false);
+
+    addPlatform(game, platform, 80, 30, 11400, 500, false);
+
 
     addPlatform(game, platWall, 30, 190, 11500, 0, false);
 
     addPlatform(game, platWall9, 30, 280, 11500, 410, false);
+
+    var m16 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10000, 540, true, .15, 0, 0);
+    game.addEntity(m16);
+    game.baddies.push(m16);
+
+    var m17 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10300, 540, true, .15, 0, 0);
+    game.addEntity(m17);
+    game.baddies.push(m17);
+
+    var m18 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10600, 540, true, .15, 0, 0);
+    game.addEntity(m18);
+    game.baddies.push(m18);
+
 
 
 
