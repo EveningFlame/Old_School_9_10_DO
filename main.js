@@ -75,6 +75,7 @@ ASSET_MANAGER.queueDownload("./img/metaplatform5High.png");
 ASSET_MANAGER.queueDownload("./img/metaplatform9High.png");
 ASSET_MANAGER.queueDownload("./img/metaplatform.png");
 ASSET_MANAGER.queueDownload("./img/Spearow.png");
+ASSET_MANAGER.queueDownload("./img/ganondorfSprite.png");
 
 //Title Screen
 ASSET_MANAGER.queueDownload("./img/titleBackground.png");

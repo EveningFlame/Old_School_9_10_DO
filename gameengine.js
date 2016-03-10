@@ -79,7 +79,7 @@ function GameEngine() {
     this.defeatBoss = false;
     this.heroLife = 4;
     this.lives = 3;
-    this.level = 3;
+    this.level = 2;
     this.bigBoss;
     this.bossLife = 4;
 }

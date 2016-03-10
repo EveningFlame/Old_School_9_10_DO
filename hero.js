@@ -351,6 +351,7 @@ Hero.prototype.update = function () {
             if (this.game.level > 3) {
                 this.game.level = 1;
             }
+            this.themeMusic.stop();
             winGame(this.game);
 
         }

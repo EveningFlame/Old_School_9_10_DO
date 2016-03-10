@@ -2,6 +2,7 @@ function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, 
 	var boss = new Boss(game, bowserSprite, 55.968, 55.968, 0, 55.968,
     4, 6, 1100, 595, true, 0.16, 500);
 
+
     var bg = new Platform(game, world1, 800, game.defaultGround, 0, 0, true, true);
     for (var i = 0; i < 25; i++) {
         var gr = new Platform(game, ground1, 2650, 95, 800 * i, game.defaultGround, false);
@@ -150,9 +151,9 @@ function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, 
       //117.166667 width
       //101.8 height
       //SPEAROW TESTING
-    addPlatform(game, platWall, 1, 1, 200, 550, false, 5);
+    addPlatform(game, platWall, 30, 30, 200, 550, false, 5);
     var m1 = new Minion(game, spearowSprite, 96 , 96, 0, 101.8, 6, 8, 600, 450, true, .1, 0, 0);
-    addPlatform(game, platWall, 1, 1, 800, 550, false, 5);
+    addPlatform(game, platWall, 30, 30, 800, 550, false, 5);
 //SPEAROW TESTING
     var m2 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 3250, 287, true, .2, 3180, 3331);
     var m3 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 4400, 592, true, .2, 0, 0);
@@ -201,5 +202,6 @@ function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, 
 
     game.addEntity(boss);
     game.bigBoss = boss;
+
 //MINIONS
 }
