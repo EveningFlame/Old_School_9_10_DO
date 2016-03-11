@@ -363,7 +363,12 @@ Hero.prototype.update = function () {
                 this.game.level = 1;
             }
             this.themeMusic.stop();
-            winGame(this.game);
+            if(this.game.level === 3){
+                winGame(this.game);
+            } else {
+                nextLevel(this.game);
+            }
+            
 
         }
     } else if (boshit === 0 && !this.game.bigBoss.bossBlink && !this.heroBlink) {

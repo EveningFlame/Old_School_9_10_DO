@@ -65,6 +65,7 @@ gameOver = function (game) {
 
     clearEngine(game);
 
+    game.level = 1;
     game.score = 0;
     game.heartIcon = null;
     game.gameOverScreen = new Icon(game, gameOver, 800, 800, 0, 800, 0, 0, true, "bg");
@@ -126,6 +127,11 @@ winGame = function(game){
     game.addEntity(congrats);
     
     
+};
+
+nextLevel = function(game){
+    clearEngine(game);
+    startGame(game);
 };
 
 
