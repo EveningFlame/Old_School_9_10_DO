@@ -66,6 +66,8 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
         this.themeMusic = game.samusThemeMusic;
         this.bossMusic = game.samusBossMusic;
     }
+    this.themeMusic.loop = true;
+    this.bossMusic.loop = true;
 
     this.themeMusic.play();
     Entity.call(this, game, this.x, this.y);

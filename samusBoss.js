@@ -40,7 +40,7 @@ samusBoss.prototype = new Entity();
 samusBoss.prototype.constructor = Boss;
 
 samusBoss.prototype.update = function () {
-    if (this.game.totalDistance >= 10400) {
+    if (this.game.totalDistance >= 10450) {
         this.appear = true;
     }
 
@@ -86,13 +86,14 @@ samusBoss.prototype.draw = function (ctx) {
             this.blinkDone = 0;
         }
     }
-    if (this.appear  && this.fire) {
-             var f1 = new Minion(this.game, this.bossSprite, 64, 96, 0, 105, 6, 8, 10900, this.y + 35, true, .15, 0, 0)
+    if (this.appear) {
+        this.animationFaceLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
+        if (this.fire) {
+             var f1 = new Minion(this.game, this.bossSprite, 64, 96, 0, 105, 6, 8, 10880, this.y + 35, true, .15, 0, 0)
              this.game.addEntity(f1);
              this.game.baddies.push(f1);
-    } else if (this.appear) {
-        this.animationFaceLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
-    }
+        }
+    } 
 
     ctx.globalAlpha = 1;
     Entity.prototype.draw.call(this);
