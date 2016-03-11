@@ -152,40 +152,11 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     addPlatform(game, platform, 190, 30, 10000, 620, false);
     addPlatform(game, platform, 190, 30, 10000, 590, false);
     addPlatform(game, platform, 190, 30, 10000, 560, false);
-    addPlatform(game, platform, 190, 30, 10000, 530, false);
-
-    var m6 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10300, 590, true, .15, 0, 0);
-    game.addEntity(m6);
-    game.baddies.push(m6);
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 10210, 650, true, 0.09, false, 3, 6);
-
-    addPlatform(game, platform, 190, 30, 10500, 650, false);
-    addPlatform(game, platform, 190, 30, 10500, 620, false);
-    addPlatform(game, platform, 190, 30, 10500, 590, false);
-    addPlatform(game, platform, 190, 30, 10500, 560, false);
-    addPlatform(game, platform, 190, 30, 10500, 530, false);
-
-    var m7 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10800, 590, true, .15, 0, 0);
-    game.addEntity(m7);
-    game.baddies.push(m7);
-    // addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 10710, 650, true, 0.09, false, 3, 6);
-
-    // addPlatform(game, platform, 190, 30, 11000, 650, false);
-    // addPlatform(game, platform, 190, 30, 11000, 620, false);
-    // addPlatform(game, platform, 190, 30, 11000, 590, false);
-    // addPlatform(game, platform, 190, 30, 11000, 560, false);
-    // addPlatform(game, platform, 190, 30, 11000, 530, false);
-
-    // var m8 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 11300, 590, true, .15, 0, 0);
-    // game.addEntity(m8);
-    // game.baddies.push(m8);
-    // addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 11210, 650, true, 0.09, false, 3, 6);
-
-    // addPlatform(game, platform, 190, 30, 11500, 650, false);
-    // addPlatform(game, platform, 190, 30, 11500, 620, false);
-    // addPlatform(game, platform, 190, 30, 11500, 590, false);
-    // addPlatform(game, platform, 190, 30, 11500, 560, false);
-    // addPlatform(game, platform, 190, 30, 11500, 530, false);
+    addPlatform(game, platform, 190, 30, 10000, 530, false);  
+    
+    addPlatform(game, platform, 60, 30, 10450, 430, false);
+    addPlatform(game, platform, 60, 30, 10600, 590, false);
+    addPlatform(game, platform, 60, 30, 10750, 530, false);
 
 
     for (var i = 0; i < 25; i++) {
