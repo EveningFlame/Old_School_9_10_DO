@@ -4,7 +4,7 @@
 function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) {
 
-    if (frameHeight == 55.968) {
+    if (frameHeight === 55.968) {
 
         if (walking1 > 0) {
             this.animationWalkingLeft1 = new AnimationSprite(minionSprite, startX, (startY * 0),
@@ -21,7 +21,7 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
         }
 
   
-    } else if (frameHeight == 96) {
+    } else if (frameHeight === 96) {
         use1 = true;
         this.animationWalkingLeft1 = new AnimationSprite(minionSprite, startX, (startY * 1),
                 frameWidth, frameHeight, speed, walking1, loop, true);
@@ -63,7 +63,7 @@ Minion.prototype.update = function () {
     }
 
     if (this.moveRight) {
-        if (this.frameHeight == 96) {
+        if (this.frameHeight === 96) {
             this.x += 3;
         } else {
             this.x += 1;
@@ -72,7 +72,7 @@ Minion.prototype.update = function () {
             this.moveRight = false;
         }
     } else {
-        if (this.frameHeight == 96) {
+        if (this.frameHeight === 96) {
             this.x -= 3;
         } else {
             this.x -= 1;

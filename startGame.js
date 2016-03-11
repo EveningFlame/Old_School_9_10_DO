@@ -44,9 +44,9 @@ startGame = function(game){
     
 game.hero = hero;
 
-if (game.level == 2) {
+if (game.level === 2) {
     level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBossSprite);
-} else if (game.level == 3) {
+} else if (game.level === 3) {
     level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koopa, spearowSprite);
 } else {
     level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, platWall9, pipe, coinSprite, starSprite, spearowSprite);
