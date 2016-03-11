@@ -3,7 +3,7 @@
  */
 function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) {
-    this.isShot = false;
+    //this.isShot = false;
 
     if (frameHeight === 55.968) {
 
@@ -30,9 +30,13 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
                 frameWidth, frameHeight, speed, walking1, loop, false);
 
     } else if (frameHeight == 97) {
-        this.isShot = true;
+        //this.isShot = true;
         this.shot = new AnimationSprite(minionSprite, startX, (startY * 3),
                 frameWidth, frameHeight, speed, 2, loop, false);
+    } else if (frameHeight == 64) {
+        //this.isShot = true;
+        this.shot2 = new AnimationSprite(minionSprite, startX, (startY * 3),
+                frameWidth, frameHeight, speed, 3, loop, true);
     }
 
     this.game = game;
@@ -90,12 +94,16 @@ Minion.prototype.update = function () {
         }
     } else if (this.frameHeight === 97) {
         this.x -= 3;
+    } else if (this.frameHeight === 64) {
+        this.x -= 5;
     }
 //    this.boundingbox = this.additionalWidthForBoundBox();
     if (this.frameHeight === 55.968 || this.frameHeight === 96) {
         this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10);
     } else if (this.frameHeight === 97) {
         this.boundingbox = new BoundingBox(this.x + 3 - this.game.maxX, this.y + 44, this.frameWidth - 20, this.frameHeight - 50);
+    } else if (this.frameHeight == 64) {
+        this.boundingbox = new BoundingBox(this.x + 30 - this.game.maxX, this.y + 80, this.frameWidth - 30, this.frameHeight - 100);
     }
     
 
@@ -131,6 +139,8 @@ Minion.prototype.draw = function (ctx) {
         }
     } else if (this.frameHeight === 97) {
         this.shot.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 1.2);
+    } else if (this.frameHeight == 64) {
+        this.shot2.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 1.2);
     }
     Entity.prototype.draw.call(this);
 };

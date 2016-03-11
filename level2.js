@@ -156,7 +156,7 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     
     addPlatform(game, platform, 60, 30, 10450, 430, false);
     addPlatform(game, platform, 60, 30, 10600, 590, false);
-    addPlatform(game, platform, 60, 30, 10750, 530, false);
+    addPlatform(game, platform, 60, 30, 10700, 530, false);
 
 
     for (var i = 0; i < 25; i++) {

@@ -1,6 +1,6 @@
-function level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koopa, spearowSprite) {
-    var boss = new Boss(game, bowserSprite, 55.968, 55.968, 0, 55.968,
-    4, 6, 1100, 595, true, 0.16, 500);
+function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa, spearowSprite) {
+    var boss = new samusBoss(game, bossSprite, 110, 110.2, 0, 110, 6, 570, 515, true, 0.16, 500);
+   // 
     var bg = new Platform(game, metabg, 800, game.defaultGround, 0, 0, true, true);
     game.addEntity(bg);
     var platform = ASSET_MANAGER.getAsset("./img/metaplatform.png");
@@ -187,75 +187,82 @@ function level3(game, bowserSprite, metabg, metagr, coinSprite, starSprite, Koop
     
     addPlatform(game, platWall, 30, 30, 7880, 650, false);
 
-    addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 8400, 670, true, 0.09, false, 3, 6);
-    addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 8700, 470, true, 0.09, false, 3, 5);
-    addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 9000, 670, true, 0.09, false, 3, 6);
-    addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 9300, 470, true, 0.09, false, 3, 5);
+    // addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 8400, 670, true, 0.09, false, 3, 6);
+    // addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 8700, 470, true, 0.09, false, 3, 5);
+    // addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 9000, 670, true, 0.09, false, 3, 6);
+    // addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 9300, 470, true, 0.09, false, 3, 5);
 
-    addPlatform(game, platWall9, 30, 240, 9600, 250, false);
-    addPlatform(game, platWall9, 30, 250, 9600, 0, false);
+    addPlatform(game, platWall9, 30, 240, 8100, 250, false);
+    addPlatform(game, platWall9, 30, 250, 8100, 0, false);
 
-    addPlatform(game, platWall, 30, 30, 9600, 620, false);
-    addPlatform(game, platform, 190, 30, 9600, 650, false);
-    addPlatform(game, platform, 190, 30, 9790, 650, false);
-    addPlatform(game, platform, 190, 30, 9980, 650, false);
-    addPlatform(game, platform, 190, 30, 10170, 650, false);
-    addPlatform(game, platform, 190, 30, 10360, 650, false);
-    addPlatform(game, platform, 190, 30, 10550, 650, false);
-    addPlatform(game, platform, 190, 30, 10740, 650, false);
-    addPlatform(game, platform, 190, 30, 10930, 650, false);
-    addPlatform(game, platform, 190, 30, 11120, 650, false);
-    addPlatform(game, platform, 190, 30, 11310, 650, false);
+    addPlatform(game, platWall, 30, 30, 8100, 620, false);
+    addPlatform(game, platform, 190, 30, 8100, 650, false);
+    addPlatform(game, platform, 190, 30, 8290, 650, false);
+    addPlatform(game, platform, 190, 30, 8480, 650, false);
+    addPlatform(game, platform, 190, 30, 8670, 650, false);
+    addPlatform(game, platform, 190, 30, 8860, 650, false);
+    addPlatform(game, platform, 190, 30, 9050, 650, false);
+    addPlatform(game, platform, 190, 30, 9240, 650, false);
+    addPlatform(game, platform, 190, 30, 9430, 650, false);
+    addPlatform(game, platform, 190, 30, 9620, 650, false);
+    addPlatform(game, platform, 190, 30, 9810, 650, false);
 
-    addPlatform(game, platform, 190, 30, 9600, 0, false);
-    addPlatform(game, platform, 190, 30, 9790, 0, false);
-    addPlatform(game, platform, 190, 30, 9980, 0, false);
-    addPlatform(game, platform, 190, 30, 10170, 0, false);
-    addPlatform(game, platform, 190, 30, 10360, 0, false);
-    addPlatform(game, platform, 190, 30, 10550, 0, false);
-    addPlatform(game, platform, 190, 30, 10740, 0, false);
-    addPlatform(game, platform, 190, 30, 10930, 0, false);
-    addPlatform(game, platform, 190, 30, 11120, 0, false);
-    addPlatform(game, platform, 190, 30, 11310, 0, false);
+    addPlatform(game, platform, 190, 30, 8100, 0, false);
+    addPlatform(game, platform, 190, 30, 8290, 0, false);
+    addPlatform(game, platform, 190, 30, 8480, 0, false);
+    addPlatform(game, platform, 190, 30, 8670, 0, false);
+    addPlatform(game, platform, 190, 30, 8860, 0, false);
+    addPlatform(game, platform, 190, 30, 9150, 0, false);
+    addPlatform(game, platform, 190, 30, 9240, 0, false);
+    addPlatform(game, platform, 190, 30, 9430, 0, false);
+    addPlatform(game, platform, 190, 30, 9620, 0, false);
+    addPlatform(game, platform, 190, 30, 9810, 0, false);
 
-    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 9800, 100, true, 0.09, false, 3, 35);
+    addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 8300, 100, true, 0.09, false, 3, 35);
 
-    var s1 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 10200, 110, true, .1, 0, 0);
+    var s1 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 8700, 110, true, .1, 0, 0);
     game.addEntity(s1);
     game.baddies.push(s1);
-    var s2 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 10800, 0, true, .1, 0, 0);
+    var s2 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 9300, 0, true, .1, 0, 0);
     game.addEntity(s2);
     game.baddies.push(s2);
 
-    addPlatform(game, platform, 100, 30, 9750, 500, false);
-    addPlatform(game, platform, 100, 30, 9800, 400, false);
-    addPlatform(game, platform, 190, 30, 9900, 350, false);
-    addPlatform(game, platform, 190, 30, 10090, 350, false);
-    addPlatform(game, platform, 190, 30, 10280, 350, false);
-    addPlatform(game, platform, 190, 30, 10470, 350, false);
-    addPlatform(game, platform, 190, 30, 10660, 350, false);
-    addPlatform(game, platform, 190, 30, 10850, 350, false);
-    addPlatform(game, platform, 190, 30, 11040, 350, false);
-    addPlatform(game, platform, 100, 30, 11230, 350, false);
+    addPlatform(game, platform, 100, 30, 8250, 500, false);
+    addPlatform(game, platform, 100, 30, 8300, 400, false);
+    addPlatform(game, platform, 190, 30, 8400, 350, false);
+    addPlatform(game, platform, 190, 30, 8590, 350, false);
+    addPlatform(game, platform, 190, 30, 8780, 350, false);
+    addPlatform(game, platform, 190, 30, 8970, 350, false);
+    addPlatform(game, platform, 190, 30, 9160, 350, false);
+    addPlatform(game, platform, 190, 30, 9350, 350, false);
+    addPlatform(game, platform, 190, 30, 9540, 350, false);
+    addPlatform(game, platform, 100, 30, 9730, 350, false);
 
-    addPlatform(game, platform, 80, 30, 11400, 500, false);
+    addPlatform(game, platform, 80, 30, 9900, 500, false);
 
 
-    addPlatform(game, platWall, 30, 190, 11500, 0, false);
+    addPlatform(game, platWall, 30, 190, 10000, 0, false);
 
-    addPlatform(game, platWall9, 30, 280, 11500, 410, false);
+    addPlatform(game, platWall9, 30, 280, 10000, 410, false);
 
-    var m16 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10000, 540, true, .15, 0, 0);
+    var m16 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 8500, 540, true, .15, 0, 0);
     game.addEntity(m16);
     game.baddies.push(m16);
 
-    var m17 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10300, 540, true, .15, 0, 0);
+    var m17 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 8800, 540, true, .15, 0, 0);
     game.addEntity(m17);
     game.baddies.push(m17);
 
-    var m18 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 10600, 540, true, .15, 0, 0);
+    var m18 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 9100, 540, true, .15, 0, 0);
     game.addEntity(m18);
     game.baddies.push(m18);
+
+    addPlatform(game, platform, 60, 30, 10450, 430, false);
+    addPlatform(game, platform, 60, 30, 10600, 590, false);
+    addPlatform(game, platform, 60, 30, 10750, 530, false);
+    addPlatform(game, platform, 60, 30, 10600, 250, false);
+    addPlatform(game, platform, 60, 30, 10400, 300, false);
+    addPlatform(game, platform, 60, 30, 10770, 350, false);
 
 
 

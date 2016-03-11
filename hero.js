@@ -95,7 +95,7 @@ Hero.prototype.bottom = function () {
 Hero.prototype.update = function () {
     var found = false;
 
-    console.log("Total Distance: " + this.game.totalDistance);
+    //console.log("Total Distance: " + this.game.totalDistance);
     if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
@@ -105,7 +105,7 @@ Hero.prototype.update = function () {
     if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
-    console.log("Sb1: " +this.game.sb1);
+    //console.log("Sb1: " +this.game.sb1);
 
     this.additionalWidthForBoundBoxWhileRunning(this.width);
     if (this.game.walkLeft) {
