@@ -3,6 +3,7 @@
  */
 function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) {
+    this.isShot = false;
 
     if (frameHeight === 55.968) {
 
@@ -28,6 +29,10 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
         this.animationWalkingRight1 = new AnimationSprite(minionSprite, startX, (startY * 2),
                 frameWidth, frameHeight, speed, walking1, loop, false);
 
+    } else if (frameHeight == 97) {
+        this.isShot = true;
+        this.shot = new AnimationSprite(minionSprite, startX, (startY * 3),
+                frameWidth, frameHeight, speed, 2, loop, false);
     }
 
     this.game = game;
@@ -54,35 +59,45 @@ Minion.prototype.constructor = Minion;
 
 Minion.prototype.update = function () {
 
-    if (checkMinion(this, this.game) === 1) {
-        this.moveRight = !this.moveRight;
-    }
+    if (this.frameHeight === 96 || this.frameHeight === 55.968) {
 
-    if (this.farLeft === 0 && this.farRight === 0) {
-        if (checkPlatform(this, this.game)) this.moveRight = !this.moveRight;
-    }
+        if (checkMinion(this, this.game) === 1) {
+            this.moveRight = !this.moveRight;
+        }
 
-    if (this.moveRight) {
-        if (this.frameHeight === 96) {
-            this.x += 3;
+        if (this.farLeft === 0 && this.farRight === 0) {
+            if (checkPlatform(this, this.game)) this.moveRight = !this.moveRight;
+        }
+
+        if (this.moveRight) {
+            if (this.frameHeight === 96) {
+                this.x += 3;
+            } else {
+                this.x += 1;
+            }
+            if (this.x >= this.farRight && this.farRight > 0){
+                this.moveRight = false;
+            }
         } else {
-            this.x += 1;
+            if (this.frameHeight === 96) {
+                this.x -= 3;
+            } else {
+                this.x -= 1;
+            }
+            if (this.x <= this.farLeft && this.farLeft > 0){
+                this.moveRight = true;
+            }
         }
-        if (this.x >= this.farRight && this.farRight > 0){
-            this.moveRight = false;
-        }
-    } else {
-        if (this.frameHeight === 96) {
-            this.x -= 3;
-        } else {
-            this.x -= 1;
-        }
-        if (this.x <= this.farLeft && this.farLeft > 0){
-            this.moveRight = true;
-        }
+    } else if (this.frameHeight === 97) {
+        this.x -= 3;
     }
 //    this.boundingbox = this.additionalWidthForBoundBox();
-    this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10);
+    if (this.frameHeight === 55.968 || this.frameHeight === 96) {
+        this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10);
+    } else if (this.frameHeight === 97) {
+        this.boundingbox = new BoundingBox(this.x + 3 - this.game.maxX, this.y + 44, this.frameWidth - 20, this.frameHeight - 50);
+    }
+    
 
     for (var i = 0; i < this.game.baddies.length; i++) {
         if (this.game.baddies[i].boundingbox.right < 0) {
@@ -100,18 +115,22 @@ Minion.prototype.draw = function (ctx) {
         ctx.strokeStyle = "red";
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
     }
-    if (this.moveRight) {
-        if (this.use1) {
-            this.animationWalkingRight1.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 2);
+    if (this.frameHeight === 96 || this.frameHeight === 55.968) {
+        if (this.moveRight) {
+            if (this.use1) {
+                this.animationWalkingRight1.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 2);
+            } else {
+                this.animationWalkingRight2.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 2);
+            }
         } else {
-            this.animationWalkingRight2.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 2);
+            if (this.use1) {
+                this.animationWalkingLeft1.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 2);
+            } else {
+                this.animationWalkingLeft2.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 2);
+            }
         }
-    } else {
-        if (this.use1) {
-            this.animationWalkingLeft1.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 2);
-        } else {
-            this.animationWalkingLeft2.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 2);
-        }
+    } else if (this.frameHeight === 97) {
+        this.shot.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 1.2);
     }
     Entity.prototype.draw.call(this);
 };

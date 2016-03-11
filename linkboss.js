@@ -16,7 +16,7 @@ function linkBoss(game, bossSprite, frameHeight, frameWidth, startX, startY, sta
     /* this.animation = new AnimationSprite(heroSprite, startX, (startY * 0) + charYOffset,
         frameWidth, frameHeight - charYOffset, movementSpeed, standAnimation, true, false);	 */
  
-
+    this.bossSprite = bossSprite;
     this.radius = frameHeight / 2;
     this.y = placeY;
     this.x = placeX;
@@ -47,13 +47,13 @@ linkBoss.prototype.constructor = Boss;
 
 linkBoss.prototype.update = function () {
 //console.log(this.game.totalDistance);
-    if (this.game.totalDistance >= 10400) {
+    if (this.game.totalDistance >= 10600) {
         this.appear = true;
         this.x = this.x;
         this.y = this.y;
     }
 
-    if (getRandomInt(0, 100) == 3) {
+    if (getRandomInt(0, 150) === 3) {
         this.fire = true;
         this.finishFiring = 4;
     } else if (this.finishFiring < 0) {
@@ -64,7 +64,9 @@ linkBoss.prototype.update = function () {
 
     this.boundingbox = new BoundingBox(this.x + 60, this.y + 62, this.frameWidth - 25, this.frameHeight + 30);
 
+
     Entity.prototype.update.call(this);
+
     // console.log(this.finishFiring);
     // console.log(this.fire);
 };
@@ -89,6 +91,11 @@ linkBoss.prototype.draw = function (ctx) {
 
     if (this.appear  && this.fire) {
         this.shooting.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
+        if (this.shooting.elapsedTime === 0) {
+             var f1 = new Minion(this.game, this.bossSprite, 97, 97, 0, 96, 6, 8, 11000, 560, true, .15, 0, 0)
+             this.game.addEntity(f1);
+             this.game.baddies.push(f1);
+        }
     } else if (this.appear && !this.fire) {
         this.animationFaceLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
     }
