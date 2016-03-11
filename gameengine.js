@@ -80,6 +80,7 @@ function GameEngine() {
     this.level = 1;
     this.bigBoss;
     this.bossLife = 4;
+    this.bossMusicNotPlaying = true;
 }
 
 GameEngine.prototype.init = function (ctx) {

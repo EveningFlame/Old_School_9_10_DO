@@ -91,10 +91,11 @@ Hero.prototype.bottom = function () {
 
 Hero.prototype.update = function () {
     var found = false;
-    //console.log(this.game.totalDistance);
+    console.log("Total Distance: " + this.game.totalDistance);
     if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
+    console.log("Sb1: " +this.game.sb1);
     this.additionalWidthForBoundBoxWhileRunning(this.width);
     if (this.game.walkLeft) {
         if (this.x > 0) {
@@ -114,7 +115,7 @@ Hero.prototype.update = function () {
             this.game.bgmove = false;
             this.heroMove = false;
             //this.x -= this.scrollSpeed;
-            this.game.totalDistance -= this.scrollSpeed;
+            //this.game.totalDistance -= this.scrollSpeed;
         } else {
             this.heroMove = true;
             if (this.x >= this.game.defaultScroll) {
@@ -128,10 +129,10 @@ Hero.prototype.update = function () {
         }
     }
 
-    if (this.game.totalDistance === 10220) {
+    if (this.game.totalDistance === 10220 && this.game.bossMusicNotPlaying) {
         this.themeMusic.stop();
         this.bossMusic.play();
-        //this.game.
+        this.game.bossMusicNotPlaying = false;
     }
 
     //console.log(this.game.totalDistance);
@@ -399,7 +400,15 @@ Hero.prototype.draw = function (ctx) {
     if (this.jumping) {
         if (this.standLeft) {
             this.jumpAnimationLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
-            if (this.game.walkLeft) if (this.game.unlocked) this.game.totalDistance -= this.scrollSpeed;
+            if (this.game.walkLeft){
+                if (this.game.unlocked) {
+                    this.game.totalDistance -= this.scrollSpeed;
+                }
+            } else if(this.game.walkRight){
+                if (this.heroMove) {
+                    this.game.totalDistance += this.scrollSpeed;
+                }                
+            }
         } else {
             this.jumpAnimation.drawFrame(this.game.clockTick, ctx, this.x, this.y, this.scale);
             if (this.game.walkRight) {
@@ -410,6 +419,10 @@ Hero.prototype.draw = function (ctx) {
                         this.game.coinMove += this.scrollSpeed;
                         this.game.maxX += this.scrollSpeed;
                     }
+                }
+            } else if (this.game.walkLeft){
+                if (this.game.unlocked) {
+                    this.game.totalDistance -= this.scrollSpeed;
                 }
             }
         }
