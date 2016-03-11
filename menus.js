@@ -92,6 +92,7 @@ clearEngine = function (game) {
     game.heroLife = 4;
     game.lives = 1;
     game.bossMusicNotPlaying = true;
+    game.bossLife = 4;
 };
 
 winGame = function(game){

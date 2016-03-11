@@ -59,9 +59,12 @@ function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOf
     this.damagedMusic = game.marioDamagedMusic;
     this.gameOverMusic = game.gameOverMusic;
 
-    if (game.level == 2) {
+    if (game.level === 2) {
         this.themeMusic = game.linkThemeMusic;
         this.bossMusic = game.linkBossMusic;
+    } else if (game.level === 3) {
+        this.themeMusic = game.samusThemeMusic;
+        this.bossMusic = game.samusBossMusic;
     }
 
     this.themeMusic.play();
@@ -349,6 +352,7 @@ Hero.prototype.update = function () {
             if (this.game.level > 3) {
                 this.game.level = 1;
             }
+            this.themeMusic.stop();
             winGame(this.game);
 
         }

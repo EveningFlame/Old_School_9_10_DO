@@ -64,6 +64,8 @@ function GameEngine() {
     this.introMusic = new Howl({urls: ["./music/Pokemon Red-Blue-Yellow - Route 1 Acapella.mp3"]});  
     this.linkThemeMusic = new Howl({urls: ["./music/linkGameMusic.mp3"]});
     this.linkBossMusic = new Howl({urls: ["./music/linkBossBattle.mp3"]});
+    this.samusBossMusic = new Howl({urls: ["./music/samusBossMusic.mp3"]});
+    this.samusThemeMusic = new Howl({urls: ["./music/samusGameMusic.mp3"]});
     this.hero = null;
     this.coinMove = 0;
     this.mjump = 0;
@@ -77,7 +79,7 @@ function GameEngine() {
     this.defeatBoss = false;
     this.heroLife = 4;
     this.lives = 3;
-    this.level = 1;
+    this.level = 2;
     this.bigBoss;
     this.bossLife = 4;
     this.bossMusicNotPlaying = true;
