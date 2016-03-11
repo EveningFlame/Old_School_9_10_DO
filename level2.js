@@ -159,7 +159,7 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     addPlatform(game, platform, 60, 30, 10700, 530, false);
 
 
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < 1; i++) {
         var gr = new Platform(game, linkground, 2560, 95, 2557 * i, game.defaultGround, false);
         console.log("adding ground");
         game.addEntity(gr);
