@@ -22,8 +22,6 @@ var superCollide = function (game) {
 
 var checkBoss = function (game) {
     if (game.hero.boundingbox.collide(game.bigBoss.boundingbox)) {
-
-//        console.log(game.mjump);
         if (game.mjump === -1) {
             return 1;
         } else {
@@ -44,7 +42,7 @@ var checkMinion = function (me, game) {
                     crash = -1;
                 }
                 
-                if(me.name === "Baddies"){
+                if(me.name === "Baddies" && game.baddies[i].id !== "BulletSpearow"){
                     crash = 1;
                 }
             }

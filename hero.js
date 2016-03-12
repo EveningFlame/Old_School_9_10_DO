@@ -95,17 +95,16 @@ Hero.prototype.bottom = function () {
 Hero.prototype.update = function () {
     var found = false;
 
-    //console.log("Total Distance: " + this.game.totalDistance);
-    if (this.game.sb1 > 2380) {
-        this.game.sb1 = 0;
+    if(this.y > 810){
+        this.game.heroLife = 0;
     }
-    //console.log("Sb1: " +this.game.sb1);
 
-    // console.log("Total Distance: " + this.game.totalDistance);
     if (this.game.sb1 > 2380) {
         this.game.sb1 = 0;
     }
-    //console.log("Sb1: " +this.game.sb1);
+    if (this.game.sb1 > 2380) {
+        this.game.sb1 = 0;
+    }
 
     this.additionalWidthForBoundBoxWhileRunning(this.width);
     if (this.game.walkLeft) {
@@ -114,19 +113,14 @@ Hero.prototype.update = function () {
             this.heroMove = true;
         }
         if (this.x < 0 || checkPlatform(this, this.game)) { 
-            //console.log(this.x);
             this.game.unlocked = false;
             this.heroMove = false;
-            //this.x += this.scrollSpeed;
-           // this.game.totalDistance += this.scrollSpeed;
         }
     } else {
         if (checkPlatform(this, this.game)) {
             this.game.unlocked = false;
             this.game.bgmove = false;
             this.heroMove = false;
-            //this.x -= this.scrollSpeed;
-            //this.game.totalDistance -= this.scrollSpeed;
         } else {
             this.heroMove = true;
             if (this.x >= this.game.defaultScroll) {
@@ -145,20 +139,7 @@ Hero.prototype.update = function () {
         this.bossMusic.play();
         this.game.bossMusicNotPlaying = false;
     }
-
-    //console.log(this.game.totalDistance);
-    
-    // make sure the hero does not go through the bricks.
-    //for (var i = 0; i < this.game.platforms.length && !found; i++) {
-    //    var pf = this.game.platforms[i];
-    //    if (this.boundingbox.left > pf.boundingbox.left && this.boundingbox.right < pf.boundingbox.right &&
-    //        this.boundingbox.top > pf.boundingbox.bottom) {
-    //        this.jumpHeight = this.top() - pf.boundingbox.bottom;
-    //        found = true;
-    //    }
-    //}
-
-    //reset the jump hight.
+    //reset the jump height.
     if (this.jumpHeight < 0) this.jumpHeight = this.game.defaultJumpHeight;
     if (this.jumpHeight > this.game.defaultJumpHeight && !found) {
         this.jumpHeight = this.game.defaultJumpHeight;
@@ -166,17 +147,10 @@ Hero.prototype.update = function () {
 
     found = false;
 
-    // if (this.game.space) {
-    //     this.jumping = true;
-    //     this.game.jumpMusic.play();
-    // }
-
     if (this.game.space && !this.jumping && !this.falling) {
         this.jumping = true;
         this.base = this.y;
         this.jumpMusic.play();
-//        console.log(this.y);
-//console.log(this.game.platforms.length);
     }
     if (this.jumping && !this.standLeft) {
         if (this.jumpAnimation.isDone()) {
@@ -198,9 +172,8 @@ Hero.prototype.update = function () {
         this.boundingbox.setChangingBox(this.game, this.x , this.y, this.width, this.height);
         for (var i = 0; i < this.game.platforms.length; i++) {
             var pf = this.game.platforms[i];
-            //console.log("before collision");
+
             if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
-//                console.log("after collision");
                 this.jumping = false;
                 this.y = pf.boundingbox.top - this.heroHeight - 2.5;
                 this.platform = pf;
@@ -213,8 +186,6 @@ Hero.prototype.update = function () {
         if (this.jumpAnimationLeft.isDone()) {
             this.jumpAnimationLeft.elapsedTime = 0;
             this.jumping = false;
-            this.game.mjump = 0;
-
         }
         var jumpDistance = this.jumpAnimationLeft.elapsedTime / this.jumpAnimationLeft.totalTime;
         var totalHeight = this.jumpHeight;
@@ -223,14 +194,11 @@ Hero.prototype.update = function () {
 
         if (jumpDistance > 0.5) {
             jumpDistance = 1 - jumpDistance;
-            this.game.mjump = -1;
-
         }
         var height = totalHeight * (4 * jumpDistance - 4 * jumpDistance * jumpDistance);
         this.lastBottom = this.boundingbox.bottom;
         this.y = this.base - height;
         this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
-//        console.log("checking jump bottom");
         for (var i = 0; i < this.game.platforms.length; i++) {
             var pf = this.game.platforms[i];
             if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
@@ -243,13 +211,13 @@ Hero.prototype.update = function () {
     }
 
     if (this.falling) {
+        this.game.mjump = -1;
         this.lastBottom = this.boundingbox.bottom;
         this.y += this.game.clockTick / this.jumpAnimation.totalTime * 4 * this.jumpHeight;
         this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
         this.game.mjump = -1;
         for (var i = 0; i < this.game.platforms.length && !found; i++) {
             var pf = this.game.platforms[i];
-            //console.log(pf.top());
             if (this.boundingbox.collide(pf.boundingbox) && this.lastBottom < pf.boundingbox.top) {
                 this.falling = false;
                 this.y = pf.boundingbox.top - this.heroHeight - 3;
@@ -262,6 +230,7 @@ Hero.prototype.update = function () {
     }
 
     if (!this.jumping && !this.falling) {
+        this.game.mjump = 0;
         this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
         if (this.platform !== null) {
             if (this.boundingbox.left > this.platform.boundingbox.right || this.boundingbox.right < this.platform.boundingbox.left) {
@@ -271,24 +240,17 @@ Hero.prototype.update = function () {
     }
 
     if (this.game.bgmove && this.game.walkRight) {
-        //this.game.sb1 += this.scrollSpeed;           // background movement lock
-        //this.game.coinMove += this.scrollSpeed;
-        //this.game.maxX += this.scrollSpeed;
-        this.additionalWidthForBoundBoxWhileRunning(this.width);
-        
-        
+        this.additionalWidthForBoundBoxWhileRunning(this.width);  
     }
 
     if (this.game.unlocked && this.game.walkRight) {
         this.x += this.scrollSpeed;
         this.additionalWidthForBoundBoxWhileRunning(this.width);
-//        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
     if (this.game.unlocked && this.game.walkLeft) {
         this.x -= this.scrollSpeed;
         this.additionalWidthForBoundBoxWhileRunning(this.width);
-//        this.boundingbox.setChangingBox(this.game, this.x, this.y, this.width, this.height);
     }
 
     var coinNum = checkCoin(this.game);
@@ -312,27 +274,11 @@ Hero.prototype.update = function () {
         if (minionKill > 0) {
             this.minionKillMusic.play();
             this.game.baddies[minionKill - 1].removeFromWorld = true;
-            this.game.baddies.splice(minionKill - 1, 1);
             this.game.score += 10;
         } else if (minionKill < 0 && !this.heroBlink) {
             this.heroBlink = true;
             this.game.heroLife--;
-            this.damagedMusic.play();
-            console.log(this.game.heroLife);
-            if(this.game.heroLife === 0){
-                console.log("mario dead");
-                this.dieMusic.play();
-                this.game.lives--;
-
-                if (this.game.lives === 0) {
-                    this.themeMusic.stop();
-                    this.bossMusic.stop();
-                    this.gameOverMusic.play(); 
-                    gameOver(this.game);
-                } else {
-                    lifeOver(this.game);
-                }
-            }                
+            this.damagedMusic.play();               
         }
     } else {
         minionKill = superCollide(this.game);
@@ -343,53 +289,45 @@ Hero.prototype.update = function () {
             this.game.score += 10;
         }
     }
-
+    //This means boss hit
     var boshit = checkBoss(this.game);
-//    console.log(boshit);
     if (boshit === 1 && !this.game.bigBoss.bossBlink && !this.heroBlink) {
-        // mario hit bowser
+        //  hit 
         this.game.bigBoss.bossBlink = true;
         this.game.bossLife--;
-        console.log(this.game.bossLife);
         if (this.game.bossLife === 0) {
             this.game.score += 50;
             this.game.bigBoss.removeFromWorld = true;
             this.bossMusic.stop();
             this.game.congratulationsMusic.play();
             this.game.level++;
-            if (this.game.level > 3) {
-                this.game.level = 1;
-            }
             this.themeMusic.stop();
-            if(this.game.level === 3){
+            if(this.game.level === 4){
                 winGame(this.game);
+                this.game.level = 1;
             } else {
                 nextLevel(this.game);
             }
-            
-
         }
     } else if (boshit === 0 && !this.game.bigBoss.bossBlink && !this.heroBlink) {
         // bowser hit mario
         this.heroBlink = true;
         this.game.heroLife--;
         this.damagedMusic.play();
-        console.log(this.game.heroLife);
-        if (this.game.heroLife === 0) {
-            console.log("mario dead");
-            this.dieMusic.play();
-            this.game.lives--;
-
-            if (this.game.lives === 0) {
-                this.themeMusic.stop();
-                this.bossMusic.stop();
-                this.gameOverMusic.play(); 
-                gameOver(this.game);
-            } else {
-                lifeOver(this.game);
-            }
-        }
     }
+    
+    if(this.game.heroLife === 0){
+        this.dieMusic.play();
+        this.game.lives--;
+        if (this.game.lives === 0) {
+            this.themeMusic.stop();
+            this.bossMusic.stop();
+            this.gameOverMusic.play(); 
+            gameOver(this.game);
+        } else {
+            lifeOver(this.game);
+        }
+    } 
 
     Entity.prototype.update.call(this);
 };

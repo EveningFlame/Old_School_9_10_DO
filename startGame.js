@@ -32,9 +32,7 @@ startGame = function(game){
         
     } else if(game.chosenCharacter === "Link"){
         var linkSprite = ASSET_MANAGER.getAsset("./img/linkSprite.png");
-        /* 	function Hero(game, heroSprite, frameWidth, frameHeight, startX, startY, charYOffset,
-        heroHeight, standAnimation, walkAnimation, jumpAnimation, movementSpeed, scrollSpeed, scale) { */
-        var hero = new Hero(game, linkSprite, 96, 64, 0, 64, 0, 115, 13, 10, 5, .15, 4, 2);//2.5);
+        var hero = new Hero(game, linkSprite, 96, 64, 0, 64, 0, 115, 13, 10, 5, .1, 4, 2);//2.5);
     } else if(game.chosenCharacter === "Pikachu"){
         var pikaSprite = ASSET_MANAGER.getAsset("./img/pikachuSprite.png");
         var hero = new Hero(game, pikaSprite, 64, 64, 0, 64, 0, 80, 7, 4, 5, .15, 4, 1.5);//2.5);
@@ -45,26 +43,26 @@ startGame = function(game){
     
 game.hero = hero;
 
-if (game.level === 2) {
-    level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBossSprite);
-} else if (game.level === 3) {
-    level3(game, samusBossSprite, metabg, metagr, coinSprite, starSprite, Koopa, spearowSprite);
-} else {
-    level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, platWall9, pipe, coinSprite, starSprite, spearowSprite);
-}
+    if (game.level === 2) { 
+        level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBossSprite);
+    } else if (game.level === 3) {
+        level3(game, samusBossSprite, metabg, metagr, coinSprite, starSprite, Koopa, spearowSprite);
+    } else {
+        level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, platWall9, pipe, coinSprite, starSprite, spearowSprite);
+    }
 
 
-game.addEntity(hero);
+    game.addEntity(hero);
 
-//HEALTH  
+    //HEALTH  
    var heart = new Icon(game, game.hearts, 32, 32, 0, 32, 740, 0, true, "heart", 2); 
    game.addEntity(heart);
    game.heartIcon = heart;
-//HEALTH
+    //HEALTH
 
-//SCORE / POWERUP CONTROL
+    //SCORE / POWERUP CONTROL
    var score = new gameScore(game);
    game.addEntity(score);
-//SCORE / POWERUP CONTROL
+    //SCORE / POWERUP CONTROL
 	
 };

@@ -26,7 +26,7 @@ function Boss(game, bossSprite, frameHeight, frameWidth, startX, startY, standin
     this.y = placeY;
     this.x = placeX;
     this.game = game;
-    this.frameWidth = frameWidth
+    this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
     this.speed = speed;
     this.jumpHeight = game.defaultJumpHeight;

@@ -51,21 +51,21 @@ function GameEngine() {
     this.gameOver = ASSET_MANAGER.getAsset("./img/gameOver.png");
     this.heartIcon = null;
     this.sb1 = 0;
+    this.introMusic = new Howl({urls: ["./music/Pokemon Red-Blue-Yellow - Route 1 Acapella.mp3"], buffer: true}); 
+    this.themeMusic =  new Howl({urls: ["./music/mario_overworld_theme.mp3"], buffer: true});
     this.powerUpMusic = new Howl({urls: ["./music/Mario_Invincible_Theme.mp3"]});
     this.coinMusic = new Howl({urls: ["./music/coinsound.wav"]});
     this.jumpMusic = new Howl({urls: ["./music/jumpsound.wav"]});
     this.stompMusic = new Howl({urls: ["./music/stomp.wav"]});
-    this.bowserMusic = new Howl({urls: ["./music/bowserMusic.mp3"], loop: true});
-    this.themeMusic =  new Howl({urls: ["./music/mario_overworld_theme.mp3"], loop: true});
+    this.bowserMusic = new Howl({urls: ["./music/bowserMusic.mp3"]});
     this.marioDamagedMusic = new Howl({urls: ["./music/marioDamaged.wav"]});
     this.marioDieMusic = new Howl({urls: ["./music/mariodie.wav"]});
     this.gameOverMusic = new Howl({urls: ["./music/gameover.wav"]});
     this.congratulationsMusic = new Howl({urls: ["./music/Congratulations.mp3"]});
-    this.introMusic = new Howl({urls: ["./music/Pokemon Red-Blue-Yellow - Route 1 Acapella.mp3"]});  
-    this.linkThemeMusic = new Howl({urls: ["./music/linkGameMusic.mp3"], loop: true});
-    this.linkBossMusic = new Howl({urls: ["./music/linkBossBattle.mp3"], loop: true});
-    this.samusBossMusic = new Howl({urls: ["./music/samusBossMusic.mp3"], loop: true});
-    this.samusThemeMusic = new Howl({urls: ["./music/samusGameMusic.mp3"], loop: true});
+    this.linkThemeMusic = new Howl({urls: ["./music/linkGameMusic.mp3"]});
+    this.linkBossMusic = new Howl({urls: ["./music/linkBossBattle.mp3"]});
+    this.samusBossMusic = new Howl({urls: ["./music/samusBossMusic.mp3"]});
+    this.samusThemeMusic = new Howl({urls: ["./music/samusGameMusic.mp3"]});
     this.hero = null;
     this.coinMove = 0;
     this.mjump = 0;
@@ -159,15 +159,15 @@ GameEngine.prototype.addEntity = function (entity) {
     //console.log('added entity');
     this.entities.push(entity);
     if(entity.name === "Coins"){
-        console.log("entered coins");
+//        console.log("entered coins");
         this.coins.push(entity);
     } 
     if(entity.name === "Baddies"){
-    console.log("entered baddies");
+//    console.log("entered baddies");
     this.baddies.push(entity);
     }
     if(entity.name === "Platform" && !entity.isSky){
-        console.log("entered platforms");
+//        console.log("entered platforms");
         this.platforms.push(entity);
     }
 };
@@ -212,6 +212,7 @@ GameEngine.prototype.update = function () {
             this.platforms.splice(i, 1);
         }
     }
+
 };
 
 GameEngine.prototype.loop = function () {
@@ -228,7 +229,7 @@ function Entity(game, x, y) {
     this.removeFromWorld = false;
 }
 
-Entity.prototype.update = function () {
+Entity.prototype.update = function () {    
 };
 
 Entity.prototype.draw = function (ctx) {
@@ -239,6 +240,7 @@ Entity.prototype.draw = function (ctx) {
         this.game.ctx.stroke();
         this.game.ctx.closePath();
     }
+
 };
 
 Entity.prototype.rotateAndCache = function (image, angle) {
