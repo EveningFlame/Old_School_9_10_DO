@@ -186,6 +186,7 @@ Hero.prototype.update = function () {
         if (this.jumpAnimationLeft.isDone()) {
             this.jumpAnimationLeft.elapsedTime = 0;
             this.jumping = false;
+            this.game.mjump = 0;
         }
         var jumpDistance = this.jumpAnimationLeft.elapsedTime / this.jumpAnimationLeft.totalTime;
         var totalHeight = this.jumpHeight;
@@ -194,6 +195,7 @@ Hero.prototype.update = function () {
 
         if (jumpDistance > 0.5) {
             jumpDistance = 1 - jumpDistance;
+            this.game.mjump = -1;
         }
         var height = totalHeight * (4 * jumpDistance - 4 * jumpDistance * jumpDistance);
         this.lastBottom = this.boundingbox.bottom;

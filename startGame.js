@@ -32,7 +32,7 @@ startGame = function(game){
         
     } else if(game.chosenCharacter === "Link"){
         var linkSprite = ASSET_MANAGER.getAsset("./img/linkSprite.png");
-        var hero = new Hero(game, linkSprite, 96, 64, 0, 64, 0, 115, 13, 10, 5, .1, 4, 2);//2.5);
+        var hero = new Hero(game, linkSprite, 96, 64, 0, 64, 0, 115, 13, 10, 5, .09, 4, 2);//2.5);
     } else if(game.chosenCharacter === "Pikachu"){
         var pikaSprite = ASSET_MANAGER.getAsset("./img/pikachuSprite.png");
         var hero = new Hero(game, pikaSprite, 64, 64, 0, 64, 0, 80, 7, 4, 5, .15, 4, 1.5);//2.5);

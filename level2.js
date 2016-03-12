@@ -19,7 +19,7 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
 //        game.platforms.push(gr);
         
         if(i === 1 || i === 7 || i === 13){
-            gr = new Platform(game, linkground, 800, 95, 800 * i + 150, game.defaultGround, false);
+            gr = new Platform(game, linkground, 800, 95, 800 * i + 130, game.defaultGround, false);
             
         } else if(i === 8){
             gr = new Platform(game, linkground, 80, 95, 800 * i + 310, game.defaultGround, false);
@@ -117,7 +117,7 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     addPlatform(game, platWall, 30, 30, 6860, 535, false);
     
         for (var i = 0 ; i < 10; i++) {
-        var m1 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6900 + (i * 60), 435, true, .15, 0, 0);
+        var m1 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6900 + (i * 60), 440, true, .15, 0, 0);
         game.addEntity(m1);
         game.baddies.push(m1);
     }
@@ -180,7 +180,7 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     addPlatform(game, platform, 190, 30, 10000, 560, false);
     addPlatform(game, platform, 190, 30, 10000, 530, false);  
     
-    addPlatform(game, platform, 60, 30, 10450, 430, false);
+    addPlatform(game, platform, 60, 30, 10550, 415, false);
     addPlatform(game, platform, 60, 30, 10600, 590, false);
     addPlatform(game, platform, 60, 30, 10700, 530, false);
 
