@@ -275,7 +275,7 @@ function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa,
 
     for (var i = 0; i < 25; i++) {
         var gr = new Platform(game, metagr, 2560, 95, 800 * i, game.defaultGround, false);
-        console.log("adding ground");
+//        console.log("adding ground");
         game.addEntity(gr);
         game.platforms.push(gr);
     }

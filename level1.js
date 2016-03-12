@@ -7,7 +7,7 @@ function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, 
 //    function Platform(game, platformSprite, width, height, startX, startY, scroll, isSky) {
     for (var i = 0; i < 25; i++) {
         var gr = new Platform(game, ground1, 800, 95, 800 * i, game.defaultGround, false);
-        console.log("adding ground");
+//        console.log("adding ground");
         if(i === 1){
 //            gr = new Platform(game, ground1, 800, 95, 850, game.defaultGround, false);
             game.addEntity(gr);
