@@ -14,7 +14,7 @@ function samusBoss(game, bossSprite, frameHeight, frameWidth, startX, startY, st
     this.y = placeY;
     this.x = placeX;
     this.game = game;
-    this.frameWidth = frameWidth
+    this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
     this.speed = speed;
     this.bossBlink = false;
@@ -44,7 +44,7 @@ samusBoss.prototype.update = function () {
         this.appear = true;
     }
 
-    this.x = this.x;
+//    this.x = this.x;
     if (this.up) {
         this.y -= 2; 
     } else if (!this.up) {
@@ -52,7 +52,7 @@ samusBoss.prototype.update = function () {
     }
 
     if (this.y < 61) {
-        this.up = false
+        this.up = false;
     } else if (this.y > 515) {
         this.up = true;
     }
@@ -89,7 +89,7 @@ samusBoss.prototype.draw = function (ctx) {
     if (this.appear) {
         this.animationFaceLeft.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
         if (this.fire) {
-             var f1 = new Minion(this.game, this.bossSprite, 64, 96, 0, 105, 6, 8, 10880, this.y + 35, true, .15, 0, 0)
+             var f1 = new Minion(this.game, this.bossSprite, 64, 96, 0, 105, 6, 8, 10880, this.y + 35, true, .15, 0, 0, "GargoyleFire");
              this.game.addEntity(f1);
              this.game.baddies.push(f1);
         }

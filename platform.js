@@ -57,7 +57,7 @@ Platform.prototype.update = function () {
 Platform.prototype.draw = function (ctx) {
     if (this.boxes) {
         ctx.strokeStyle = "darkmagenta";
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 3;
         ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
     }
     this.animation.drawFrame(this.game.clockTick, ctx, this.beginingX(), this.startY);

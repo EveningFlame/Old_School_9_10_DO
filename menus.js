@@ -20,7 +20,7 @@ startMenu = function(game){
     var link = new Icon(game, linkIcon, 200, 200, 0, 200, 50, 300, true, "Link");
     var samus = new Icon(game, samusIcon, 200, 200, 0, 200, 300, 300, true, "Samus");
     var pikachu = new Icon(game, pikachuIcon, 200, 200, 0, 200, 170, 520, true, "Pikachu");
-    var nc = new Creature(game, naviCircle, 300, 300, 0, 300, 2, 118, 35, true, "select", .05);  
+    var nc = new Creature(game, naviCircle, 300, 300, 0, 300, 2, 118, 35, true, "select", .05);  //this will show who is selected
     var startButton = new Button(game, start, 60, 360, 0, 60, 2, 420, 650, true, "start");
     var selectChar = new Icon(game, selectCharacter, 161, 296, 0, 161, 470, 110, true, "selectChar");
 
@@ -50,7 +50,7 @@ selectCharacter = function(game, character, xPlace, yPlace){
     }
    
    game.chosenCharacter = character;
-   console.log(game.chosenCharacter);
+//   console.log(game.chosenCharacter);
     
 };
 
@@ -73,6 +73,7 @@ gameOver = function (game) {
     game.themeMusic.stop();
     game.bowserMusic.stop();
     game.gameOverMusic.play();
+    game.chosenCharacter = null;
 };
 
 
@@ -98,6 +99,7 @@ clearEngine = function (game) {
 
 winGame = function(game){
     clearEngine(game);
+    game.chosenCharacter = null;
     
     var menuB = ASSET_MANAGER.getAsset("./img/menu.png"); 
     var marioIcon = ASSET_MANAGER.getAsset("./img/MarioWin.png");

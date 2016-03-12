@@ -2,9 +2,7 @@
  * Minions
  */
 function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
-    walking1, walking2, placeX, placeY, loop, speed, leftX, rightX) {
-    //this.isShot = false;
-
+    walking1, walking2, placeX, placeY, loop, speed, leftX, rightX, id) {
     if (frameHeight === 55.968) {
 
         if (walking1 > 0) {
@@ -29,11 +27,11 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
         this.animationWalkingRight1 = new AnimationSprite(minionSprite, startX, (startY * 2),
                 frameWidth, frameHeight, speed, walking1, loop, false);
 
-    } else if (frameHeight == 97) {
+    } else if (frameHeight === 97) {
         //this.isShot = true;
         this.shot = new AnimationSprite(minionSprite, startX, (startY * 3),
                 frameWidth, frameHeight, speed, 2, loop, false);
-    } else if (frameHeight == 64) {
+    } else if (frameHeight === 64) {
         //this.isShot = true;
         this.shot2 = new AnimationSprite(minionSprite, startX, (startY * 3),
                 frameWidth, frameHeight, speed, 3, loop, true);
@@ -52,6 +50,8 @@ function Minion(game, minionSprite, frameHeight, frameWidth, startX, startY,
     this.use1 = (walking1 > 0);
     this.boxes = false;
     this.name = "Baddies";
+    
+    this.id = id || "";
 
     this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 45, this.frameWidth + 4, this.frameHeight + 12);
     Entity.call(this, game, placeX, placeY);
@@ -62,19 +62,19 @@ Minion.prototype = new Entity();
 Minion.prototype.constructor = Minion;
 
 Minion.prototype.update = function () {
-
+    fireBulletSpearow(this.game); //located in level 3
     if (this.frameHeight === 96 || this.frameHeight === 55.968) {
+        if(this.id !== "BulletSpearow"){
+            if (checkMinion(this, this.game) === 1) {
+                this.moveRight = !this.moveRight;
+            }
 
-        if (checkMinion(this, this.game) === 1) {
-            this.moveRight = !this.moveRight;
+            if (this.farLeft === 0 && this.farRight === 0) {
+                if (checkPlatform(this, this.game)) this.moveRight = !this.moveRight;
+            }
         }
-
-        if (this.farLeft === 0 && this.farRight === 0) {
-            if (checkPlatform(this, this.game)) this.moveRight = !this.moveRight;
-        }
-
         if (this.moveRight) {
-            if (this.frameHeight === 96) {
+            if (this.id === "Spearow") {
                 this.x += 3;
             } else {
                 this.x += 1;
@@ -83,7 +83,7 @@ Minion.prototype.update = function () {
                 this.moveRight = false;
             }
         } else {
-            if (this.frameHeight === 96) {
+            if (this.id === "Spearow" || this.id === "BulletSpearow") {
                 this.x -= 3;
             } else {
                 this.x -= 1;
@@ -95,23 +95,30 @@ Minion.prototype.update = function () {
     } else if (this.frameHeight === 97) {
         this.x -= 3;
     } else if (this.frameHeight === 64) {
-        this.x -= 5;
+        this.x -= 3;
     }
 //    this.boundingbox = this.additionalWidthForBoundBox();
-    if (this.frameHeight === 55.968 || this.frameHeight === 96) {
+    if (this.frameHeight === 55.968) {
         this.boundingbox = new BoundingBox(this.x + 18 - this.game.maxX, this.y + 46, this.frameWidth + 4, this.frameHeight + 10);
+    } else if(this.id === "Spearow" || this.id === "BulletSpearow"){
+        this.boundingbox = new BoundingBox(this.x + 65 - this.game.maxX, this.y + 80, this.frameWidth - 28, this.frameHeight - 26);
     } else if (this.frameHeight === 97) {
         this.boundingbox = new BoundingBox(this.x + 3 - this.game.maxX, this.y + 44, this.frameWidth - 20, this.frameHeight - 50);
-    } else if (this.frameHeight == 64) {
-        this.boundingbox = new BoundingBox(this.x + 30 - this.game.maxX, this.y + 80, this.frameWidth - 30, this.frameHeight - 100);
+    } else if (this.id === "GargoyleFire") {
+        this.boundingbox = new BoundingBox(this.x + 30 - this.game.maxX, this.y + 70, this.frameWidth - 30, this.frameHeight - 80);
     }
     
-
     for (var i = 0; i < this.game.baddies.length; i++) {
-        if (this.game.baddies[i].boundingbox.right < 0) {
-            this.game.baddies[i].removeFromWorld = true;
-//            this.game.baddies.splice(i, 1);
+        if(this.game.baddies[i].id !== "GargoyleFire"){
+            if (this.game.baddies[i].boundingbox.right < -1000) {
+                this.game.baddies[i].removeFromWorld = true;
+            }
+        } else {
+            if (this.game.baddies[i].boundingbox.right < 0) {
+                this.game.baddies[i].removeFromWorld = true;
+            }
         }
+        
     }
     
     Entity.prototype.update.call(this);
@@ -139,7 +146,7 @@ Minion.prototype.draw = function (ctx) {
         }
     } else if (this.frameHeight === 97) {
         this.shot.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 1.2);
-    } else if (this.frameHeight == 64) {
+    } else if (this.frameHeight === 64) {
         this.shot2.drawFrame(this.game.clockTick, ctx, this.x - this.game.maxX, this.y, 1.2);
     }
     Entity.prototype.draw.call(this);

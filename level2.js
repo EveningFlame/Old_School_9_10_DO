@@ -11,9 +11,25 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     // game.baddies.push(f1);
 
     // addPlatform(game, platform, 190, 30, 200, 540, false);
-
-
-
+    
+    for (var i = 0; i < 25; i++) {
+        var gr = new Platform(game, linkground, 800, 95, 800 * i, game.defaultGround, false);
+        console.log("adding ground");
+//        game.addEntity(gr);
+//        game.platforms.push(gr);
+        
+        if(i === 1 || i === 7 || i === 13){
+            gr = new Platform(game, linkground, 800, 95, 800 * i + 150, game.defaultGround, false);
+            
+        } else if(i === 8){
+            gr = new Platform(game, linkground, 80, 95, 800 * i + 310, game.defaultGround, false);
+            
+        }
+        game.addEntity(gr);
+        game.platforms.push(gr);
+    }
+    game.hero.platform = game.platforms[1];
+//first set of platforms
     addPlatform(game, platform, 190, 30, 1000, 550, false);
     addPlatform(game, platWall, 30, 190, 1000, 550, false);
     addPlatform(game, platform, 190, 30, 1190, 550, false);
@@ -25,7 +41,7 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     addPlatform(game, platform, 190, 30, 1760, 550, false);
     addPlatform(game, platWall, 30, 190, 1760, 550, false);  
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 1600, 520, true, 0.09, false, 3, 6);
-    
+    //second tier of platforms a little higher up
     addPlatform(game, platWall9, 30, 270, 1950, 440, false);
     addPlatform(game, platform, 190, 30, 1950, 440, false);
     addPlatform(game, platWall9, 30, 270, 2140, 440, false);
@@ -42,13 +58,15 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
         game.addEntity(m1);
         game.baddies.push(m1);
     }
+    //
     addPlatform(game, platWall, 30, 190, 3500, 550, false);
     addPlatform(game, platform, 190, 30, 3500, 550, false);
     var star = new Coin(game, starSprite, 40, 40, 0, 0, 7, 3590, 630, true, 0.1, true, 3);
     game.addEntity(star);
     addPlatform(game, platWall, 30, 190, 3690, 550, false);
 
-    addPlatform(game, platWall9, 30, 270, 3730, 440, false);
+    addPlatform(game, platWall, 30, 30, 3750, 375, false);
+   //addPlatform(game, platWall9, 30, 270, 3730, 440, false);
 
     addPlatform(game, platWall, 30, 190, 3850, 350, false); 
 
@@ -70,7 +88,7 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
 
     addPlatform(game, platWall, 30, 190, 5200, 400, false);
 
-    for (var i = 0 ; i <12; i++) {
+    for (var i = 0 ; i < 12; i++) {
         var m1 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 3750 + (i * 150), 590, true, .15, 0, 0);
         game.addEntity(m1);
         game.baddies.push(m1);
@@ -90,12 +108,20 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     addPlatform(game, platform, 190, 30, 6080, 550, false);
     addPlatform(game, platform, 190, 30, 6270, 550, false);
     addPlatform(game, platform, 190, 30, 6460, 550, false);
-    addPlatform(game, platWall, 30, 30, 6620, 520, false);
+    addPlatform(game, platWall, 30, 30, 6650, 570, false);
 
     var star2 = new Coin(game, starSprite, 40, 40, 0, 0, 7, 6730, 630, true, 0.1, true, 3);
     game.addEntity(star2);
 
-    addPlatform(game, platWall, 30, 30, 6840, 520, false);
+    //wall after star on bridge
+    addPlatform(game, platWall, 30, 30, 6860, 535, false);
+    
+        for (var i = 0 ; i < 10; i++) {
+        var m1 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 6900 + (i * 60), 435, true, .15, 0, 0);
+        game.addEntity(m1);
+        game.baddies.push(m1);
+    }
+    
     addPlatform(game, platform, 190, 30, 6840, 550, false);
     addPlatform(game, platform, 190, 30, 7030, 550, false);
     addPlatform(game, platform, 190, 30, 7220, 550, false);
@@ -158,13 +184,6 @@ function level2(game, Koopa, coinSprite, starSprite, linkbg, linkground, linkBos
     addPlatform(game, platform, 60, 30, 10600, 590, false);
     addPlatform(game, platform, 60, 30, 10700, 530, false);
 
-
-    for (var i = 0; i < 25; i++) {
-        var gr = new Platform(game, linkground, 2560, 95, 2557 * i, game.defaultGround, false);
-        console.log("adding ground");
-        game.addEntity(gr);
-        game.platforms.push(gr);
-    }
 
     game.addEntity(boss);
     game.bigBoss = boss;

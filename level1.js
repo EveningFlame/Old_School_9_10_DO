@@ -4,12 +4,21 @@ function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, 
 
 
     var bg = new Platform(game, world1, 800, game.defaultGround, 0, 0, true, true);
+//    function Platform(game, platformSprite, width, height, startX, startY, scroll, isSky) {
     for (var i = 0; i < 25; i++) {
-        var gr = new Platform(game, ground1, 2650, 95, 800 * i, game.defaultGround, false);
+        var gr = new Platform(game, ground1, 800, 95, 800 * i, game.defaultGround, false);
         console.log("adding ground");
-        game.addEntity(gr);
-        game.platforms.push(gr);
+        if(i === 1){
+//            gr = new Platform(game, ground1, 800, 95, 850, game.defaultGround, false);
+            game.addEntity(gr);
+            game.platforms.push(gr);
+        } else {
+            game.addEntity(gr);
+            game.platforms.push(gr);
+        }
+        
     }
+    game.hero.platform = game.platforms[1];
     game.addEntity(bg);
     //PLATFORMS
     addPlatform(game, platform, 190, 30, 1300, 600, false);
@@ -152,7 +161,7 @@ function level1(game, bowserSprite, world1, ground1, platform, platWall, Koopa, 
       //101.8 height
       //SPEAROW TESTING
     addPlatform(game, platWall, 30, 30, 200, 550, false, 5);
-    var m1 = new Minion(game, spearowSprite, 96 , 96, 0, 101.8, 6, 8, 600, 450, true, .1, 0, 0);
+    var m1 = new Minion(game, spearowSprite, 96 , 96, 0, 101.8, 6, 8, 600, 450, true, .1, 0, 0, "Spearow");
     addPlatform(game, platWall, 30, 30, 800, 550, false, 5);
 //SPEAROW TESTING
     var m2 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 0, 8, 3250, 287, true, .2, 3180, 3331);

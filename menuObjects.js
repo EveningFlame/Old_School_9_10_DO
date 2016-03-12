@@ -9,6 +9,7 @@ function Creature(game, critterSheet, frameHeight, frameWidth, startX, startY, f
     this.name = name;
     this.group = "title";
     this.radius = 30;
+    //the NaviCircle is called select
     if(this.name === "select"){
         this.paint = false;
     } else {

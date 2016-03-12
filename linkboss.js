@@ -21,7 +21,7 @@ function linkBoss(game, bossSprite, frameHeight, frameWidth, startX, startY, sta
     this.y = placeY;
     this.x = placeX;
     this.game = game;
-    this.frameWidth = frameWidth
+    this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
     this.speed = speed;
     this.bossBlink = false;
@@ -49,11 +49,11 @@ linkBoss.prototype.update = function () {
 //console.log(this.game.totalDistance);
     if (this.game.totalDistance >= 10600) {
         this.appear = true;
-        this.x = this.x;
-        this.y = this.y;
+//        this.x = this.x;
+//        this.y = this.y;
     }
 
-    if (getRandomInt(0, 150) === 3) {
+    if (getRandomInt(0, 90) === 3) {
         this.fire = true;
         this.finishFiring = 4;
     } else if (this.finishFiring < 0) {
@@ -92,7 +92,7 @@ linkBoss.prototype.draw = function (ctx) {
     if (this.appear  && this.fire) {
         this.shooting.drawFrame(this.game.clockTick, ctx, this.x, this.y, 2);
         if (this.shooting.elapsedTime === 0) {
-             var f1 = new Minion(this.game, this.bossSprite, 97, 97, 0, 96, 6, 8, 11000, 560, true, .15, 0, 0)
+             var f1 = new Minion(this.game, this.bossSprite, 97, 97, 0, 96, 6, 8, 11000, 560, true, .15, 0, 0);
              this.game.addEntity(f1);
              this.game.baddies.push(f1);
         }

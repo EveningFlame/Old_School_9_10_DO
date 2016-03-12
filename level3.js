@@ -72,17 +72,17 @@ function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa,
     addPlatform(game, platWall, 30, 190, 4660, 450, false);
     addPlatform(game, platWall, 30, 190, 4690, 400, false);
     addPlatform(game, platWall, 30, 190, 4720, 350, false);
-    addPlatform(game, platWall, 30, 190, 4750, 300, false);
-
-    var s3 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 4900, 350, true, .1, 0, 0);
-    game.addEntity(s3);
-    game.baddies.push(s3);
+//    addPlatform(game, platWall, 30, 190, 4750, 300, false);
+    
+//    var s3 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 4800, 340, true, .1, 0, 0, "Spearow");
+//    game.addEntity(s3);
+//    game.baddies.push(s3);
 
     var m19 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 4900, 590, true, .15, 0, 0);
     game.addEntity(m19);
     game.baddies.push(m19);
 
-    addPlatform(game, platWall, 1, 1, 5020, 450, false);
+//    addPlatform(game, platWall, 1, 1, 5025, 450, false);
 
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 4670, 670, true, 0.09, false, 3, 6);
 
@@ -91,17 +91,17 @@ function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa,
     addPlatform(game, platWall, 30, 190, 5060, 450, false);
     addPlatform(game, platWall, 30, 190, 5090, 400, false);
     addPlatform(game, platWall, 30, 190, 5120, 350, false);
-    addPlatform(game, platWall, 30, 190, 5150, 300, false);
+//    addPlatform(game, platWall, 30, 190, 5150, 300, false);
 
-    var s4 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 5250, 350, true, .1, 0, 0);
-    game.addEntity(s4);
-    game.baddies.push(s4);
+//    var s4 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 5250, 340, true, .1, 0, 0, "Spearow");
+//    game.addEntity(s4);
+//    game.baddies.push(s4);
 
     var m20 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 5250, 590, true, .15, 0, 0);
     game.addEntity(m20);
     game.baddies.push(m20);
 
-    addPlatform(game, platWall, 1, 1, 5420, 450, false);
+//    addPlatform(game, platWall, 1, 1, 5425, 450, false);
 
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 5070, 670, true, 0.09, false, 3, 6);
 
@@ -110,17 +110,17 @@ function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa,
     addPlatform(game, platWall, 30, 190, 5460, 450, false);
     addPlatform(game, platWall, 30, 190, 5490, 400, false);
     addPlatform(game, platWall, 30, 190, 5520, 350, false);
-    addPlatform(game, platWall, 30, 190, 5550, 300, false);
+//    addPlatform(game, platWall, 30, 190, 5550, 300, false);
 
-    var s5 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 5700, 350, true, .1, 0, 0);
-    game.addEntity(s5);
-    game.baddies.push(s5);
+//    var s5 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 5650, 340, true, .1, 0, 0, "Spearow");
+//    game.addEntity(s5);
+//    game.baddies.push(s5);
 
-    var m21 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 5700, 590, true, .15, 0, 0);
+    var m21 = new Minion(game, Koopa, 55.968, 40.032, 0, 55.968, 6, 8, 5700, 590, true, .15, 0, 0, "Spearow");
     game.addEntity(m21);
     game.baddies.push(m21);
 
-    addPlatform(game, platWall, 1, 1, 5820, 450, false);
+//    addPlatform(game, platWall, 1, 1, 5825, 450, false);
 
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 5470, 670, true, 0.09, false, 3, 6);
 
@@ -187,10 +187,10 @@ function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa,
     
     addPlatform(game, platWall, 30, 30, 7880, 650, false);
 
-    // addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 8400, 670, true, 0.09, false, 3, 6);
-    // addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 8700, 470, true, 0.09, false, 3, 5);
-    // addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 9000, 670, true, 0.09, false, 3, 6);
-    // addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 9300, 470, true, 0.09, false, 3, 5);
+     addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 8400, 670, true, 0.09, false, 3, 6);
+     addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 8700, 470, true, 0.09, false, 3, 5);
+     addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 9000, 670, true, 0.09, false, 3, 6);
+     addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 9300, 470, true, 0.09, false, 3, 5);
 
     addPlatform(game, platWall9, 30, 240, 8100, 250, false);
     addPlatform(game, platWall9, 30, 250, 8100, 0, false);
@@ -220,12 +220,18 @@ function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa,
 
     addCoinStraightLine(game, coinSprite, 32, 32, 0, 0, 20, 8300, 100, true, 0.09, false, 3, 35);
 
-    var s1 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 8700, 110, true, .1, 0, 0);
+    var s1 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 8700, 100, true, .1, 0, 0, "Spearow");
     game.addEntity(s1);
     game.baddies.push(s1);
-    var s2 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 9300, 0, true, .1, 0, 0);
+    var s2 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 9300, 0, true, .1, 0, 0, "Spearow");
     game.addEntity(s2);
     game.baddies.push(s2);
+    var s3 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 9300, 197, true, .1, 0, 0, "Spearow");
+    game.addEntity(s3);
+    game.baddies.push(s3);
+    var s4 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 9300, 320, true, .1, 0, 0, "Spearow");
+    game.addEntity(s4);
+    game.baddies.push(s4);
 
     addPlatform(game, platform, 100, 30, 8250, 500, false);
     addPlatform(game, platform, 100, 30, 8300, 400, false);
@@ -278,3 +284,18 @@ function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa,
     game.bigBoss = boss;
 
 }
+var time = 10;
+fireBulletSpearow = function (game) {  
+    
+    var spearowSprite = ASSET_MANAGER.getAsset("./img/Spearow.png");
+    if(game.level === 3 && game.totalDistance < 10220){ 
+        time -= game.clockTick;
+        if (time < 0) {            
+            var random = getRandomInt(0, 500);
+            var f1 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 800 + game.totalDistance, 100 + random, true, .1, 0, 0, "BulletSpearow");
+            game.addEntity(f1);
+            game.baddies.push(f1);
+            time = 40;
+        }
+    }
+};
