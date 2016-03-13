@@ -187,10 +187,10 @@ function level3(game, bossSprite, metabg, metagr, coinSprite, starSprite, Koopa,
     
     addPlatform(game, platWall, 30, 30, 7880, 650, false);
 
-     addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 8400, 670, true, 0.09, false, 3, 6);
-     addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 8700, 470, true, 0.09, false, 3, 5);
-     addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 9000, 670, true, 0.09, false, 3, 6);
-     addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 9300, 470, true, 0.09, false, 3, 5);
+     addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 8400, 600, true, 0.09, false, 3, 5);
+     addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 8700, 400, true, 0.09, false, 3, 4);
+     addCoinArcUp(game, coinSprite, 32, 32, 0, 0, 20, 9000, 600, true, 0.09, false, 3, 5);
+     addCoinArcDown(game, coinSprite, 32, 32, 0, 0, 20, 9300, 400, true, 0.09, false, 3, 4);
 
     addPlatform(game, platWall9, 30, 240, 8100, 250, false);
     addPlatform(game, platWall9, 30, 250, 8100, 0, false);
@@ -295,7 +295,7 @@ fireBulletSpearow = function (game) {
             var f1 = new Minion(game, spearowSprite, 96 , 96, 0, 96, 6, 8, 800 + game.totalDistance, 100 + random, true, .1, 0, 0, "BulletSpearow");
             game.addEntity(f1);
             game.baddies.push(f1);
-            time = 40;
+            time = 32;
         }
     }
 };
